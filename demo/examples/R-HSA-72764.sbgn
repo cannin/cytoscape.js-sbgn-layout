@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+  <map language="process description">
+    <glyph id="compartmentVertex_70101_12" class="compartment">
+      <label text="cytosol"/>
+      <bbox x="-3.9648384925976643" y="11.595053835800798" w="1317.2500000000005" h="268.25"/>
+    </glyph>
+    <glyph id="entityVertex_6800132_60" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <label text="ETF1 dimer:eRF3:GTP"/>
+      <bbox x="11.66016150740245" y="89.2200538358008" w="111" h="36"/>
+    </glyph>
+    <glyph id="reactionVertex_141671_9" class="dissociation" compartmentRef="compartmentVertex_70101_12">
+      <label text="Polypeptide release from the eRF3-GDP:eRF1:mRNA:80S Ribosome complex"/>
+      <bbox x="931.6601615074024" y="102.2200538358008" w="10" h="10"/>
+      <port id="reactionVertex_141671.1" x="928.3268615074024" y="107.2200538358008"/>
+      <port id="reactionVertex_141671.2" x="944.9934615074025" y="107.2200538358008"/>
+    </glyph>
+    <glyph id="entityVertex_29356_118" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="H2O"/>
+      <bbox x="604.6601615074024" y="41.2200538358008" w="43" h="30"/>
+    </glyph>
+    <glyph id="entityVertex_29372_7" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="Pi"/>
+      <bbox x="731.6601615074024" y="41.2200538358008" w="32" h="29"/>
+    </glyph>
+    <glyph id="reactionVertex_141691_1" class="association" compartmentRef="compartmentVertex_70101_12">
+      <label text="GTP bound eRF3:eRF1 complex binds the peptidyl tRNA:mRNA:80S Ribosome complex"/>
+      <bbox x="453.66016150740245" y="100.2200538358008" w="10" h="10"/>
+      <port id="reactionVertex_141691.1" x="450.3268215074024" y="105.2200538358008"/>
+      <port id="reactionVertex_141691.2" x="466.99350150740247" y="105.2200538358008"/>
+    </glyph>
+    <glyph id="entityVertex_71285_62" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="AdoHcy"/>
+      <bbox x="228.66016150740245" y="143.2200538358008" w="59" h="30"/>
+    </glyph>
+    <glyph id="reactionVertex_6800138_58" class="process" compartmentRef="compartmentVertex_70101_12">
+      <label text="N6AMT1:TRMT112 transfers CH3 group from AdoMet to ETF1 dimer"/>
+      <bbox x="179.66016150740245" y="101.2200538358008" w="12" h="12"/>
+      <port id="reactionVertex_6800138.1" x="175.66016150740245" y="107.2200538358008"/>
+      <port id="reactionVertex_6800138.2" x="195.66016150740245" y="107.2200538358008"/>
+    </glyph>
+    <glyph id="entityVertex_141952_3" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <label text="80S Ribosome:mRNA:peptidyl-tRNA with elongating peptide"/>
+      <bbox x="316.66016150740245" y="149.2200538358008" w="121" h="58"/>
+    </glyph>
+    <glyph id="entityVertex_5691510_45" class="macromolecule" compartmentRef="compartmentVertex_70101_12">
+      <label text="APEH"/>
+      <bbox x="1098.6601615074028" y="242.2200538358008" w="47" h="22"/>
+    </glyph>
+    <glyph id="entityVertex_143396_10" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <label text="Me-Q185-ETF1 dimer:eRF3:GDP:80S Ribosome:mRNA:tRNA Complex"/>
+      <bbox x="1070.6601615074028" y="71.2200538358008" w="131" h="72"/>
+    </glyph>
+    <glyph id="entityVertex_6785226_46" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="protein"/>
+      <bbox x="1223.6601615074028" y="224.2200538358008" w="58" h="30"/>
+    </glyph>
+    <glyph id="reactionVertex_5691512_41" class="process" compartmentRef="compartmentVertex_70101_12">
+      <label text="APEH hydrolyses NAc-Ser-protein"/>
+      <bbox x="1114.6601615074028" y="202.2200538358008" w="12" h="12"/>
+      <port id="reactionVertex_5691512.1" x="1110.6601615074028" y="208.2200538358008"/>
+      <port id="reactionVertex_5691512.2" x="1130.6601615074028" y="208.2200538358008"/>
+    </glyph>
+    <glyph id="entityVertex_6800154_61" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <label text="Me-Q185-ETF1 dimer:eRF3:GTP"/>
+      <bbox x="287.66016150740245" y="89.2200538358008" w="104" h="36"/>
+    </glyph>
+    <glyph id="entityVertex_6800133_63" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <label text="N6AMT1:TRMT112"/>
+      <bbox x="146.66016150740245" y="27.220053835800798" w="83" h="35"/>
+    </glyph>
+    <glyph id="entityVertex_5691496_31" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <label text="NAc-Ser:protein"/>
+      <bbox x="931.6601615074024" y="192.2200538358008" w="65" h="33"/>
+    </glyph>
+    <glyph id="entityVertex_71284_59" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="AdoMet"/>
+      <bbox x="85.66016150740245" y="150.2200538358008" w="59" h="30"/>
+    </glyph>
+    <glyph id="entityVertex_29356_42" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="H2O"/>
+      <bbox x="975.6601615074024" y="234.2200538358008" w="39" h="30"/>
+    </glyph>
+    <glyph id="entityVertex_5691517_44" class="simple chemical" compartmentRef="compartmentVertex_70101_12">
+      <label text="NAc-Ser residue"/>
+      <bbox x="1233.6601615074028" y="158.2200538358008" w="64" h="37"/>
+    </glyph>
+    <glyph id="entityVertex_143397_5" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <label text="Me-Q185-ETF1 dimer:eRF3:GTP:80S Ribosome:mRNA:peptidyl-tRNA"/>
+      <bbox x="483.66016150740245" y="68.2200538358008" w="123" h="79"/>
+    </glyph>
+    <glyph id="entityVertex_143381_8" class="complex" compartmentRef="compartmentVertex_70101_12">
+      <label text="Me-Q185-ETF1 dimer:eRF3:GDP:80S Ribosome:mRNA:peptidyl-tRNA Complex"/>
+      <bbox x="764.6601615074024" y="72.2200538358008" w="126" h="81"/>
+    </glyph>
+    <glyph id="reactionVertex_141673_6" class="process" compartmentRef="compartmentVertex_70101_12">
+      <label text="GTP Hydrolysis by eRF3 bound to the eRF1:mRNA:polypeptide:80S Ribosome complex"/>
+      <bbox x="661.6601615074024" y="100.2200538358008" w="12" h="12"/>
+      <port id="reactionVertex_141673.1" x="657.6601615074024" y="106.2200538358008"/>
+      <port id="reactionVertex_141673.2" x="677.6601615074024" y="106.2200538358008"/>
+    </glyph>
+    <arc id="arc_62_output_58" class="production" source="reactionVertex_6800138.2" target="entityVertex_71285_62">
+      <glyph id="arc_62_output_58_card" class="stoichiometry">
+        <label text="2"/>
+        <bbox x="232.3532947947681" y="107.56927837905148" w="10" h="15.999999999999986"/>
+      </glyph>
+      <start x="196.28516150740245" y="107.2200538358008"/>
+      <next x="225.66016150740248" y="107.22005383580078"/>
+      <end x="247.0266813268878" y="140.74905416791626"/>
+    </arc>
+    <arc id="arc_44_output_41" class="production" source="reactionVertex_5691512.2" target="entityVertex_5691517_44">
+      <start x="1131.2851615074028" y="208.2200538358008"/>
+      <next x="1170.6601615074028" y="207.22005383580074"/>
+      <end x="1234.0701917259573" y="186.8620967656333"/>
+    </arc>
+    <arc id="arc_63_catalyst_58" class="catalysis" source="entityVertex_6800133_63" target="reactionVertex_6800138_58">
+      <start x="187.18569914181103" y="62.8450538358008"/>
+      <next x="185.66016150740245" y="91.22005383580034"/>
+      <end x="185.66016150740245" y="97.7200538358008"/>
+    </arc>
+    <arc id="arc_3_input_1" class="consumption" source="entityVertex_141952_3" target="reactionVertex_141691.1">
+      <start x="401.7123875347997" y="148.5950538358008"/>
+      <next x="437.6601615074024" y="105.22005383580081"/>
+      <end x="449.7018215074024" y="105.2200538358008"/>
+    </arc>
+    <arc id="arc_31_output_9" class="production" source="reactionVertex_141671.2" target="entityVertex_5691496_31">
+      <start x="945.6184615074025" y="107.2200538358008"/>
+      <next x="1010.6601615074024" y="107.22005383580098"/>
+      <end x="973.3071689041282" y="188.7540054321952"/>
+    </arc>
+    <arc id="arc_8_input_9" class="consumption" source="entityVertex_143381_8" target="reactionVertex_141671.1">
+      <start x="891.2851615074024" y="109.50961805598429"/>
+      <end x="927.7018615074024" y="107.2200538358008"/>
+    </arc>
+    <arc id="arc_61_input_1" class="consumption" source="entityVertex_6800154_61" target="reactionVertex_141691.1">
+      <start x="392.28516150740245" y="106.14607424396407"/>
+      <next x="437.66016150740245" y="105.2200538358008"/>
+      <end x="449.7018215074024" y="105.2200538358008"/>
+    </arc>
+    <arc id="arc_5_input_6" class="consumption" source="entityVertex_143397_5" target="reactionVertex_141673.1">
+      <start x="607.2851615074024" y="106.7233960817901"/>
+      <next x="638.6601615074024" y="106.2200538358008"/>
+      <end x="657.0351615074024" y="106.2200538358008"/>
+    </arc>
+    <arc id="arc_61_output_58" class="production" source="reactionVertex_6800138.2" target="entityVertex_6800154_61">
+      <start x="196.28516150740245" y="107.2200538358008"/>
+      <next x="225.66016150740245" y="107.2200538358008"/>
+      <end x="283.91016150740245" y="107.2200538358008"/>
+    </arc>
+    <arc id="arc_46_output_41" class="production" source="reactionVertex_5691512.2" target="entityVertex_6785226_46">
+      <start x="1131.2851615074028" y="208.2200538358008"/>
+      <next x="1170.660161507403" y="207.22005383580083"/>
+      <end x="1225.9340542700238" y="228.7903534504821"/>
+    </arc>
+    <arc id="arc_5_output_1" class="production" source="reactionVertex_141691.2" target="entityVertex_143397_5">
+      <start x="467.61850150740247" y="105.2200538358008"/>
+      <end x="479.9114658625444" y="105.83425338363728"/>
+    </arc>
+    <arc id="arc_59_input_58" class="consumption" source="entityVertex_71284_59" target="reactionVertex_6800138.1">
+      <glyph id="arc_59_input_58_card" class="stoichiometry">
+        <label text="2"/>
+        <bbox x="131.88166596656606" y="118.25804789024934" w="10" h="16"/>
+      </glyph>
+      <start x="126.08166596656605" y="150.65804789024935"/>
+      <next x="158.66016150740245" y="107.22005383580083"/>
+      <end x="175.03516150740245" y="107.2200538358008"/>
+    </arc>
+    <arc id="arc_42_input_41" class="consumption" source="entityVertex_29356_42" target="reactionVertex_5691512.1">
+      <start x="1011.0107608169367" y="239.59228240334295"/>
+      <next x="1062.6601615074026" y="208.2200538358008"/>
+      <end x="1110.0351615074028" y="208.2200538358008"/>
+    </arc>
+    <arc id="arc_45_catalyst_41" class="catalysis" source="entityVertex_5691510_45" target="reactionVertex_5691512_41">
+      <start x="1121.5588684039544" y="241.5950538358008"/>
+      <next x="1120.6601615074028" y="224.22005383580182"/>
+      <end x="1120.6601615074028" y="217.7200538358008"/>
+    </arc>
+    <arc id="arc_10_output_9" class="production" source="reactionVertex_141671.2" target="entityVertex_143396_10">
+      <start x="945.6184615074025" y="107.2200538358008"/>
+      <next x="1010.6601615074026" y="107.2200538358008"/>
+      <end x="1066.9101615074028" y="107.2200538358008"/>
+    </arc>
+    <arc id="arc_118_input_6" class="consumption" source="entityVertex_29356_118" target="reactionVertex_141673.1">
+      <start x="630.0069175741861" y="71.60707810293562"/>
+      <next x="638.6601615074024" y="106.22005383580077"/>
+      <end x="657.0351615074024" y="106.2200538358008"/>
+    </arc>
+    <arc id="arc_7_output_6" class="production" source="reactionVertex_141673.2" target="entityVertex_29372_7">
+      <start x="678.2851615074024" y="106.2200538358008"/>
+      <next x="702.6601615074024" y="106.22005383580085"/>
+      <end x="735.1116415810199" y="69.80228175318572"/>
+    </arc>
+    <arc id="arc_60_input_58" class="consumption" source="entityVertex_6800132_60" target="reactionVertex_6800138.1">
+      <start x="123.28516150740245" y="107.2200538358008"/>
+      <next x="158.66016150740245" y="107.2200538358008"/>
+      <end x="175.03516150740245" y="107.2200538358008"/>
+    </arc>
+    <arc id="arc_31_input_41" class="consumption" source="entityVertex_5691496_31" target="reactionVertex_5691512.1">
+      <start x="997.2851615074024" y="208.55190662767896"/>
+      <next x="1062.6601615074028" y="208.2200538358008"/>
+      <end x="1110.0351615074028" y="208.2200538358008"/>
+    </arc>
+    <arc id="arc_8_output_6" class="production" source="reactionVertex_141673.2" target="entityVertex_143381_8">
+      <start x="678.2851615074024" y="106.2200538358008"/>
+      <next x="702.6601615074024" y="106.22005383580078"/>
+      <end x="760.9143779583641" y="109.2492730912508"/>
+    </arc>
+  </map>
+</sbgn>

@@ -10,6 +10,7 @@ let FDLayoutConstants = require('cose-base').layoutBase.FDLayoutConstants;
 const SBGNLayout = require('../SBGN/SBGNLayout');
 const SBGNNode = require('../SBGN/SBGNNode');
 let SBGNPolishing = require('../SBGN/SBGNPolishing');
+let SBGNPolishingNew = require('../SBGN/SBGNPolishingNew');
 
 const ContinuousLayout = require('./continuous-base');
 const assign = require('../assign');
@@ -52,7 +53,7 @@ let defaults = {
   // Node repulsion (non overlapping) multiplier
   nodeRepulsion: 4500,
   // Ideal edge (non nested) length
-  idealEdgeLength: 100,
+  idealEdgeLength: 75,
   // Divisor to compute edge forces
   edgeElasticity: 0.45,
   // Nesting factor (multiplier) to compute ideal edge length for nested edges
@@ -64,7 +65,7 @@ let defaults = {
   // Represents the amount of the horizontal space to put between the zero degree members during the tiling operation(can also be a function)
   tilingPaddingHorizontal: 10,
   // Gravity force (constant)
-  gravity: 0.25,
+  gravity: 0,
   // Gravity range (constant) for compounds
   gravityRangeCompound: 1.5,
   // Gravity force (constant) for compounds
@@ -103,10 +104,9 @@ let getUserOptions = function (options) {
   SBGNConstants.NODE_DIMENSIONS_INCLUDE_LABELS = CoSEConstants.NODE_DIMENSIONS_INCLUDE_LABELS = FDLayoutConstants.NODE_DIMENSIONS_INCLUDE_LABELS = LayoutConstants.NODE_DIMENSIONS_INCLUDE_LABELS = options.nodeDimensionsIncludeLabels;
   SBGNConstants.DEFAULT_INCREMENTAL = CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = !(options.randomize);
   SBGNConstants.ANIMATE = CoSEConstants.ANIMATE = FDLayoutConstants.ANIMATE = LayoutConstants.ANIMATE = options.animate;
-  SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 80;
+  SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 50;
   LayoutConstants.DEFAULT_UNIFORM_LEAF_NODE_SIZES = options.uniformNodeDimensions;
   CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = false;
-  SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 80;
 }
 
 class Layout extends ContinuousLayout {
@@ -139,172 +139,185 @@ class Layout extends ContinuousLayout {
     // If incremental is true, skip over Phase I
     if (state.randomize) {
       sbgnLayout.runLayout();
+          let graphInfo = sbgnLayout.constructSkeleton();
+
+      // Apply an incremental layout to give a shape to reaction blocks
+      sbgnLayout.constraints["alignmentConstraint"] = graphInfo.constraints.alignmentConstraint;
+      sbgnLayout.constraints["relativePlacementConstraint"] = graphInfo.constraints.relativePlacementConstraint;
+      let directions = graphInfo.directions;
+      graphManager.allNodesToApplyGravitation = undefined;
+      sbgnLayout.initParameters();
+      sbgnLayout.initSpringEmbedder();
+      CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+      CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+      CoSEConstants.TILE = false;
+      sbgnLayout.runLayout();
+
+      //console.log("Actual Nodes");
+      //console.log(this.root.getNodes());
+
+      //Initialize skeleton layout
+      let sbgnLayoutSkeleton = this.sbgnLayoutSkeleton = new SBGNLayout();
+      let graphManagerSkeleton = this.graphManagerSkeleton = sbgnLayoutSkeleton.newGraphManager();
+      this.rootSkeleton = graphManagerSkeleton.addRoot();
+      let oldPositions = [];
+      let newPositions = [];
+      let sbgnNodeToSkeleton = this.sbgnNodeToSkeleton = new Map();
+      let skeletonToSbgnNode = this.skeletonToSbgnNode = new Map();
+
+      let ringNodes = graphInfo.ringNodes;
+      let components = graphInfo.components;
+      let componentExtended = graphInfo.componentsExtended;
+
+      // process skeleton nodes
+      [...ringNodes].forEach((ringNode, i) => {
+        let theNode = this.rootSkeleton.add(new SBGNNode(sbgnLayoutSkeleton.graphManager,
+          ringNode.getLocation(),
+          new DimensionD(ringNode.getWidth(), ringNode.getHeight())));
+        theNode.id = "ringNode_" + i;
+        this.sbgnNodeToSkeleton.set(ringNode, theNode);
+        this.skeletonToSbgnNode.set(theNode, ringNode);
+        oldPositions.push({ x: ringNode.getCenterX(), y: ringNode.getCenterY() });
+      });
+      componentExtended.forEach((component, i) => {
+        let componentRect = this.calculateBounds(component);
+        let theNode = this.rootSkeleton.add(new SBGNNode(sbgnLayoutSkeleton.graphManager,
+          new PointD(componentRect.getX(), componentRect.getY()),
+          new DimensionD(componentRect.getWidth(), componentRect.getHeight())));
+        theNode.id = "component_" + i;
+        this.sbgnNodeToSkeleton.set(components[i], theNode);
+        this.skeletonToSbgnNode.set(theNode, components[i]);
+        oldPositions.push({ x: componentRect.getX() + componentRect.getWidth() / 2, y: componentRect.getY() + componentRect.getHeight() / 2 });
+      });
+      //console.log("Skeleton Nodes");
+      //console.log(this.rootSkeleton.getNodes());
+
+      // process skeleton edges
+      components.forEach((component, i) => {
+        let ringNodeToComponentNode = [];
+        component.forEach(node => {
+          node.getNeighborsList().intersection(ringNodes).forEach(neigbor => {
+            ringNodeToComponentNode.push({ source: neigbor, target: node });
+          });
+        });
+        ringNodeToComponentNode.forEach(edge => {
+          let sourceNode = this.sbgnNodeToSkeleton.get(edge.source);
+          let targetNode = this.sbgnNodeToSkeleton.get(component);
+          let e1 = graphManagerSkeleton.add(sbgnLayoutSkeleton.newEdge(), sourceNode, targetNode);
+          e1.id = sourceNode.id + "_" + targetNode.id;
+          e1.originalTarget = edge.target;
+        });
+      });
+
+      //console.log("Skeleton Edges");
+      //console.log(this.rootSkeleton.getEdges());
+
+      // apply incremental layout on skeleton graph
+      graphManagerSkeleton.allNodesToApplyGravitation = undefined;
+      sbgnLayoutSkeleton.initParameters();
+      sbgnLayoutSkeleton.initSpringEmbedder();
+      CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+      CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+      CoSEConstants.TILE = false;
+      sbgnLayoutSkeleton.runLayout();
+
+      //console.log("Skeleton Nodes");
+      //console.log(this.rootSkeleton.getNodes());
+
+      graphManagerSkeleton.getAllNodes().forEach((node, i) => {
+        newPositions.push({ x: node.getCenterX(), y: node.getCenterY() });
+      });
+
+      graphManagerSkeleton.getAllNodes().forEach((node, i) => {
+        let sbgnElement = this.skeletonToSbgnNode.get(node);
+        if (Array.isArray(sbgnElement)) {
+          sbgnElement.forEach(sbgnNode => {
+            sbgnNode.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
+          });
+        }
+        else {
+          sbgnElement.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
+        }
+      });
+
+      let ringToReactionBlockEdges = [];
+      components.forEach((component, i) => {
+        component.forEach(node => {
+          node.getNeighborsList().intersection(ringNodes).forEach(neigbor => {
+            ringToReactionBlockEdges.push(node.getEdgesBetween(neigbor)[0]);
+          });
+        });
+      });
+
+      let updatedConstraintInfo = sbgnLayout.addPerComponentConstraints(components, directions);
+      let verticalAlignments = updatedConstraintInfo.verticalAlignments;
+      let horizontalAlignments = updatedConstraintInfo.horizontalAlignments;
+      this.graphManagerSkeleton.getAllEdges().forEach((edge, i) => {
+        let source = edge.getSource();
+        let target = edge.getTarget();
+        if (Math.abs(target.getCenterY() - source.getCenterY()) > Math.abs(target.getCenterX() - source.getCenterX())) {
+          verticalAlignments.push([this.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]); // source nodes are ring nodes
+        }
+        else {
+          horizontalAlignments.push([this.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]);
+        }
+      });
+
+      verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
+      horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
+      let alignmentConstraint = { vertical: verticalAlignments, horizontal: horizontalAlignments };
+
+      console.log(verticalAlignments);
+      console.log(horizontalAlignments);
+
+      // Apply an incremental layout to give a final shape to reaction blocks
+      sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
+      graphManager.allNodesToApplyGravitation = undefined;
+      sbgnLayout.initParameters();
+      sbgnLayout.initSpringEmbedder();
+      CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+      CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+      CoSEConstants.TILE = false;
+      sbgnLayout.runLayout();
+
+      let polishingInfo = SBGNPolishing.addPerComponentPolishment(components, directions);
+      sbgnLayout.repopulateCompounds();
+      /*     verticalAlignments.push(polishingInfo.verticalAlignments);
+          horizontalAlignments.push(polishingInfo.horizontalAlignments);
+          verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
+          horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
+          alignmentConstraint = {vertical: verticalAlignments, horizontal: horizontalAlignments};
+      
+          let relativePlacementConstraints = graphInfo.constraints.relativePlacementConstraint.concat(polishingInfo.relativePlacementConstraints);
+      
+          // Apply an incremental layout to polish each component
+          sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
+          sbgnLayout.constraints["relativePlacementConstraint"] = relativePlacementConstraints;
+          graphManager.allNodesToApplyGravitation = undefined;
+          sbgnLayout.initParameters();
+          sbgnLayout.initSpringEmbedder();
+          CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+          CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+          CoSEConstants.TILE = false;
+          sbgnLayout.runLayout(); */
     }
-    else {
-      sbgnLayout.clearCompounds();
+    else {  // incremental
+      //sbgnLayout.clearCompounds();
+
+      let constraints = SBGNPolishingNew.generateConstraints(sbgnLayout);
+      sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
+      sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
+
+      graphManager.allNodesToApplyGravitation = undefined;
+      sbgnLayout.initParameters();
+      sbgnLayout.initSpringEmbedder();
+      CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+      CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+      CoSEConstants.TILE = true;
+      sbgnLayout.runLayout();
+      SBGNPolishingNew.polish(sbgnLayout);
+      sbgnLayout.repopulateCompounds();
     }
-    let graphInfo = sbgnLayout.constructSkeleton();
-
-    // Apply an incremental layout to give a shape to reaction blocks
-    sbgnLayout.constraints["alignmentConstraint"] = graphInfo.constraints.alignmentConstraint;
-    sbgnLayout.constraints["relativePlacementConstraint"] = graphInfo.constraints.relativePlacementConstraint;
-    let directions = graphInfo.directions;
-    graphManager.allNodesToApplyGravitation = undefined;
-    sbgnLayout.initParameters();
-    sbgnLayout.initSpringEmbedder();
-    CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
-    CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
-    CoSEConstants.TILE = false;
-    sbgnLayout.runLayout();
-
-    //console.log("Actual Nodes");
-    //console.log(this.root.getNodes());
-
-    //Initialize skeleton layout
-    let sbgnLayoutSkeleton = this.sbgnLayoutSkeleton = new SBGNLayout();
-    let graphManagerSkeleton = this.graphManagerSkeleton = sbgnLayoutSkeleton.newGraphManager();
-    this.rootSkeleton = graphManagerSkeleton.addRoot();
-    let oldPositions = [];
-    let newPositions = [];
-    let sbgnNodeToSkeleton = this.sbgnNodeToSkeleton = new Map();
-    let skeletonToSbgnNode = this.skeletonToSbgnNode = new Map();
-
-    let ringNodes = graphInfo.ringNodes;
-    let components = graphInfo.components;
-    let componentExtended = graphInfo.componentsExtended;
-
-    // process skeleton nodes
-    [...ringNodes].forEach((ringNode, i) => {
-      let theNode = this.rootSkeleton.add(new SBGNNode(sbgnLayoutSkeleton.graphManager,
-        ringNode.getLocation(),
-        new DimensionD(ringNode.getWidth(), ringNode.getHeight())));
-      theNode.id = "ringNode_" + i;
-      this.sbgnNodeToSkeleton.set(ringNode, theNode);
-      this.skeletonToSbgnNode.set(theNode, ringNode);
-      oldPositions.push({ x: ringNode.getCenterX(), y: ringNode.getCenterY() });
-    });
-    componentExtended.forEach((component, i) => {
-      let componentRect = this.calculateBounds(component);
-      let theNode = this.rootSkeleton.add(new SBGNNode(sbgnLayoutSkeleton.graphManager,
-        new PointD(componentRect.getX(), componentRect.getY()),
-        new DimensionD(componentRect.getWidth(), componentRect.getHeight())));
-      theNode.id = "component_" + i;
-      this.sbgnNodeToSkeleton.set(components[i], theNode);
-      this.skeletonToSbgnNode.set(theNode, components[i]);
-      oldPositions.push({ x: componentRect.getX() + componentRect.getWidth() / 2, y: componentRect.getY() + componentRect.getHeight() / 2 });
-    });
-    //console.log("Skeleton Nodes");
-    //console.log(this.rootSkeleton.getNodes());
-
-    // process skeleton edges
-    components.forEach((component, i) => {
-      let ringNodeToComponentNode = [];
-      component.forEach(node => {
-        node.getNeighborsList().intersection(ringNodes).forEach(neigbor => {
-          ringNodeToComponentNode.push({ source: neigbor, target: node });
-        });
-      });
-      ringNodeToComponentNode.forEach(edge => {
-        let sourceNode = this.sbgnNodeToSkeleton.get(edge.source);
-        let targetNode = this.sbgnNodeToSkeleton.get(component);
-        let e1 = graphManagerSkeleton.add(sbgnLayoutSkeleton.newEdge(), sourceNode, targetNode);
-        e1.id = sourceNode.id + "_" + targetNode.id;
-        e1.originalTarget = edge.target;
-      });
-    });
-
-    //console.log("Skeleton Edges");
-    //console.log(this.rootSkeleton.getEdges());
-
-    // apply incremental layout on skeleton graph
-    graphManagerSkeleton.allNodesToApplyGravitation = undefined;
-    sbgnLayoutSkeleton.initParameters();
-    sbgnLayoutSkeleton.initSpringEmbedder();
-    CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
-    CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
-    CoSEConstants.TILE = false;
-    sbgnLayoutSkeleton.runLayout();
-
-    //console.log("Skeleton Nodes");
-    //console.log(this.rootSkeleton.getNodes());
-
-    graphManagerSkeleton.getAllNodes().forEach((node, i) => {
-      newPositions.push({ x: node.getCenterX(), y: node.getCenterY() });
-    });
-
-    graphManagerSkeleton.getAllNodes().forEach((node, i) => {
-      let sbgnElement = this.skeletonToSbgnNode.get(node);
-      if (Array.isArray(sbgnElement)) {
-        sbgnElement.forEach(sbgnNode => {
-          sbgnNode.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
-        });
-      }
-      else {
-        sbgnElement.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
-      }
-    });
-
-    let ringToReactionBlockEdges = [];
-    components.forEach((component, i) => {
-      component.forEach(node => {
-        node.getNeighborsList().intersection(ringNodes).forEach(neigbor => {
-          ringToReactionBlockEdges.push(node.getEdgesBetween(neigbor)[0]);
-        });
-      });
-    });
-
-    let updatedConstraintInfo = sbgnLayout.addPerComponentConstraints(components, directions);
-    let verticalAlignments = updatedConstraintInfo.verticalAlignments;
-    let horizontalAlignments = updatedConstraintInfo.horizontalAlignments;
-    this.graphManagerSkeleton.getAllEdges().forEach((edge, i) => {
-      let source = edge.getSource();
-      let target = edge.getTarget();
-      if (Math.abs(target.getCenterY() - source.getCenterY()) > Math.abs(target.getCenterX() - source.getCenterX())) {
-        verticalAlignments.push([this.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]); // source nodes are ring nodes
-      }
-      else {
-        horizontalAlignments.push([this.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]);
-      }
-    });
-
-    verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
-    horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
-    let alignmentConstraint = { vertical: verticalAlignments, horizontal: horizontalAlignments };
-
-    console.log(verticalAlignments);
-    console.log(horizontalAlignments);
-
-    // Apply an incremental layout to give a final shape to reaction blocks
-    sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
-    graphManager.allNodesToApplyGravitation = undefined;
-    sbgnLayout.initParameters();
-    sbgnLayout.initSpringEmbedder();
-    CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
-    CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
-    CoSEConstants.TILE = false;
-    sbgnLayout.runLayout();
-
-    let polishingInfo = SBGNPolishing.addPerComponentPolishment(components, directions);
-    sbgnLayout.repopulateCompounds();
-    /*     verticalAlignments.push(polishingInfo.verticalAlignments);
-        horizontalAlignments.push(polishingInfo.horizontalAlignments);
-        verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
-        horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
-        alignmentConstraint = {vertical: verticalAlignments, horizontal: horizontalAlignments};
-    
-        let relativePlacementConstraints = graphInfo.constraints.relativePlacementConstraint.concat(polishingInfo.relativePlacementConstraints);
-    
-        // Apply an incremental layout to polish each component
-        sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
-        sbgnLayout.constraints["relativePlacementConstraint"] = relativePlacementConstraints;
-        graphManager.allNodesToApplyGravitation = undefined;
-        sbgnLayout.initParameters();
-        sbgnLayout.initSpringEmbedder();
-        CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
-        CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
-        CoSEConstants.TILE = false;
-        sbgnLayout.runLayout(); */
-
   }
 
   // Get the top most ones of a list of nodes

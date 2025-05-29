@@ -39818,9 +39818,9 @@
 
 		var sbgnData = __webpack_require__(0);
 
-		var sbgnStyle = new Map().set('unspecified entity', { w: 32, h: 32, shape: 'ellipse' }).set('simple chemical', { w: 48, h: 48, shape: 'ellipse' }).set('simple chemical multimer', { w: 48, h: 48, shape: 'ellipse' }).set('macromolecule', { w: 96, h: 48, shape: 'roundrectangle' }).set('macromolecule multimer', { w: 96, h: 48, shape: 'roundrectangle' }).set('nucleic acid feature', { w: 88, h: 56, shape: 'bottomroundrectangle' }).set('nucleic acid feature multimer', { w: 88, h: 52, shape: 'bottomroundrectangle' }).set('complex', { w: 10, h: 10, shape: 'cutrectangle' }).set('complex multimer', { w: 10, h: 10, shape: 'cutrectangle' }).set('source and sink', { w: 60, h: 60, shape: 'polygon' }).set('perturbing agent', { w: 140, h: 60, shape: 'concavehexagon' }).set('phenotype', { w: 140, h: 60, shape: 'hexagon' }).set('process', { w: 25, h: 25, shape: 'square' }).set('uncertain process', { w: 25, h: 25, shape: 'square' }).set('omitted process', { w: 25, h: 25, shape: 'square' }).set('association', { w: 25, h: 25, shape: 'ellipse' }).set('dissociation', { w: 25, h: 25, shape: 'ellipse' }).set('compartment', { w: 50, h: 50, shape: 'barrel' }).set('tag', { w: 100, h: 65, shape: 'tag' }).set('and', { w: 40, h: 40, shape: 'ellipse' }).set('or', { w: 40, h: 40, shape: 'ellipse' }).set('not', { w: 40, h: 40, shape: 'ellipse' });
+		var sbgnStyle = new Map().set('unspecified entity', { w: 96, h: 48, shape: 'ellipse' }).set('simple chemical', { w: 96, h: 48, shape: 'polygon' }).set('simple chemical multimer', { w: 48, h: 48, shape: 'ellipse' }).set('macromolecule', { w: 96, h: 48, shape: 'roundrectangle' }).set('macromolecule multimer', { w: 96, h: 48, shape: 'roundrectangle' }).set('nucleic acid feature', { w: 88, h: 56, shape: 'bottomroundrectangle' }).set('nucleic acid feature multimer', { w: 88, h: 52, shape: 'bottomroundrectangle' }).set('complex', { w: 10, h: 10, shape: 'cutrectangle' }).set('complex multimer', { w: 10, h: 10, shape: 'cutrectangle' }).set('source and sink', { w: 60, h: 60, shape: 'polygon' }).set('perturbing agent', { w: 140, h: 60, shape: 'concavehexagon' }).set('phenotype', { w: 140, h: 60, shape: 'hexagon' }).set('process', { w: 25, h: 25, shape: 'square' }).set('uncertain process', { w: 25, h: 25, shape: 'square' }).set('omitted process', { w: 25, h: 25, shape: 'square' }).set('association', { w: 25, h: 25, shape: 'ellipse' }).set('dissociation', { w: 25, h: 25, shape: 'ellipse' }).set('compartment', { w: 50, h: 50, shape: 'barrel' }).set('tag', { w: 100, h: 65, shape: 'tag' }).set('and', { w: 48, h: 48, shape: 'ellipse' }).set('or', { w: 48, h: 48, shape: 'ellipse' }).set('not', { w: 48, h: 48, shape: 'ellipse' }).set('delay', { w: 48, h: 48, shape: 'ellipse' }).set('biological activity', { w: 96, h: 48, shape: 'rectangle' });
 
-		var sbgnArrowMap = new Map().set('necessary stimulation', 'triangle-cross').set('inhibition', 'tee').set('catalysis', 'circle').set('stimulation', 'triangle').set('production', 'triangle').set('modulation', 'diamond');
+		var sbgnArrowMap = new Map().set('necessary stimulation', 'triangle-cross').set('inhibition', 'tee').set('catalysis', 'circle').set('stimulation', 'triangle').set('production', 'triangle').set('modulation', 'diamond').set('positive influence', 'triangle').set('negative influence', 'tee').set('unknown influence', 'diamond');
 
 		var elementStyle = {
 		  sbgnShape: function sbgnShape(node) {
@@ -39851,6 +39851,9 @@
 		    }
 		    if (sbgnClass == 'uncertain process') {
 		      content = '?';
+		    }
+		    if (sbgnClass == 'delay') {
+		      content = '\u03C4'; // tau
 		    }
 
 		    return content;
@@ -40657,9 +40660,10 @@
 		    },
 		    'text-valign': 'center',
 		    'text-halign': 'center',
+		    'text-wrap': 'wrap',
 		    'border-width': 1.5,
 		    'border-color': '#555',
-		    'background-color': '#f6f6f6',
+		    'background-color': '#ffffff',
 		    'text-opacity': 1,
 		    'opacity': 1,
 		    'text-outline-color': 'white',
@@ -40672,6 +40676,8 @@
 		  }).selector('node:active').css({
 		    'overlay-color': '#d67614',
 		    'overlay-padding': '14'
+		  }).selector('\n          node[class="simple chemical"]\n        ').css({
+		    'shape-polygon-points': "-1 0 -0.992 -0.134 -0.970 -0.272 -0.933 -0.408 -0.883 -0.541 -0.821 -0.664 -0.750 -0.775 -0.671 -0.869 -0.587 -0.945 -0.5 -1 0.5 -1 0.587 -0.945 0.671 -0.869 0.750 -0.775 0.821 -0.664 0.883 -0.541 0.933 -0.408 0.970 -0.272 0.992 -0.134 1 0 0.992 0.134 0.970 0.272 0.933 0.408 0.883 0.541 0.821 0.664 0.750 0.775 0.671 0.869 0.587 0.945 0.5 1 -0.5 1 -0.587 0.945 -0.671 0.869 -0.750 0.775 -0.821 0.664 -0.883 0.541 -0.933 0.408 -0.970 0.272 -0.992 0.134 -1 0"
 		  })
 
 		  // draw sbgn specific styling (auxiliary items, clonemarker, etc.)
@@ -40795,6 +40801,8 @@
 		    },
 		    'source-arrow-shape': 'none'
 		  }).selector('edge[class="inhibition"]').css({
+		    'target-arrow-fill': 'filled'
+		  }).selector('edge[class="negative influence"]').css({
 		    'target-arrow-fill': 'filled'
 		  }).selector('edge[class="production"]').css({
 		    'target-arrow-fill': 'filled'
@@ -50651,7 +50659,7 @@
 		/******/ 	__webpack_require__.p = "";
 		/******/
 		/******/ 	// Load entry module and return exports
-		/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+		/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 		/******/ })
 		/************************************************************************/
 		/******/ ([
@@ -50662,27 +50670,6 @@
 
 		/***/ }),
 		/* 1 */
-		/***/ (function(module, exports, __webpack_require__) {
-
-
-		// Simple, internal Object.assign() polyfill for options objects etc.
-
-		module.exports = Object.assign != null ? Object.assign.bind(Object) : function (tgt) {
-		  for (var _len = arguments.length, srcs = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-		    srcs[_key - 1] = arguments[_key];
-		  }
-
-		  srcs.forEach(function (src) {
-		    Object.keys(src).forEach(function (k) {
-		      return tgt[k] = src[k];
-		    });
-		  });
-
-		  return tgt;
-		};
-
-		/***/ }),
-		/* 2 */
 		/***/ (function(module, exports, __webpack_require__) {
 
 
@@ -50698,12 +50685,12 @@
 		module.exports = SBGNConstants;
 
 		/***/ }),
-		/* 3 */
+		/* 2 */
 		/***/ (function(module, exports, __webpack_require__) {
 
 
 		var CoSENode = __webpack_require__(0).CoSENode;
-		__webpack_require__(16).IMath;
+		__webpack_require__(17).IMath;
 
 		function SBGNNode(gm, loc, size, vNode) {
 		  // the constructor of LNode handles alternative constructors
@@ -50778,107 +50765,38 @@
 		module.exports = SBGNNode;
 
 		/***/ }),
-		/* 4 */
+		/* 3 */
 		/***/ (function(module, exports, __webpack_require__) {
 
 
-		/**
-		 * Redirection to SBGN Layout Algorithm
-		 */
+		// Simple, internal Object.assign() polyfill for options objects etc.
 
-		module.exports = __webpack_require__(11);
-
-		/***/ }),
-		/* 5 */
-		/***/ (function(module, exports, __webpack_require__) {
-
-
-		var CoSEEdge = __webpack_require__(0).CoSEEdge;
-
-		function SBGNEdge(source, target, vEdge) {
-		  CoSEEdge.call(this, source, target, vEdge);
-
-		  // SBGN class of edge (such as consumption, production etc.)
-		  this.class = null;
-		}
-
-		SBGNEdge.prototype = Object.create(CoSEEdge.prototype);
-		for (var prop in CoSEEdge) {
-		  SBGNEdge[prop] = CoSEEdge[prop];
-		}
-
-		SBGNEdge.prototype.isModulation = function () {
-		  var self = this;
-		  if (self.class == "modulation" || self.class == "stimulation" || self.class == "catalysis" || self.class == "inhibition" || self.class == "necessary stimulation") return true;else return false;
-		};
-
-		module.exports = SBGNEdge;
-
-		/***/ }),
-		/* 6 */
-		/***/ (function(module, exports, __webpack_require__) {
-
-
-		var CoSEGraph = __webpack_require__(0).CoSEGraph;
-
-		function SBGNGraph(parent, graphMgr, vGraph) {
-		  CoSEGraph.call(this, parent, graphMgr, vGraph);
-		}
-
-		SBGNGraph.prototype = Object.create(CoSEGraph.prototype);
-
-		for (var prop in CoSEGraph) {
-		  SBGNGraph[prop] = CoSEGraph[prop];
-		}
-
-		module.exports = SBGNGraph;
-
-		/***/ }),
-		/* 7 */
-		/***/ (function(module, exports, __webpack_require__) {
-
-
-		var CoSEGraphManager = __webpack_require__(0).CoSEGraphManager;
-
-		function SBGNGraphManager(layout) {
-		  CoSEGraphManager.call(this, layout);
-		}
-
-		SBGNGraphManager.prototype = Object.create(CoSEGraphManager.prototype);
-
-		for (var prop in CoSEGraphManager) {
-		  SBGNGraphManager[prop] = CoSEGraphManager[prop];
-		}
-
-		SBGNGraphManager.prototype.getAllProcessNodes = function () {
-		  var nodeList = [];
-		  var graphs = this.getGraphs();
-		  var s = graphs.length;
-		  for (var i = 0; i < s; i++) {
-		    nodeList = nodeList.concat(graphs[i].getNodes());
+		module.exports = Object.assign != null ? Object.assign.bind(Object) : function (tgt) {
+		  for (var _len = arguments.length, srcs = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+		    srcs[_key - 1] = arguments[_key];
 		  }
-		  var processNodeList = nodeList.filter(function (node) {
-		    if (node.isProcess()) return true;else return false;
-		  });
-		  this.processNodes = processNodeList;
 
-		  return this.processNodes;
+		  srcs.forEach(function (src) {
+		    Object.keys(src).forEach(function (k) {
+		      return tgt[k] = src[k];
+		    });
+		  });
+
+		  return tgt;
 		};
 
-		module.exports = SBGNGraphManager;
-
 		/***/ }),
-		/* 8 */
+		/* 4 */
 		/***/ (function(module, exports, __webpack_require__) {
 
 
 		function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 		var CoSELayout = __webpack_require__(0).CoSELayout;
-		var SBGNGraphManager = __webpack_require__(7);
-		var SBGNGraph = __webpack_require__(6);
-		var SBGNNode = __webpack_require__(3);
-		var SBGNEdge = __webpack_require__(5);
+		var SBGNGraphManager = __webpack_require__(8);
+		var SBGNGraph = __webpack_require__(7);
+		var SBGNNode = __webpack_require__(2);
+		var SBGNEdge = __webpack_require__(6);
 
 		// Constructor
 		function SBGNLayout() {
@@ -51368,13 +51286,103 @@
 		module.exports = SBGNLayout;
 
 		/***/ }),
+		/* 5 */
+		/***/ (function(module, exports, __webpack_require__) {
+
+
+		/**
+		 * Redirection to SBGN Layout Algorithm
+		 */
+
+		module.exports = __webpack_require__(12);
+
+		/***/ }),
+		/* 6 */
+		/***/ (function(module, exports, __webpack_require__) {
+
+
+		var CoSEEdge = __webpack_require__(0).CoSEEdge;
+
+		function SBGNEdge(source, target, vEdge) {
+		  CoSEEdge.call(this, source, target, vEdge);
+
+		  // SBGN class of edge (such as consumption, production etc.)
+		  this.class = null;
+		}
+
+		SBGNEdge.prototype = Object.create(CoSEEdge.prototype);
+		for (var prop in CoSEEdge) {
+		  SBGNEdge[prop] = CoSEEdge[prop];
+		}
+
+		SBGNEdge.prototype.isModulation = function () {
+		  var self = this;
+		  if (self.class == "modulation" || self.class == "stimulation" || self.class == "catalysis" || self.class == "inhibition" || self.class == "necessary stimulation") return true;else return false;
+		};
+
+		module.exports = SBGNEdge;
+
+		/***/ }),
+		/* 7 */
+		/***/ (function(module, exports, __webpack_require__) {
+
+
+		var CoSEGraph = __webpack_require__(0).CoSEGraph;
+
+		function SBGNGraph(parent, graphMgr, vGraph) {
+		  CoSEGraph.call(this, parent, graphMgr, vGraph);
+		}
+
+		SBGNGraph.prototype = Object.create(CoSEGraph.prototype);
+
+		for (var prop in CoSEGraph) {
+		  SBGNGraph[prop] = CoSEGraph[prop];
+		}
+
+		module.exports = SBGNGraph;
+
+		/***/ }),
+		/* 8 */
+		/***/ (function(module, exports, __webpack_require__) {
+
+
+		var CoSEGraphManager = __webpack_require__(0).CoSEGraphManager;
+
+		function SBGNGraphManager(layout) {
+		  CoSEGraphManager.call(this, layout);
+		}
+
+		SBGNGraphManager.prototype = Object.create(CoSEGraphManager.prototype);
+
+		for (var prop in CoSEGraphManager) {
+		  SBGNGraphManager[prop] = CoSEGraphManager[prop];
+		}
+
+		SBGNGraphManager.prototype.getAllProcessNodes = function () {
+		  var nodeList = [];
+		  var graphs = this.getGraphs();
+		  var s = graphs.length;
+		  for (var i = 0; i < s; i++) {
+		    nodeList = nodeList.concat(graphs[i].getNodes());
+		  }
+		  var processNodeList = nodeList.filter(function (node) {
+		    if (node.isProcess()) return true;else return false;
+		  });
+		  this.processNodes = processNodeList;
+
+		  return this.processNodes;
+		};
+
+		module.exports = SBGNGraphManager;
+
+		/***/ }),
 		/* 9 */
 		/***/ (function(module, exports, __webpack_require__) {
 
 
 		function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-		var SBGNConstants = __webpack_require__(2);
+		var SBGNConstants = __webpack_require__(1);
 
 		function SBGNPolishing() {}
 
@@ -52287,7 +52295,1266 @@
 		/***/ (function(module, exports, __webpack_require__) {
 
 
-		var impl = __webpack_require__(4);
+		function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+		var SBGNConstants = __webpack_require__(1);
+		__webpack_require__(2);
+		__webpack_require__(4);
+
+		function SBGNPolishingNew() {}
+
+		SBGNPolishingNew.polish = function (sbgnLayout) {
+		  sbgnLayout.getAllNodes();
+		  var processNodes = sbgnLayout.getAllProcessNodes();
+		  processNodes.forEach(function (process) {
+		    var edges = process.edges.filter(function (edge) {
+		      return edge.direction;
+		    });
+		    for (var i = 0; i < edges.length; i++) {
+		      if (edges[i].direction && (edges[i].direction == 'l-r' || edges[i].direction == 'r-l' || edges[i].direction == 't-b' || edges[i].direction == 'b-t')) {
+		        process.direction = edges[i].direction;
+		        break;
+		      } else if (edges[i].direction == 'tl-br' || edges[i].direction == 'tr-bl' || edges[i].direction == 'br-tl' || edges[i].direction == 'bl-tr') {
+		        process.direction = 't-b';
+		      }
+		    }	    var predecessors = [];
+		    var incomers = process.getIncomerNodes();
+		    incomers.forEach(function (incomer) {
+		      predecessors = predecessors.concat(incomer.getIncomerNodes());
+		    });
+		    var successors = [];
+		    var outgoers = process.getOutgoerNodes();
+		    outgoers.forEach(function (outgoer) {
+		      successors = successors.concat(outgoer.getOutgoerNodes());
+		    });
+		    var before = false;
+		    var after = false;
+		    predecessors.forEach(function (node) {
+		      if (node.isProcess()) {
+		        before = true;
+		      }
+		    });
+		    successors.forEach(function (node) {
+		      if (node.isProcess()) {
+		        after = true;
+		      }
+		    });
+		    if (before && after) {
+		      process.status = "middle";
+		    } else if (before) {
+		      process.status = "last";
+		    } else if (after) {
+		      process.status = "first";
+		    }
+		    console.log(process.status);
+		  });
+
+		  this.addPerProcessPolishment(processNodes);
+		};
+
+		SBGNPolishingNew.generateConstraints = function (sbgnLayout) {
+		  var _this = this;
+
+		  var allNodes = sbgnLayout.getAllNodes();
+		  var oneDegreeNodes = new Set();
+		  var multiDegreeNodes = new Set();
+		  allNodes.forEach(function (node) {
+		    if (node.getNeighborsList().size == 1) {
+		      oneDegreeNodes.add(node);
+		    } else {
+		      multiDegreeNodes.add(node);
+		    }
+		  });
+
+		  var relativePlacementConstraints = [];
+		  var verticalAlignments = [];
+		  var horizontalAlignments = [];
+		  var allEdges = sbgnLayout.getAllEdges();
+		  allEdges.forEach(function (edge) {
+		    var source = edge.getSource();
+		    var target = edge.getTarget();
+		    if (!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target)) {
+		      var direction = _this.getDirection(source, target);
+		      edge.direction = direction;
+		      if (direction == "l-r") {
+		        var relativePlacement = [];
+		        relativePlacement.push({ left: source.id, right: target.id });
+		        horizontalAlignments.push([source.id, target.id]);
+		        relativePlacementConstraints = relativePlacementConstraints.concat(relativePlacement);
+		      } else if (direction == "r-l") {
+		        var _relativePlacement = [];
+		        _relativePlacement.push({ left: target.id, right: source.id });
+		        horizontalAlignments.push([source.id, target.id]);
+		        relativePlacementConstraints = relativePlacementConstraints.concat(_relativePlacement);
+		      } else if (direction == "t-b") {
+		        var _relativePlacement2 = [];
+		        _relativePlacement2.push({ top: source.id, bottom: target.id });
+		        verticalAlignments.push([source.id, target.id]);
+		        relativePlacementConstraints = relativePlacementConstraints.concat(_relativePlacement2);
+		      } else if (direction == "b-t") {
+		        var _relativePlacement3 = [];
+		        _relativePlacement3.push({ top: target.id, bottom: source.id });
+		        verticalAlignments.push([source.id, target.id]);
+		        relativePlacementConstraints = relativePlacementConstraints.concat(_relativePlacement3);
+		      } else if (direction == "tl-br") {
+		        var _relativePlacement4 = [];
+		        _relativePlacement4.push({ left: source.id, right: target.id });
+		        _relativePlacement4.push({ top: source.id, bottom: target.id });
+		        relativePlacementConstraints = relativePlacementConstraints.concat(_relativePlacement4);
+		      } else if (direction == "br-tl") {
+		        var _relativePlacement5 = [];
+		        _relativePlacement5.push({ left: target.id, right: source.id });
+		        _relativePlacement5.push({ top: target.id, bottom: source.id });
+		        relativePlacementConstraints = relativePlacementConstraints.concat(_relativePlacement5);
+		      } else if (direction == "tr-bl") {
+		        var _relativePlacement6 = [];
+		        _relativePlacement6.push({ left: target.id, right: source.id });
+		        _relativePlacement6.push({ top: source.id, bottom: target.id });
+		        relativePlacementConstraints = relativePlacementConstraints.concat(_relativePlacement6);
+		      } else if (direction == "bl-tr") {
+		        var _relativePlacement7 = [];
+		        _relativePlacement7.push({ left: source.id, right: target.id });
+		        _relativePlacement7.push({ top: target.id, bottom: source.id });
+		        relativePlacementConstraints = relativePlacementConstraints.concat(_relativePlacement7);
+		      }
+		    }
+		  });
+
+		  if (verticalAlignments.length) {
+		    verticalAlignments = mergeArrays(verticalAlignments);
+		  }
+		  if (horizontalAlignments.length) {
+		    horizontalAlignments = mergeArrays(horizontalAlignments);
+		  }
+
+		  var alignmentConstraints = { vertical: verticalAlignments.length > 0 ? verticalAlignments : undefined, horizontal: horizontalAlignments.length > 0 ? horizontalAlignments : undefined };
+
+		  return { relativePlacementConstraint: relativePlacementConstraints, alignmentConstraint: alignmentConstraints };
+		};
+
+		// calculates line direction
+		SBGNPolishingNew.getDirection = function (source, target) {
+		  var slopeThreshold = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.40;
+
+		  var direction = "l-r";
+		  if (Math.abs(target.getCenterY() - source.getCenterY()) / Math.abs(target.getCenterX() - source.getCenterX()) < slopeThreshold) {
+		    if (target.getCenterX() - source.getCenterX() > 0) {
+		      direction = "l-r";
+		    } else {
+		      direction = "r-l";
+		    }
+		  } else if (Math.abs(target.getCenterX() - source.getCenterX()) / Math.abs(target.getCenterY() - source.getCenterY()) < slopeThreshold) {
+		    if (target.getCenterY() - source.getCenterY() > 0) {
+		      direction = "t-b";
+		    } else {
+		      direction = "b-t";
+		    }
+		  } else if (target.getCenterY() - source.getCenterY() > 0 && target.getCenterX() - source.getCenterX() > 0) {
+		    direction = "tl-br";
+		  } else if (target.getCenterY() - source.getCenterY() < 0 && target.getCenterX() - source.getCenterX() < 0) {
+		    direction = "br-tl";
+		  } else if (target.getCenterY() - source.getCenterY() > 0 && target.getCenterX() - source.getCenterX() < 0) {
+		    direction = "tr-bl";
+		  } else if (target.getCenterY() - source.getCenterY() < 0 && target.getCenterX() - source.getCenterX() > 0) {
+		    direction = "bl-tr";
+		  }
+		  return direction;
+		};
+
+		// auxuliary function to merge arrays with duplicates
+		var mergeArrays = function mergeArrays(arrays) {
+		  // Function to check if two arrays have common items
+		  function haveCommonItems(arr1, arr2) {
+		    return arr1.some(function (item) {
+		      return arr2.includes(item);
+		    });
+		  }
+
+		  // Function to merge two arrays and remove duplicates
+		  function mergeAndRemoveDuplicates(arr1, arr2) {
+		    return Array.from(new Set([].concat(_toConsumableArray(arr1), _toConsumableArray(arr2))));
+		  }
+
+		  // Loop until no more merges are possible
+		  var merged = false;
+		  do {
+		    merged = false;
+		    for (var i = 0; i < arrays.length; i++) {
+		      for (var j = i + 1; j < arrays.length; j++) {
+		        if (haveCommonItems(arrays[i], arrays[j])) {
+		          // Merge the arrays
+		          arrays[i] = mergeAndRemoveDuplicates(arrays[i], arrays[j]);
+		          // Remove the merged array
+		          arrays.splice(j, 1);
+		          // Set merged to true to indicate a merge has occurred
+		          merged = true;
+		          break;
+		        }
+		      }
+		      if (merged) {
+		        break;
+		      }
+		    }
+		  } while (merged);
+
+		  return arrays;
+		};
+
+		SBGNPolishingNew.addPerProcessPolishment = function (processes, directions) {
+		  var horizontalAlignments = [];
+		  var verticalAlignments = [];
+		  var relativePlacementConstraints = [];
+
+		  var idealEdgeLength = SBGNConstants.DEFAULT_EDGE_LENGTH;
+
+		  var calculatePosition = function calculatePosition(nodeA, nodeB, idealEdgeLength, degree) {
+		    if (degree == 0) {
+		      return { x: nodeA.getCenterX() + (nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength), y: nodeA.getCenterY() };
+		    } else if (degree == 90) {
+		      return { x: nodeA.getCenterX(), y: nodeA.getCenterY() - (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
+		    } else if (degree == 180) {
+		      return { x: nodeA.getCenterX() - (nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength), y: nodeA.getCenterY() };
+		    } else if (degree == 270) {
+		      return { x: nodeA.getCenterX(), y: nodeA.getCenterY() + (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
+		    } else {
+		      var radian = degree * Math.PI / 180;
+		      var radius = idealEdgeLength / 2 + (nodeA.getDiagonal() / 2 + nodeB.getDiagonal() / 2);
+		      return { x: nodeA.getCenterX() + radius * Math.cos(radian), y: nodeA.getCenterY() - radius * Math.sin(radian) };
+		    }
+		  };
+
+		  var placeLogicalOperators = function placeLogicalOperators(modulator, a1, a2, a3) {
+		    var incomers = modulator.getIncomerNodes();
+		    if (incomers.length == 1) {
+		      var position = calculatePosition(modulator, incomers[0], idealEdgeLength, a1);
+		      incomers[0].setCenter(position.x, position.y);
+		    } else if (incomers.length == 2) {
+		      var _position = calculatePosition(modulator, incomers[0], idealEdgeLength, a2);
+		      incomers[0].setCenter(_position.x, _position.y);
+		      _position = calculatePosition(modulator, incomers[1], idealEdgeLength, a3);
+		      incomers[1].setCenter(_position.x, _position.y);
+		    }
+		  };
+
+		  // first process input nodes (except modulators)
+		  processes.forEach(function (node, j) {
+		    var incomers = node.getIncomerNodes();
+		    var outgoers = node.getOutgoerNodes();
+		    // find input nodes (filter ring nodes, modulator nodes and input with degree higher than 1)
+		    var inputs = incomers.filter(function (input) {
+		      var edgeBetween = node.getEdgesBetween(input)[0];
+		      if (input.pseudoClass == "ring" || edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation" || input.getNeighborsList().size > 1) {
+		        return false;
+		      } else {
+		        return true;
+		      }
+		    });
+		    // find modulator nodes (filter ring nodes, non-modulator nodes and input with degree higher than 1)
+		    var modulators = incomers.filter(function (input) {
+		      var edgeBetween = node.getEdgesBetween(input)[0];
+		      if (input.pseudoClass != "ring" && (edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation") && (input.getNeighborsList().size == 1 || input.isLogicalOperator())) {
+		        return true;
+		      } else {
+		        return false;
+		      }
+		    });
+		    // find output nodes (filter ring nodes, modulator nodes and output with degree higher than 1)
+		    var outputs = outgoers.filter(function (output) {
+		      var edgeBetween = node.getEdgesBetween(output)[0];
+		      if (output.pseudoClass == "ring" || edgeBetween.class == "modulation" || edgeBetween.class == "stimulation" || edgeBetween.class == "catalysis" || edgeBetween.class == "inhibition" || edgeBetween.class == "necessary stimulation" || output.getNeighborsList().size > 1) {
+		        return false;
+		      } else {
+		        return true;
+		      }
+		    });
+		    if (node.status == 'first') {
+		      // first node and not connected to ring
+		      if (node.direction == "l-r") {
+		        // process inputs
+		        if (inputs.length == 1) {
+		          var position = calculatePosition(node, inputs[0], idealEdgeLength, 180);
+		          inputs[0].setCenter(position.x, position.y);
+		          horizontalAlignments.push([node, inputs[0]]);
+		        } else if (inputs.length == 2) {
+		          var _position2 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
+		          inputs[0].setCenter(_position2.x, _position2.y);
+		          _position2 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
+		          inputs[1].setCenter(_position2.x, _position2.y);
+		        } else if (inputs.length == 3) {
+		          var _position3 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
+		          inputs[0].setCenter(_position3.x, _position3.y);
+		          _position3 = calculatePosition(node, inputs[1], idealEdgeLength, 180);
+		          inputs[1].setCenter(_position3.x, _position3.y);
+		          _position3 = calculatePosition(node, inputs[2], idealEdgeLength, 225);
+		          inputs[2].setCenter(_position3.x, _position3.y);
+		          horizontalAlignments.push([node, inputs[1]]);
+		        } else if (inputs.length > 3) {
+		          var _position4 = calculatePosition(node, inputs[0], idealEdgeLength, 126);
+		          inputs[0].setCenter(_position4.x, _position4.y);
+		          _position4 = calculatePosition(node, inputs[1], idealEdgeLength, 162);
+		          inputs[1].setCenter(_position4.x, _position4.y);
+		          _position4 = calculatePosition(node, inputs[2], idealEdgeLength, 198);
+		          inputs[2].setCenter(_position4.x, _position4.y);
+		          _position4 = calculatePosition(node, inputs[3], idealEdgeLength, 234);
+		          inputs[3].setCenter(_position4.x, _position4.y);
+		          inputs.forEach(function (input) {
+		            relativePlacementConstraints.push({ left: input.id, right: node.id });
+		          });
+		        }
+		        // process modulators
+		        if (modulators.length == 1) {
+		          var _position5 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
+		          modulators[0].setCenter(_position5.x, _position5.y);
+		          verticalAlignments.push([node, modulators[0]]);
+		        } else if (modulators.length >= 2) {
+		          var _position6 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
+		          modulators[0].setCenter(_position6.x, _position6.y);
+		          _position6 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
+		          modulators[1].setCenter(_position6.x, _position6.y);
+		          if (modulators[2]) {
+		            if (inputs.length == 1) {
+		              _position6 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
+		              modulators[2].setCenter(_position6.x, _position6.y);
+		            }
+		            if (inputs.length == 2) {
+		              _position6 = calculatePosition(node, modulators[2], idealEdgeLength, 180);
+		              modulators[2].setCenter(_position6.x, _position6.y);
+		            }
+		          }
+		        }
+		        // process outputs
+		        if (outputs.length == 1) {
+		          var _position7 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
+		          outputs[0].setCenter(_position7.x, _position7.y);
+		        } else if (outputs.length == 2) {
+		          var _position8 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
+		          outputs[0].setCenter(_position8.x, _position8.y);
+		          _position8 = calculatePosition(node, outputs[1], idealEdgeLength, 45);
+		          outputs[1].setCenter(_position8.x, _position8.y);
+		        } else if (outputs.length > 2) {
+		          var _position9 = calculatePosition(node, outputs[0], idealEdgeLength, 330);
+		          outputs[0].setCenter(_position9.x, _position9.y);
+		          _position9 = calculatePosition(node, outputs[1], idealEdgeLength, 30);
+		          outputs[1].setCenter(_position9.x, _position9.y);
+		          if (outputs[2]) {
+		            _position9 = calculatePosition(node, outputs[2], idealEdgeLength, 310);
+		            outputs[2].setCenter(_position9.x, _position9.y);
+		            if (outputs[3]) {
+		              _position9 = calculatePosition(node, outputs[3], idealEdgeLength, 60);
+		              outputs[3].setCenter(_position9.x, _position9.y);
+		            }
+		          }
+		        }
+		      }
+		      if (node.direction == "r-l") {
+		        // process inputs
+		        if (inputs.length == 1) {
+		          var _position10 = calculatePosition(node, inputs[0], idealEdgeLength, 0);
+		          inputs[0].setCenter(_position10.x, _position10.y);
+		          horizontalAlignments.push([node, inputs[0]]);
+		        } else if (inputs.length == 2) {
+		          var _position11 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+		          inputs[0].setCenter(_position11.x, _position11.y);
+		          _position11 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
+		          inputs[1].setCenter(_position11.x, _position11.y);
+		        } else if (inputs.length == 3) {
+		          var _position12 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+		          inputs[0].setCenter(_position12.x, _position12.y);
+		          _position12 = calculatePosition(node, inputs[1], idealEdgeLength, 0);
+		          inputs[1].setCenter(_position12.x, _position12.y);
+		          _position12 = calculatePosition(node, inputs[2], idealEdgeLength, 315);
+		          inputs[2].setCenter(_position12.x, _position12.y);
+		          horizontalAlignments.push([node, inputs[1]]);
+		        } else if (inputs.length > 3) {
+		          var _position13 = calculatePosition(node, inputs[0], idealEdgeLength, 36);
+		          inputs[0].setCenter(_position13.x, _position13.y);
+		          _position13 = calculatePosition(node, inputs[1], idealEdgeLength, 324);
+		          inputs[1].setCenter(_position13.x, _position13.y);
+		          _position13 = calculatePosition(node, inputs[2], idealEdgeLength, 72);
+		          inputs[2].setCenter(_position13.x, _position13.y);
+		          _position13 = calculatePosition(node, inputs[3], idealEdgeLength, 288);
+		          inputs[3].setCenter(_position13.x, _position13.y);
+		          inputs.forEach(function (input) {
+		            relativePlacementConstraints.push({ left: input.id, right: node.id });
+		          });
+		        }
+		        // process modulators
+		        if (modulators.length == 1) {
+		          var _position14 = calculatePosition(node, modulators[0], idealEdgeLength, 270);
+		          modulators[0].setCenter(_position14.x, _position14.y);
+		          verticalAlignments.push([node, modulators[0]]);
+		        } else if (modulators.length >= 2) {
+		          var _position15 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
+		          modulators[0].setCenter(_position15.x, _position15.y);
+		          _position15 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
+		          modulators[1].setCenter(_position15.x, _position15.y);
+		          if (modulators[2]) {
+		            if (inputs.length == 1) {
+		              _position15 = calculatePosition(node, modulators[2], idealEdgeLength, 45);
+		              modulators[2].setCenter(_position15.x, _position15.y);
+		            }
+		            if (inputs.length == 2) {
+		              _position15 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
+		              modulators[2].setCenter(_position15.x, _position15.y);
+		            }
+		          }
+		        }
+		        // process outputs
+		        if (outputs.length == 1) {
+
+		          var _position16 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
+		          outputs[0].setCenter(_position16.x, _position16.y);
+		        } else if (outputs.length == 2) {
+		          var _position17 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
+		          outputs[0].setCenter(_position17.x, _position17.y);
+		          _position17 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
+		          outputs[1].setCenter(_position17.x, _position17.y);
+		        } else if (outputs.length > 2) {
+		          var _position18 = calculatePosition(node, outputs[0], idealEdgeLength, 210);
+		          outputs[0].setCenter(_position18.x, _position18.y);
+		          _position18 = calculatePosition(node, outputs[1], idealEdgeLength, 150);
+		          outputs[1].setCenter(_position18.x, _position18.y);
+		          if (outputs[2]) {
+		            _position18 = calculatePosition(node, outputs[2], idealEdgeLength, 240);
+		            outputs[2].setCenter(_position18.x, _position18.y);
+		            if (outputs[3]) {
+		              _position18 = calculatePosition(node, outputs[3], idealEdgeLength, 120);
+		              outputs[3].setCenter(_position18.x, _position18.y);
+		            }
+		          }
+		        }
+		      }
+		      if (node.direction == "t-b") {
+		        // process inputs
+		        if (inputs.length == 1) {
+		          var _position19 = calculatePosition(node, inputs[0], idealEdgeLength, 90);
+		          inputs[0].setCenter(_position19.x, _position19.y);
+		          verticalAlignments.push([node, inputs[0]]);
+		        } else if (inputs.length == 2) {
+		          var _position20 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+		          inputs[0].setCenter(_position20.x, _position20.y);
+		          _position20 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
+		          inputs[1].setCenter(_position20.x, _position20.y);
+		        } else if (inputs.length == 3) {
+		          var _position21 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+		          inputs[0].setCenter(_position21.x, _position21.y);
+		          _position21 = calculatePosition(node, inputs[1], idealEdgeLength, 90);
+		          inputs[1].setCenter(_position21.x, _position21.y);
+		          _position21 = calculatePosition(node, inputs[2], idealEdgeLength, 135);
+		          inputs[2].setCenter(_position21.x, _position21.y);
+		          horizontalAlignments.push([node, inputs[1]]);
+		        } else if (inputs.length > 3) {
+		          var _position22 = calculatePosition(node, inputs[0], idealEdgeLength, 72);
+		          inputs[0].setCenter(_position22.x, _position22.y);
+		          _position22 = calculatePosition(node, inputs[1], idealEdgeLength, 108);
+		          inputs[1].setCenter(_position22.x, _position22.y);
+		          _position22 = calculatePosition(node, inputs[2], idealEdgeLength, 36);
+		          inputs[2].setCenter(_position22.x, _position22.y);
+		          _position22 = calculatePosition(node, inputs[3], idealEdgeLength, 144);
+		          inputs[3].setCenter(_position22.x, _position22.y);
+		          inputs.forEach(function (input) {
+		            relativePlacementConstraints.push({ left: input.id, right: node.id });
+		          });
+		        }
+		        // process modulators
+		        if (modulators.length == 1) {
+		          var _position23 = calculatePosition(node, modulators[0], idealEdgeLength, 0);
+		          modulators[0].setCenter(_position23.x, _position23.y);
+		          horizontalAlignments.push([node, modulators[0]]);
+		        } else if (modulators.length >= 2) {
+		          var _position24 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
+		          modulators[0].setCenter(_position24.x, _position24.y);
+		          _position24 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
+		          modulators[1].setCenter(_position24.x, _position24.y);
+		          if (modulators[2]) {
+		            if (inputs.length == 1) {
+		              _position24 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
+		              modulators[2].setCenter(_position24.x, _position24.y);
+		            }
+		            if (inputs.length == 2) {
+		              _position24 = calculatePosition(node, modulators[2], idealEdgeLength, 90);
+		              modulators[2].setCenter(_position24.x, _position24.y);
+		            }
+		          }
+		        }
+		        // process outputs
+		        if (outputs.length == 1) {
+		          var _position25 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
+		          outputs[0].setCenter(_position25.x, _position25.y);
+		        } else if (outputs.length == 2) {
+		          var _position26 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
+		          outputs[0].setCenter(_position26.x, _position26.y);
+		          _position26 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
+		          outputs[1].setCenter(_position26.x, _position26.y);
+		        } else if (outputs.length > 2) {
+		          var _position27 = calculatePosition(node, outputs[0], idealEdgeLength, 300);
+		          outputs[0].setCenter(_position27.x, _position27.y);
+		          _position27 = calculatePosition(node, outputs[1], idealEdgeLength, 240);
+		          outputs[1].setCenter(_position27.x, _position27.y);
+		          if (outputs[2]) {
+		            _position27 = calculatePosition(node, outputs[2], idealEdgeLength, 330);
+		            outputs[2].setCenter(_position27.x, _position27.y);
+		            if (outputs[3]) {
+		              _position27 = calculatePosition(node, outputs[3], idealEdgeLength, 210);
+		              outputs[3].setCenter(_position27.x, _position27.y);
+		            }
+		          }
+		        }
+		      }
+		      if (node.direction == "b-t") {
+		        // process inputs
+		        if (inputs.length == 1) {
+		          var _position28 = calculatePosition(node, inputs[0], idealEdgeLength, 270);
+		          inputs[0].setCenter(_position28.x, _position28.y);
+		          verticalAlignments.push([node, inputs[0]]);
+		        } else if (inputs.length == 2) {
+		          var _position29 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
+		          inputs[0].setCenter(_position29.x, _position29.y);
+		          _position29 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
+		          inputs[1].setCenter(_position29.x, _position29.y);
+		        } else if (inputs.length == 3) {
+		          var _position30 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
+		          inputs[0].setCenter(_position30.x, _position30.y);
+		          _position30 = calculatePosition(node, inputs[1], idealEdgeLength, 270);
+		          inputs[1].setCenter(_position30.x, _position30.y);
+		          _position30 = calculatePosition(node, inputs[2], idealEdgeLength, 225);
+		          inputs[2].setCenter(_position30.x, _position30.y);
+		          verticalAlignments.push([node, inputs[1]]);
+		        } else if (inputs.length > 3) {
+		          var _position31 = calculatePosition(node, inputs[0], idealEdgeLength, 288);
+		          inputs[0].setCenter(_position31.x, _position31.y);
+		          _position31 = calculatePosition(node, inputs[1], idealEdgeLength, 252);
+		          inputs[1].setCenter(_position31.x, _position31.y);
+		          _position31 = calculatePosition(node, inputs[2], idealEdgeLength, 324);
+		          inputs[2].setCenter(_position31.x, _position31.y);
+		          _position31 = calculatePosition(node, inputs[3], idealEdgeLength, 216);
+		          inputs[3].setCenter(_position31.x, _position31.y);
+		        }
+		        // process modulators
+		        if (modulators.length == 1) {
+		          var _position32 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
+		          modulators[0].setCenter(_position32.x, _position32.y);
+		          horizontalAlignments.push([node, modulators[0]]);
+		        } else if (modulators.length >= 2) {
+		          var _position33 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
+		          modulators[0].setCenter(_position33.x, _position33.y);
+		          _position33 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
+		          modulators[1].setCenter(_position33.x, _position33.y);
+		          if (modulators[2]) {
+		            if (inputs.length == 1) {
+		              _position33 = calculatePosition(node, modulators[2], idealEdgeLength, 225);
+		              modulators[2].setCenter(_position33.x, _position33.y);
+		            }
+		            if (inputs.length == 2) {
+		              _position33 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
+		              modulators[2].setCenter(_position33.x, _position33.y);
+		            }
+		          }
+		        }
+		        // process outputs
+		        if (outputs.length == 1) {
+		          var _position34 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
+		          outputs[0].setCenter(_position34.x, _position34.y);
+		        } else if (outputs.length == 2) {
+		          var _position35 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
+		          outputs[0].setCenter(_position35.x, _position35.y);
+		          _position35 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
+		          outputs[1].setCenter(_position35.x, _position35.y);
+		        } else if (outputs.length > 2) {
+		          var _position36 = calculatePosition(node, outputs[0], idealEdgeLength, 60);
+		          outputs[0].setCenter(_position36.x, _position36.y);
+		          _position36 = calculatePosition(node, outputs[1], idealEdgeLength, 120);
+		          outputs[1].setCenter(_position36.x, _position36.y);
+		          if (outputs[2]) {
+		            _position36 = calculatePosition(node, outputs[2], idealEdgeLength, 30);
+		            outputs[2].setCenter(_position36.x, _position36.y);
+		            if (outputs[3]) {
+		              _position36 = calculatePosition(node, outputs[3], idealEdgeLength, 150);
+		              outputs[3].setCenter(_position36.x, _position36.y);
+		            }
+		          }
+		        }
+		      }
+		    } else if (node.status == 'middle') {
+		      // an intermediate node - think about if connected to ring
+		      if (node.direction == "l-r") {
+		        // process inputs
+		        if (inputs.length == 1) {
+		          var _position37 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
+		          inputs[0].setCenter(_position37.x, _position37.y);
+		        } else if (inputs.length == 2) {
+		          var _position38 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
+		          inputs[0].setCenter(_position38.x, _position38.y);
+		          _position38 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
+		          inputs[1].setCenter(_position38.x, _position38.y);
+		        } else if (inputs.length > 2) {
+		          var _position39 = calculatePosition(node, inputs[0], idealEdgeLength, 210);
+		          inputs[0].setCenter(_position39.x, _position39.y);
+		          _position39 = calculatePosition(node, inputs[1], idealEdgeLength, 150);
+		          inputs[1].setCenter(_position39.x, _position39.y);
+		          if (inputs[2]) {
+		            _position39 = calculatePosition(node, inputs[2], idealEdgeLength, 240);
+		            inputs[2].setCenter(_position39.x, _position39.y);
+		            if (inputs[3]) {
+		              _position39 = calculatePosition(node, inputs[3], idealEdgeLength, 120);
+		              inputs[3].setCenter(_position39.x, _position39.y);
+		            }
+		          }
+		        }
+		        // process modulators
+		        if (modulators.length == 1) {
+		          var _position40 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
+		          modulators[0].setCenter(_position40.x, _position40.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 90, 45, 135);
+		          }
+		        } else if (modulators.length == 2) {
+		          var _position41 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
+		          modulators[0].setCenter(_position41.x, _position41.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 90, 45, 135);
+		          }
+		          _position41 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
+		          modulators[1].setCenter(_position41.x, _position41.y);
+		          if (modulators[1].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[1], 270, 225, 315);
+		          }
+		        } else if (modulators.length > 2) {
+		          var _position42 = calculatePosition(node, modulators[0], idealEdgeLength, 60);
+		          modulators[0].setCenter(_position42.x, _position42.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 90, 45, 135);
+		          }
+		          _position42 = calculatePosition(node, modulators[1], idealEdgeLength, 120);
+		          modulators[1].setCenter(_position42.x, _position42.y);
+		          if (modulators[1].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[1], 90, 45, 135);
+		          }
+		          _position42 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
+		          modulators[2].setCenter(_position42.x, _position42.y);
+		          if (modulators[2].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[2], 270, 225, 315);
+		          }
+		        }
+		        // process outputs
+		        if (outputs.length == 1) {
+		          var _position43 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
+		          outputs[0].setCenter(_position43.x, _position43.y);
+		        } else if (outputs.length == 2) {
+		          var _position44 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
+		          outputs[0].setCenter(_position44.x, _position44.y);
+		          _position44 = calculatePosition(node, outputs[1], idealEdgeLength, 45);
+		          outputs[1].setCenter(_position44.x, _position44.y);
+		        } else if (outputs.length > 2) {
+		          var _position45 = calculatePosition(node, outputs[0], idealEdgeLength, 330);
+		          outputs[0].setCenter(_position45.x, _position45.y);
+		          _position45 = calculatePosition(node, outputs[1], idealEdgeLength, 30);
+		          outputs[1].setCenter(_position45.x, _position45.y);
+		          if (outputs[2]) {
+		            _position45 = calculatePosition(node, outputs[2], idealEdgeLength, 300);
+		            outputs[2].setCenter(_position45.x, _position45.y);
+		            if (outputs[3]) {
+		              _position45 = calculatePosition(node, outputs[3], idealEdgeLength, 60);
+		              outputs[3].setCenter(_position45.x, _position45.y);
+		            }
+		          }
+		        }
+		      }
+		      if (node.direction == "r-l") {
+		        // process inputs
+		        if (inputs.length == 1) {
+		          var _position46 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+		          inputs[0].setCenter(_position46.x, _position46.y);
+		        } else if (inputs.length == 2) {
+		          var _position47 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+		          inputs[0].setCenter(_position47.x, _position47.y);
+		          _position47 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
+		          inputs[1].setCenter(_position47.x, _position47.y);
+		        } else if (inputs.length > 2) {
+		          var _position48 = calculatePosition(node, inputs[0], idealEdgeLength, 330);
+		          inputs[0].setCenter(_position48.x, _position48.y);
+		          _position48 = calculatePosition(node, inputs[1], idealEdgeLength, 30);
+		          inputs[1].setCenter(_position48.x, _position48.y);
+		          if (inputs[2]) {
+		            _position48 = calculatePosition(node, inputs[2], idealEdgeLength, 300);
+		            inputs[2].setCenter(_position48.x, _position48.y);
+		            if (inputs[3]) {
+		              _position48 = calculatePosition(node, inputs[3], idealEdgeLength, 60);
+		              inputs[3].setCenter(_position48.x, _position48.y);
+		            }
+		          }
+		          inputs.forEach(function (input) {
+		            relativePlacementConstraints.push({ left: node.id, right: input.id });
+		          });
+		        }
+		        // process modulators
+		        if (modulators.length == 1) {
+		          var _position49 = calculatePosition(node, modulators[0], idealEdgeLength, 270);
+		          modulators[0].setCenter(_position49.x, _position49.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 270, 225, 315);
+		          }
+		        } else if (modulators.length == 2) {
+		          var _position50 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
+		          modulators[0].setCenter(_position50.x, _position50.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 90, 45, 135);
+		          }
+		          _position50 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
+		          modulators[1].setCenter(_position50.x, _position50.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 270, 225, 315);
+		          }
+		        } else if (modulators.length > 2) {
+		          var _position51 = calculatePosition(node, modulators[0], idealEdgeLength, 60);
+		          modulators[0].setCenter(_position51.x, _position51.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 90, 45, 135);
+		          }
+		          _position51 = calculatePosition(node, modulators[1], idealEdgeLength, 120);
+		          modulators[1].setCenter(_position51.x, _position51.y);
+		          if (modulators[1].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[1], 90, 45, 135);
+		          }
+		          _position51 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
+		          modulators[2].setCenter(_position51.x, _position51.y);
+		          if (modulators[2].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[2], 270, 225, 315);
+		          }
+		        }
+		        // process outputs
+		        if (outputs.length == 1) {
+		          var _position52 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
+		          outputs[0].setCenter(_position52.x, _position52.y);
+		        } else if (outputs.length == 2) {
+		          var _position53 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
+		          outputs[0].setCenter(_position53.x, _position53.y);
+		          _position53 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
+		          outputs[1].setCenter(_position53.x, _position53.y);
+		        } else if (outputs.length > 2) {
+		          var _position54 = calculatePosition(node, outputs[0], idealEdgeLength, 210);
+		          outputs[0].setCenter(_position54.x, _position54.y);
+		          _position54 = calculatePosition(node, outputs[1], idealEdgeLength, 150);
+		          outputs[1].setCenter(_position54.x, _position54.y);
+		          if (outputs[2]) {
+		            _position54 = calculatePosition(node, outputs[2], idealEdgeLength, 240);
+		            outputs[2].setCenter(_position54.x, _position54.y);
+		            if (outputs[3]) {
+		              _position54 = calculatePosition(node, outputs[3], idealEdgeLength, 120);
+		              outputs[3].setCenter(_position54.x, _position54.y);
+		            }
+		          }
+		        }
+		      }
+		      if (node.direction == "t-b") {
+		        // process inputs
+		        if (inputs.length == 1) {
+		          var _position55 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
+		          inputs[0].setCenter(_position55.x, _position55.y);
+		        } else if (inputs.length == 2) {
+		          var _position56 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
+		          inputs[0].setCenter(_position56.x, _position56.y);
+		          _position56 = calculatePosition(node, inputs[1], idealEdgeLength, 45);
+		          inputs[1].setCenter(_position56.x, _position56.y);
+		        } else if (inputs.length > 2) {
+		          var _position57 = calculatePosition(node, inputs[0], idealEdgeLength, 60);
+		          inputs[0].setCenter(_position57.x, _position57.y);
+		          _position57 = calculatePosition(node, inputs[1], idealEdgeLength, 120);
+		          inputs[1].setCenter(_position57.x, _position57.y);
+		          if (inputs[2]) {
+		            _position57 = calculatePosition(node, inputs[2], idealEdgeLength, 30);
+		            inputs[2].setCenter(_position57.x, _position57.y);
+		            if (inputs[3]) {
+		              _position57 = calculatePosition(node, inputs[3], idealEdgeLength, 150);
+		              inputs[3].setCenter(_position57.x, _position57.y);
+		            }
+		          }
+		          inputs.forEach(function (input) {
+		            relativePlacementConstraints.push({ top: input.id, bottom: node.id });
+		          });
+		        }
+		        // process modulators
+		        if (modulators.length == 1) {
+		          var _position58 = calculatePosition(node, modulators[0], idealEdgeLength, 0);
+		          modulators[0].setCenter(_position58.x, _position58.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 0, 45, 315);
+		          }
+		        } else if (modulators.length == 2) {
+		          var _position59 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
+		          modulators[0].setCenter(_position59.x, _position59.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 180, 135, 225);
+		          }
+		          _position59 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
+		          modulators[1].setCenter(_position59.x, _position59.y);
+		          if (modulators[1].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[1], 0, 45, 315);
+		          }
+		        } else if (modulators.length > 2) {
+		          var _position60 = calculatePosition(node, modulators[0], idealEdgeLength, 150);
+		          modulators[0].setCenter(_position60.x, _position60.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 180, 135, 225);
+		          }
+		          _position60 = calculatePosition(node, modulators[1], idealEdgeLength, 210);
+		          modulators[1].setCenter(_position60.x, _position60.y);
+		          if (modulators[1].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[1], 180, 135, 225);
+		          }
+		          _position60 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
+		          modulators[2].setCenter(_position60.x, _position60.y);
+		          if (modulators[2].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[2], 0, 45, 315);
+		          }
+		        }
+		        // process outputs
+		        if (outputs.length == 1) {
+		          var _position61 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
+		          outputs[0].setCenter(_position61.x, _position61.y);
+		        } else if (outputs.length == 2) {
+		          var _position62 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
+		          outputs[0].setCenter(_position62.x, _position62.y);
+		          _position62 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
+		          outputs[1].setCenter(_position62.x, _position62.y);
+		        } else if (outputs.length > 2) {
+		          var _position63 = calculatePosition(node, outputs[0], idealEdgeLength, 300);
+		          outputs[0].setCenter(_position63.x, _position63.y);
+		          _position63 = calculatePosition(node, outputs[1], idealEdgeLength, 240);
+		          outputs[1].setCenter(_position63.x, _position63.y);
+		          if (outputs[2]) {
+		            _position63 = calculatePosition(node, outputs[2], idealEdgeLength, 330);
+		            outputs[2].setCenter(_position63.x, _position63.y);
+		            if (outputs[3]) {
+		              _position63 = calculatePosition(node, outputs[3], idealEdgeLength, 210);
+		              outputs[3].setCenter(_position63.x, _position63.y);
+		            }
+		          }
+		        }
+		      }
+		      if (node.direction == "b-t") {
+		        // process inputs
+		        if (inputs.length == 1) {
+		          var _position64 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
+		          inputs[0].setCenter(_position64.x, _position64.y);
+		        } else if (inputs.length == 2) {
+		          var _position65 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
+		          inputs[0].setCenter(_position65.x, _position65.y);
+		          _position65 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
+		          inputs[1].setCenter(_position65.x, _position65.y);
+		        } else if (inputs.length > 2) {
+		          var _position66 = calculatePosition(node, inputs[0], idealEdgeLength, 300);
+		          inputs[0].setCenter(_position66.x, _position66.y);
+		          _position66 = calculatePosition(node, inputs[1], idealEdgeLength, 240);
+		          inputs[1].setCenter(_position66.x, _position66.y);
+		          if (inputs[2]) {
+		            _position66 = calculatePosition(node, inputs[2], idealEdgeLength, 330);
+		            inputs[2].setCenter(_position66.x, _position66.y);
+		            if (inputs[3]) {
+		              _position66 = calculatePosition(node, inputs[3], idealEdgeLength, 210);
+		              inputs[3].setCenter(_position66.x, _position66.y);
+		            }
+		          }
+		          inputs.forEach(function (input) {
+		            relativePlacementConstraints.push({ top: node.id, bottom: input.id });
+		          });
+		        }
+		        // process modulators
+		        if (modulators.length == 1) {
+		          var _position67 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
+		          modulators[0].setCenter(_position67.x, _position67.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 180, 135, 225);
+		          }
+		        } else if (modulators.length == 2) {
+		          var _position68 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
+		          modulators[0].setCenter(_position68.x, _position68.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 180, 135, 225);
+		          }
+		          _position68 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
+		          modulators[1].setCenter(_position68.x, _position68.y);
+		          if (modulators[1].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[1], 0, 45, 315);
+		          }
+		        } else if (modulators.length > 2) {
+		          var _position69 = calculatePosition(node, modulators[0], idealEdgeLength, 150);
+		          modulators[0].setCenter(_position69.x, _position69.y);
+		          if (modulators[0].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[0], 180, 135, 225);
+		          }
+		          _position69 = calculatePosition(node, modulators[1], idealEdgeLength, 210);
+		          modulators[1].setCenter(_position69.x, _position69.y);
+		          if (modulators[1].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[1], 180, 135, 225);
+		          }
+		          _position69 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
+		          modulators[2].setCenter(_position69.x, _position69.y);
+		          if (modulators[1].isLogicalOperator()) {
+		            // if logical operator
+		            placeLogicalOperators(modulators[1], 0, 45, 315);
+		          }
+		        }
+		        // process outputs
+		        if (outputs.length == 1) {
+		          var _position70 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
+		          outputs[0].setCenter(_position70.x, _position70.y);
+		        } else if (outputs.length == 2) {
+		          var _position71 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
+		          outputs[0].setCenter(_position71.x, _position71.y);
+		          _position71 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
+		          outputs[1].setCenter(_position71.x, _position71.y);
+		        } else if (outputs.length > 2) {
+		          var _position72 = calculatePosition(node, outputs[0], idealEdgeLength, 60);
+		          outputs[0].setCenter(_position72.x, _position72.y);
+		          _position72 = calculatePosition(node, outputs[1], idealEdgeLength, 120);
+		          outputs[1].setCenter(_position72.x, _position72.y);
+		          if (outputs[2]) {
+		            _position72 = calculatePosition(node, outputs[2], idealEdgeLength, 30);
+		            outputs[2].setCenter(_position72.x, _position72.y);
+		            if (outputs[3]) {
+		              _position72 = calculatePosition(node, outputs[3], idealEdgeLength, 150);
+		              outputs[3].setCenter(_position72.x, _position72.y);
+		            }
+		          }
+		        }
+		      }
+		    } else {
+		      //if last node and not connected to ring, or first node, connected to ring but connected as a target
+		      if (node.direction == "l-r") {
+		        // process inputs
+		        if (inputs.length == 1) {
+		          var _position73 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
+		          inputs[0].setCenter(_position73.x, _position73.y);
+		        } else if (inputs.length == 2) {
+		          var _position74 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
+		          inputs[0].setCenter(_position74.x, _position74.y);
+		          _position74 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
+		          inputs[1].setCenter(_position74.x, _position74.y);
+		        } else if (inputs.length > 2) {
+		          var _position75 = calculatePosition(node, inputs[0], idealEdgeLength, 210);
+		          inputs[0].setCenter(_position75.x, _position75.y);
+		          _position75 = calculatePosition(node, inputs[1], idealEdgeLength, 150);
+		          inputs[1].setCenter(_position75.x, _position75.y);
+		          if (inputs[2]) {
+		            _position75 = calculatePosition(node, inputs[2], idealEdgeLength, 240);
+		            inputs[2].setCenter(_position75.x, _position75.y);
+		            if (inputs[3]) {
+		              _position75 = calculatePosition(node, inputs[3], idealEdgeLength, 120);
+		              inputs[3].setCenter(_position75.x, _position75.y);
+		            }
+		          }
+		        }
+		        // process modulators
+		        if (modulators.length == 1) {
+		          var _position76 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
+		          modulators[0].setCenter(_position76.x, _position76.y);
+		          verticalAlignments.push([node, modulators[0]]);
+		        } else if (modulators.length >= 2) {
+		          var _position77 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
+		          modulators[0].setCenter(_position77.x, _position77.y);
+		          _position77 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
+		          modulators[1].setCenter(_position77.x, _position77.y);
+		          if (modulators[2]) {
+		            if (inputs.length == 1) {
+		              _position77 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
+		              modulators[2].setCenter(_position77.x, _position77.y);
+		            }
+		            if (inputs.length == 2) {
+		              _position77 = calculatePosition(node, modulators[2], idealEdgeLength, 180);
+		              modulators[2].setCenter(_position77.x, _position77.y);
+		            }
+		          }
+		        }
+		        // process outputs
+		        if (outputs.length == 1) {
+		          var _position78 = calculatePosition(node, outputs[0], idealEdgeLength, 0);
+		          outputs[0].setCenter(_position78.x, _position78.y);
+		        } else if (outputs.length == 2) {
+		          var _position79 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
+		          outputs[0].setCenter(_position79.x, _position79.y);
+		          _position79 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
+		          outputs[1].setCenter(_position79.x, _position79.y);
+		        } else if (outputs.length == 3) {
+		          var _position80 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
+		          outputs[0].setCenter(_position80.x, _position80.y);
+		          _position80 = calculatePosition(node, outputs[1], idealEdgeLength, 0);
+		          outputs[1].setCenter(_position80.x, _position80.y);
+		          _position80 = calculatePosition(node, outputs[2], idealEdgeLength, 315);
+		          outputs[2].setCenter(_position80.x, _position80.y);
+		        } else if (outputs.length == 4) {
+		          var _position81 = calculatePosition(node, outputs[0], idealEdgeLength, 54);
+		          outputs[0].setCenter(_position81.x, _position81.y);
+		          _position81 = calculatePosition(node, outputs[1], idealEdgeLength, 18);
+		          outputs[1].setCenter(_position81.x, _position81.y);
+		          _position81 = calculatePosition(node, outputs[2], idealEdgeLength, 342);
+		          outputs[2].setCenter(_position81.x, _position81.y);
+		          _position81 = calculatePosition(node, outputs[3], idealEdgeLength, 306);
+		          outputs[3].setCenter(_position81.x, _position81.y);
+		        }
+		      }
+		      if (node.direction == "r-l") {
+		        // process inputs
+		        if (inputs.length == 1) {
+		          var _position82 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+		          inputs[0].setCenter(_position82.x, _position82.y);
+		        } else if (inputs.length == 2) {
+		          var _position83 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
+		          inputs[0].setCenter(_position83.x, _position83.y);
+		          _position83 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
+		          inputs[1].setCenter(_position83.x, _position83.y);
+		        } else if (inputs.length > 2) {
+		          var _position84 = calculatePosition(node, inputs[0], idealEdgeLength, 330);
+		          inputs[0].setCenter(_position84.x, _position84.y);
+		          _position84 = calculatePosition(node, inputs[1], idealEdgeLength, 30);
+		          inputs[1].setCenter(_position84.x, _position84.y);
+		          if (inputs[2]) {
+		            _position84 = calculatePosition(node, inputs[2], idealEdgeLength, 300);
+		            inputs[2].setCenter(_position84.x, _position84.y);
+		            if (inputs[3]) {
+		              _position84 = calculatePosition(node, inputs[3], idealEdgeLength, 60);
+		              inputs[3].setCenter(_position84.x, _position84.y);
+		            }
+		          }
+		          inputs.forEach(function (input) {
+		            relativePlacementConstraints.push({ left: node.id, right: input.id });
+		          });
+		        }
+		        // process modulators
+		        if (modulators.length == 1) {
+		          var _position85 = calculatePosition(node, modulators[0], idealEdgeLength, 270);
+		          modulators[0].setCenter(_position85.x, _position85.y);
+		          verticalAlignments.push([node, modulators[0]]);
+		        } else if (modulators.length >= 2) {
+		          var _position86 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
+		          modulators[0].setCenter(_position86.x, _position86.y);
+		          _position86 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
+		          modulators[1].setCenter(_position86.x, _position86.y);
+		          if (modulators[2]) {
+		            if (inputs.length == 1) {
+		              _position86 = calculatePosition(node, modulators[2], idealEdgeLength, 45);
+		              modulators[2].setCenter(_position86.x, _position86.y);
+		            }
+		            if (inputs.length == 2) {
+		              _position86 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
+		              modulators[2].setCenter(_position86.x, _position86.y);
+		            }
+		          }
+		        }
+		        // process outputs
+		        if (outputs.length == 1) {
+		          var _position87 = calculatePosition(node, outputs[0], idealEdgeLength, 180);
+		          outputs[0].setCenter(_position87.x, _position87.y);
+		        } else if (outputs.length == 2) {
+		          var _position88 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
+		          outputs[0].setCenter(_position88.x, _position88.y);
+		          _position88 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
+		          outputs[1].setCenter(_position88.x, _position88.y);
+		        } else if (outputs.length == 3) {
+		          var _position89 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
+		          outputs[0].setCenter(_position89.x, _position89.y);
+		          _position89 = calculatePosition(node, outputs[1], idealEdgeLength, 180);
+		          outputs[1].setCenter(_position89.x, _position89.y);
+		          _position89 = calculatePosition(node, outputs[2], idealEdgeLength, 225);
+		          outputs[2].setCenter(_position89.x, _position89.y);
+		        } else if (outputs.length == 4) {
+		          var _position90 = calculatePosition(node, outputs[0], idealEdgeLength, 126);
+		          outputs[0].setCenter(_position90.x, _position90.y);
+		          _position90 = calculatePosition(node, outputs[1], idealEdgeLength, 162);
+		          outputs[1].setCenter(_position90.x, _position90.y);
+		          _position90 = calculatePosition(node, outputs[2], idealEdgeLength, 198);
+		          outputs[2].setCenter(_position90.x, _position90.y);
+		          _position90 = calculatePosition(node, outputs[3], idealEdgeLength, 234);
+		          outputs[3].setCenter(_position90.x, _position90.y);
+		        }
+		      }
+		      if (node.direction == "t-b") {
+		        // process inputs
+		        if (inputs.length == 1) {
+		          var _position91 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
+		          inputs[0].setCenter(_position91.x, _position91.y);
+		        } else if (inputs.length == 2) {
+		          var _position92 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
+		          inputs[0].setCenter(_position92.x, _position92.y);
+		          _position92 = calculatePosition(node, inputs[1], idealEdgeLength, 45);
+		          inputs[1].setCenter(_position92.x, _position92.y);
+		        } else if (inputs.length > 2) {
+		          var _position93 = calculatePosition(node, inputs[0], idealEdgeLength, 60);
+		          inputs[0].setCenter(_position93.x, _position93.y);
+		          _position93 = calculatePosition(node, inputs[1], idealEdgeLength, 120);
+		          inputs[1].setCenter(_position93.x, _position93.y);
+		          if (inputs[2]) {
+		            _position93 = calculatePosition(node, inputs[2], idealEdgeLength, 30);
+		            inputs[2].setCenter(_position93.x, _position93.y);
+		            if (inputs[3]) {
+		              _position93 = calculatePosition(node, inputs[3], idealEdgeLength, 150);
+		              inputs[3].setCenter(_position93.x, _position93.y);
+		            }
+		          }
+		          inputs.forEach(function (input) {
+		            relativePlacementConstraints.push({ top: input.id, bottom: node.id });
+		          });
+		        }
+		        // process modulators
+		        if (modulators.length == 1) {
+		          var _position94 = calculatePosition(node, modulators[0], idealEdgeLength, 0);
+		          modulators[0].setCenter(_position94.x, _position94.y);
+		          horizontalAlignments.push([node, modulators[0]]);
+		        } else if (modulators.length >= 2) {
+		          var _position95 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
+		          modulators[0].setCenter(_position95.x, _position95.y);
+		          _position95 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
+		          modulators[1].setCenter(_position95.x, _position95.y);
+		          if (modulators[2]) {
+		            if (inputs.length == 1) {
+		              _position95 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
+		              modulators[2].setCenter(_position95.x, _position95.y);
+		            }
+		            if (inputs.length == 2) {
+		              _position95 = calculatePosition(node, modulators[2], idealEdgeLength, 90);
+		              modulators[2].setCenter(_position95.x, _position95.y);
+		            }
+		          }
+		        }
+		        // process outputs
+		        if (outputs.length == 1) {
+		          var _position96 = calculatePosition(node, outputs[0], idealEdgeLength, 270);
+		          outputs[0].setCenter(_position96.x, _position96.y);
+		        } else if (outputs.length == 2) {
+		          var _position97 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
+		          outputs[0].setCenter(_position97.x, _position97.y);
+		          _position97 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
+		          outputs[1].setCenter(_position97.x, _position97.y);
+		        } else if (outputs.length == 3) {
+		          var _position98 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
+		          outputs[0].setCenter(_position98.x, _position98.y);
+		          _position98 = calculatePosition(node, outputs[1], idealEdgeLength, 270);
+		          outputs[1].setCenter(_position98.x, _position98.y);
+		          _position98 = calculatePosition(node, outputs[2], idealEdgeLength, 315);
+		          outputs[2].setCenter(_position98.x, _position98.y);
+		        } else if (outputs.length == 4) {
+		          var _position99 = calculatePosition(node, outputs[0], idealEdgeLength, 216);
+		          outputs[0].setCenter(_position99.x, _position99.y);
+		          _position99 = calculatePosition(node, outputs[1], idealEdgeLength, 252);
+		          outputs[1].setCenter(_position99.x, _position99.y);
+		          _position99 = calculatePosition(node, outputs[2], idealEdgeLength, 288);
+		          outputs[2].setCenter(_position99.x, _position99.y);
+		          _position99 = calculatePosition(node, outputs[3], idealEdgeLength, 324);
+		          outputs[3].setCenter(_position99.x, _position99.y);
+		        }
+		      }
+		      if (node.direction == "b-t") {
+		        // process inputs
+		        if (inputs.length == 1) {
+		          var _position100 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
+		          inputs[0].setCenter(_position100.x, _position100.y);
+		        } else if (inputs.length == 2) {
+		          var _position101 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
+		          inputs[0].setCenter(_position101.x, _position101.y);
+		          _position101 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
+		          inputs[1].setCenter(_position101.x, _position101.y);
+		        } else if (inputs.length > 2) {
+		          var _position102 = calculatePosition(node, inputs[0], idealEdgeLength, 300);
+		          inputs[0].setCenter(_position102.x, _position102.y);
+		          _position102 = calculatePosition(node, inputs[1], idealEdgeLength, 240);
+		          inputs[1].setCenter(_position102.x, _position102.y);
+		          if (inputs[2]) {
+		            _position102 = calculatePosition(node, inputs[2], idealEdgeLength, 330);
+		            inputs[2].setCenter(_position102.x, _position102.y);
+		            if (inputs[3]) {
+		              _position102 = calculatePosition(node, inputs[3], idealEdgeLength, 210);
+		              inputs[3].setCenter(_position102.x, _position102.y);
+		            }
+		          }
+		          inputs.forEach(function (input) {
+		            relativePlacementConstraints.push({ top: node.id, bottom: input.id });
+		          });
+		        }
+		        // process modulators
+		        if (modulators.length == 1) {
+		          var _position103 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
+		          modulators[0].setCenter(_position103.x, _position103.y);
+		          horizontalAlignments.push([node, modulators[0]]);
+		        } else if (modulators.length >= 2) {
+		          var _position104 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
+		          modulators[0].setCenter(_position104.x, _position104.y);
+		          _position104 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
+		          modulators[1].setCenter(_position104.x, _position104.y);
+		          if (modulators[2]) {
+		            if (inputs.length == 1) {
+		              _position104 = calculatePosition(node, modulators[2], idealEdgeLength, 225);
+		              modulators[2].setCenter(_position104.x, _position104.y);
+		            }
+		            if (inputs.length == 2) {
+		              _position104 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
+		              modulators[2].setCenter(_position104.x, _position104.y);
+		            }
+		          }
+		        }
+		        // process outputs
+		        if (outputs.length == 1) {
+		          var _position105 = calculatePosition(node, outputs[0], idealEdgeLength, 90);
+		          outputs[0].setCenter(_position105.x, _position105.y);
+		        } else if (outputs.length == 2) {
+		          var _position106 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
+		          outputs[0].setCenter(_position106.x, _position106.y);
+		          _position106 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
+		          outputs[1].setCenter(_position106.x, _position106.y);
+		        } else if (outputs.length == 3) {
+		          var _position107 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
+		          outputs[0].setCenter(_position107.x, _position107.y);
+		          _position107 = calculatePosition(node, outputs[1], idealEdgeLength, 90);
+		          outputs[1].setCenter(_position107.x, _position107.y);
+		          _position107 = calculatePosition(node, outputs[2], idealEdgeLength, 135);
+		          outputs[2].setCenter(_position107.x, _position107.y);
+		        } else if (outputs.length == 4) {
+		          var _position108 = calculatePosition(node, outputs[0], idealEdgeLength, 36);
+		          outputs[0].setCenter(_position108.x, _position108.y);
+		          _position108 = calculatePosition(node, outputs[1], idealEdgeLength, 72);
+		          outputs[1].setCenter(_position108.x, _position108.y);
+		          _position108 = calculatePosition(node, outputs[2], idealEdgeLength, 108);
+		          outputs[2].setCenter(_position108.x, _position108.y);
+		          _position108 = calculatePosition(node, outputs[3], idealEdgeLength, 144);
+		          outputs[3].setCenter(_position108.x, _position108.y);
+		        }
+		      }
+		    }
+		  });
+
+		  return { horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints };
+		};
+
+		module.exports = SBGNPolishingNew;
+
+		/***/ }),
+		/* 11 */
+		/***/ (function(module, exports, __webpack_require__) {
+
+
+		var impl = __webpack_require__(5);
 
 		// registers the extension on a cytoscape lib ref
 		var register = function register(cytoscape) {
@@ -52306,7 +53573,7 @@
 		module.exports = register;
 
 		/***/ }),
-		/* 11 */
+		/* 12 */
 		/***/ (function(module, exports, __webpack_require__) {
 
 
@@ -52328,15 +53595,16 @@
 		var RectangleD = __webpack_require__(0).layoutBase.RectangleD;
 		var Integer = __webpack_require__(0).layoutBase.Integer;
 		var LayoutConstants = __webpack_require__(0).layoutBase.LayoutConstants;
-		var SBGNConstants = __webpack_require__(2);
+		var SBGNConstants = __webpack_require__(1);
 		var CoSEConstants = __webpack_require__(0).CoSEConstants;
 		var FDLayoutConstants = __webpack_require__(0).layoutBase.FDLayoutConstants;
-		var SBGNLayout = __webpack_require__(8);
-		var SBGNNode = __webpack_require__(3);
+		var SBGNLayout = __webpack_require__(4);
+		var SBGNNode = __webpack_require__(2);
 		var SBGNPolishing = __webpack_require__(9);
+		var SBGNPolishingNew = __webpack_require__(10);
 
-		var ContinuousLayout = __webpack_require__(12);
-		var assign = __webpack_require__(1);
+		var ContinuousLayout = __webpack_require__(13);
+		var assign = __webpack_require__(3);
 		var isFn = function isFn(fn) {
 		  return typeof fn === 'function';
 		};
@@ -52378,7 +53646,7 @@
 		  // Node repulsion (non overlapping) multiplier
 		  nodeRepulsion: 4500,
 		  // Ideal edge (non nested) length
-		  idealEdgeLength: 100,
+		  idealEdgeLength: 75,
 		  // Divisor to compute edge forces
 		  edgeElasticity: 0.45,
 		  // Nesting factor (multiplier) to compute ideal edge length for nested edges
@@ -52390,7 +53658,7 @@
 		  // Represents the amount of the horizontal space to put between the zero degree members during the tiling operation(can also be a function)
 		  tilingPaddingHorizontal: 10,
 		  // Gravity force (constant)
-		  gravity: 0.25,
+		  gravity: 0,
 		  // Gravity range (constant) for compounds
 		  gravityRangeCompound: 1.5,
 		  // Gravity force (constant) for compounds
@@ -52419,10 +53687,9 @@
 		  SBGNConstants.NODE_DIMENSIONS_INCLUDE_LABELS = CoSEConstants.NODE_DIMENSIONS_INCLUDE_LABELS = FDLayoutConstants.NODE_DIMENSIONS_INCLUDE_LABELS = LayoutConstants.NODE_DIMENSIONS_INCLUDE_LABELS = options.nodeDimensionsIncludeLabels;
 		  SBGNConstants.DEFAULT_INCREMENTAL = CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = !options.randomize;
 		  SBGNConstants.ANIMATE = CoSEConstants.ANIMATE = FDLayoutConstants.ANIMATE = LayoutConstants.ANIMATE = options.animate;
-		  SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 80;
+		  SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 50;
 		  LayoutConstants.DEFAULT_UNIFORM_LEAF_NODE_SIZES = options.uniformNodeDimensions;
 		  CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = false;
-		  SBGNConstants.DEFAULT_EDGE_LENGTH = CoSEConstants.DEFAULT_EDGE_LENGTH = FDLayoutConstants.DEFAULT_EDGE_LENGTH = 80;
 		};
 
 		var Layout = function (_ContinuousLayout) {
@@ -52463,164 +53730,179 @@
 		      // If incremental is true, skip over Phase I
 		      if (state.randomize) {
 		        sbgnLayout.runLayout();
+		        var graphInfo = sbgnLayout.constructSkeleton();
+
+		        // Apply an incremental layout to give a shape to reaction blocks
+		        sbgnLayout.constraints["alignmentConstraint"] = graphInfo.constraints.alignmentConstraint;
+		        sbgnLayout.constraints["relativePlacementConstraint"] = graphInfo.constraints.relativePlacementConstraint;
+		        var directions = graphInfo.directions;
+		        graphManager.allNodesToApplyGravitation = undefined;
+		        sbgnLayout.initParameters();
+		        sbgnLayout.initSpringEmbedder();
+		        CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+		        CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+		        CoSEConstants.TILE = false;
+		        sbgnLayout.runLayout();
+
+		        //console.log("Actual Nodes");
+		        //console.log(this.root.getNodes());
+
+		        //Initialize skeleton layout
+		        var sbgnLayoutSkeleton = this.sbgnLayoutSkeleton = new SBGNLayout();
+		        var graphManagerSkeleton = this.graphManagerSkeleton = sbgnLayoutSkeleton.newGraphManager();
+		        this.rootSkeleton = graphManagerSkeleton.addRoot();
+		        var oldPositions = [];
+		        var newPositions = [];
+		        this.sbgnNodeToSkeleton = new Map();
+		        this.skeletonToSbgnNode = new Map();
+
+		        var ringNodes = graphInfo.ringNodes;
+		        var components = graphInfo.components;
+		        var componentExtended = graphInfo.componentsExtended;
+
+		        // process skeleton nodes
+		        [].concat(_toConsumableArray(ringNodes)).forEach(function (ringNode, i) {
+		          var theNode = _this2.rootSkeleton.add(new SBGNNode(sbgnLayoutSkeleton.graphManager, ringNode.getLocation(), new DimensionD(ringNode.getWidth(), ringNode.getHeight())));
+		          theNode.id = "ringNode_" + i;
+		          _this2.sbgnNodeToSkeleton.set(ringNode, theNode);
+		          _this2.skeletonToSbgnNode.set(theNode, ringNode);
+		          oldPositions.push({ x: ringNode.getCenterX(), y: ringNode.getCenterY() });
+		        });
+		        componentExtended.forEach(function (component, i) {
+		          var componentRect = _this2.calculateBounds(component);
+		          var theNode = _this2.rootSkeleton.add(new SBGNNode(sbgnLayoutSkeleton.graphManager, new PointD(componentRect.getX(), componentRect.getY()), new DimensionD(componentRect.getWidth(), componentRect.getHeight())));
+		          theNode.id = "component_" + i;
+		          _this2.sbgnNodeToSkeleton.set(components[i], theNode);
+		          _this2.skeletonToSbgnNode.set(theNode, components[i]);
+		          oldPositions.push({ x: componentRect.getX() + componentRect.getWidth() / 2, y: componentRect.getY() + componentRect.getHeight() / 2 });
+		        });
+		        //console.log("Skeleton Nodes");
+		        //console.log(this.rootSkeleton.getNodes());
+
+		        // process skeleton edges
+		        components.forEach(function (component, i) {
+		          var ringNodeToComponentNode = [];
+		          component.forEach(function (node) {
+		            node.getNeighborsList().intersection(ringNodes).forEach(function (neigbor) {
+		              ringNodeToComponentNode.push({ source: neigbor, target: node });
+		            });
+		          });
+		          ringNodeToComponentNode.forEach(function (edge) {
+		            var sourceNode = _this2.sbgnNodeToSkeleton.get(edge.source);
+		            var targetNode = _this2.sbgnNodeToSkeleton.get(component);
+		            var e1 = graphManagerSkeleton.add(sbgnLayoutSkeleton.newEdge(), sourceNode, targetNode);
+		            e1.id = sourceNode.id + "_" + targetNode.id;
+		            e1.originalTarget = edge.target;
+		          });
+		        });
+
+		        //console.log("Skeleton Edges");
+		        //console.log(this.rootSkeleton.getEdges());
+
+		        // apply incremental layout on skeleton graph
+		        graphManagerSkeleton.allNodesToApplyGravitation = undefined;
+		        sbgnLayoutSkeleton.initParameters();
+		        sbgnLayoutSkeleton.initSpringEmbedder();
+		        CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+		        CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+		        CoSEConstants.TILE = false;
+		        sbgnLayoutSkeleton.runLayout();
+
+		        //console.log("Skeleton Nodes");
+		        //console.log(this.rootSkeleton.getNodes());
+
+		        graphManagerSkeleton.getAllNodes().forEach(function (node, i) {
+		          newPositions.push({ x: node.getCenterX(), y: node.getCenterY() });
+		        });
+
+		        graphManagerSkeleton.getAllNodes().forEach(function (node, i) {
+		          var sbgnElement = _this2.skeletonToSbgnNode.get(node);
+		          if (Array.isArray(sbgnElement)) {
+		            sbgnElement.forEach(function (sbgnNode) {
+		              sbgnNode.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
+		            });
+		          } else {
+		            sbgnElement.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
+		          }
+		        });
+
+		        var ringToReactionBlockEdges = [];
+		        components.forEach(function (component, i) {
+		          component.forEach(function (node) {
+		            node.getNeighborsList().intersection(ringNodes).forEach(function (neigbor) {
+		              ringToReactionBlockEdges.push(node.getEdgesBetween(neigbor)[0]);
+		            });
+		          });
+		        });
+
+		        var updatedConstraintInfo = sbgnLayout.addPerComponentConstraints(components, directions);
+		        var verticalAlignments = updatedConstraintInfo.verticalAlignments;
+		        var horizontalAlignments = updatedConstraintInfo.horizontalAlignments;
+		        this.graphManagerSkeleton.getAllEdges().forEach(function (edge, i) {
+		          var source = edge.getSource();
+		          var target = edge.getTarget();
+		          if (Math.abs(target.getCenterY() - source.getCenterY()) > Math.abs(target.getCenterX() - source.getCenterX())) {
+		            verticalAlignments.push([_this2.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]); // source nodes are ring nodes
+		          } else {
+		            horizontalAlignments.push([_this2.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]);
+		          }
+		        });
+
+		        verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
+		        horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
+		        var alignmentConstraint = { vertical: verticalAlignments, horizontal: horizontalAlignments };
+
+		        console.log(verticalAlignments);
+		        console.log(horizontalAlignments);
+
+		        // Apply an incremental layout to give a final shape to reaction blocks
+		        sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
+		        graphManager.allNodesToApplyGravitation = undefined;
+		        sbgnLayout.initParameters();
+		        sbgnLayout.initSpringEmbedder();
+		        CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+		        CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+		        CoSEConstants.TILE = false;
+		        sbgnLayout.runLayout();
+
+		        SBGNPolishing.addPerComponentPolishment(components, directions);
+		        sbgnLayout.repopulateCompounds();
+		        /*     verticalAlignments.push(polishingInfo.verticalAlignments);
+		            horizontalAlignments.push(polishingInfo.horizontalAlignments);
+		            verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
+		            horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
+		            alignmentConstraint = {vertical: verticalAlignments, horizontal: horizontalAlignments};
+		        
+		            let relativePlacementConstraints = graphInfo.constraints.relativePlacementConstraint.concat(polishingInfo.relativePlacementConstraints);
+		        
+		            // Apply an incremental layout to polish each component
+		            sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
+		            sbgnLayout.constraints["relativePlacementConstraint"] = relativePlacementConstraints;
+		            graphManager.allNodesToApplyGravitation = undefined;
+		            sbgnLayout.initParameters();
+		            sbgnLayout.initSpringEmbedder();
+		            CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+		            CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+		            CoSEConstants.TILE = false;
+		            sbgnLayout.runLayout(); */
 		      } else {
-		        sbgnLayout.clearCompounds();
+		        // incremental
+		        //sbgnLayout.clearCompounds();
+
+		        var constraints = SBGNPolishingNew.generateConstraints(sbgnLayout);
+		        sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
+		        sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
+
+		        graphManager.allNodesToApplyGravitation = undefined;
+		        sbgnLayout.initParameters();
+		        sbgnLayout.initSpringEmbedder();
+		        CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+		        CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+		        CoSEConstants.TILE = true;
+		        sbgnLayout.runLayout();
+		        SBGNPolishingNew.polish(sbgnLayout);
+		        sbgnLayout.repopulateCompounds();
 		      }
-		      var graphInfo = sbgnLayout.constructSkeleton();
-
-		      // Apply an incremental layout to give a shape to reaction blocks
-		      sbgnLayout.constraints["alignmentConstraint"] = graphInfo.constraints.alignmentConstraint;
-		      sbgnLayout.constraints["relativePlacementConstraint"] = graphInfo.constraints.relativePlacementConstraint;
-		      var directions = graphInfo.directions;
-		      graphManager.allNodesToApplyGravitation = undefined;
-		      sbgnLayout.initParameters();
-		      sbgnLayout.initSpringEmbedder();
-		      CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
-		      CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
-		      CoSEConstants.TILE = false;
-		      sbgnLayout.runLayout();
-
-		      //console.log("Actual Nodes");
-		      //console.log(this.root.getNodes());
-
-		      //Initialize skeleton layout
-		      var sbgnLayoutSkeleton = this.sbgnLayoutSkeleton = new SBGNLayout();
-		      var graphManagerSkeleton = this.graphManagerSkeleton = sbgnLayoutSkeleton.newGraphManager();
-		      this.rootSkeleton = graphManagerSkeleton.addRoot();
-		      var oldPositions = [];
-		      var newPositions = [];
-		      this.sbgnNodeToSkeleton = new Map();
-		      this.skeletonToSbgnNode = new Map();
-
-		      var ringNodes = graphInfo.ringNodes;
-		      var components = graphInfo.components;
-		      var componentExtended = graphInfo.componentsExtended;
-
-		      // process skeleton nodes
-		      [].concat(_toConsumableArray(ringNodes)).forEach(function (ringNode, i) {
-		        var theNode = _this2.rootSkeleton.add(new SBGNNode(sbgnLayoutSkeleton.graphManager, ringNode.getLocation(), new DimensionD(ringNode.getWidth(), ringNode.getHeight())));
-		        theNode.id = "ringNode_" + i;
-		        _this2.sbgnNodeToSkeleton.set(ringNode, theNode);
-		        _this2.skeletonToSbgnNode.set(theNode, ringNode);
-		        oldPositions.push({ x: ringNode.getCenterX(), y: ringNode.getCenterY() });
-		      });
-		      componentExtended.forEach(function (component, i) {
-		        var componentRect = _this2.calculateBounds(component);
-		        var theNode = _this2.rootSkeleton.add(new SBGNNode(sbgnLayoutSkeleton.graphManager, new PointD(componentRect.getX(), componentRect.getY()), new DimensionD(componentRect.getWidth(), componentRect.getHeight())));
-		        theNode.id = "component_" + i;
-		        _this2.sbgnNodeToSkeleton.set(components[i], theNode);
-		        _this2.skeletonToSbgnNode.set(theNode, components[i]);
-		        oldPositions.push({ x: componentRect.getX() + componentRect.getWidth() / 2, y: componentRect.getY() + componentRect.getHeight() / 2 });
-		      });
-		      //console.log("Skeleton Nodes");
-		      //console.log(this.rootSkeleton.getNodes());
-
-		      // process skeleton edges
-		      components.forEach(function (component, i) {
-		        var ringNodeToComponentNode = [];
-		        component.forEach(function (node) {
-		          node.getNeighborsList().intersection(ringNodes).forEach(function (neigbor) {
-		            ringNodeToComponentNode.push({ source: neigbor, target: node });
-		          });
-		        });
-		        ringNodeToComponentNode.forEach(function (edge) {
-		          var sourceNode = _this2.sbgnNodeToSkeleton.get(edge.source);
-		          var targetNode = _this2.sbgnNodeToSkeleton.get(component);
-		          var e1 = graphManagerSkeleton.add(sbgnLayoutSkeleton.newEdge(), sourceNode, targetNode);
-		          e1.id = sourceNode.id + "_" + targetNode.id;
-		          e1.originalTarget = edge.target;
-		        });
-		      });
-
-		      //console.log("Skeleton Edges");
-		      //console.log(this.rootSkeleton.getEdges());
-
-		      // apply incremental layout on skeleton graph
-		      graphManagerSkeleton.allNodesToApplyGravitation = undefined;
-		      sbgnLayoutSkeleton.initParameters();
-		      sbgnLayoutSkeleton.initSpringEmbedder();
-		      CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
-		      CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
-		      CoSEConstants.TILE = false;
-		      sbgnLayoutSkeleton.runLayout();
-
-		      //console.log("Skeleton Nodes");
-		      //console.log(this.rootSkeleton.getNodes());
-
-		      graphManagerSkeleton.getAllNodes().forEach(function (node, i) {
-		        newPositions.push({ x: node.getCenterX(), y: node.getCenterY() });
-		      });
-
-		      graphManagerSkeleton.getAllNodes().forEach(function (node, i) {
-		        var sbgnElement = _this2.skeletonToSbgnNode.get(node);
-		        if (Array.isArray(sbgnElement)) {
-		          sbgnElement.forEach(function (sbgnNode) {
-		            sbgnNode.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
-		          });
-		        } else {
-		          sbgnElement.moveBy(newPositions[i].x - oldPositions[i].x, newPositions[i].y - oldPositions[i].y);
-		        }
-		      });
-
-		      var ringToReactionBlockEdges = [];
-		      components.forEach(function (component, i) {
-		        component.forEach(function (node) {
-		          node.getNeighborsList().intersection(ringNodes).forEach(function (neigbor) {
-		            ringToReactionBlockEdges.push(node.getEdgesBetween(neigbor)[0]);
-		          });
-		        });
-		      });
-
-		      var updatedConstraintInfo = sbgnLayout.addPerComponentConstraints(components, directions);
-		      var verticalAlignments = updatedConstraintInfo.verticalAlignments;
-		      var horizontalAlignments = updatedConstraintInfo.horizontalAlignments;
-		      this.graphManagerSkeleton.getAllEdges().forEach(function (edge, i) {
-		        var source = edge.getSource();
-		        var target = edge.getTarget();
-		        if (Math.abs(target.getCenterY() - source.getCenterY()) > Math.abs(target.getCenterX() - source.getCenterX())) {
-		          verticalAlignments.push([_this2.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]); // source nodes are ring nodes
-		        } else {
-		          horizontalAlignments.push([_this2.skeletonToSbgnNode.get(source).id, edge.originalTarget.id]);
-		        }
-		      });
-
-		      verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
-		      horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
-		      var alignmentConstraint = { vertical: verticalAlignments, horizontal: horizontalAlignments };
-
-		      console.log(verticalAlignments);
-		      console.log(horizontalAlignments);
-
-		      // Apply an incremental layout to give a final shape to reaction blocks
-		      sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
-		      graphManager.allNodesToApplyGravitation = undefined;
-		      sbgnLayout.initParameters();
-		      sbgnLayout.initSpringEmbedder();
-		      CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
-		      CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
-		      CoSEConstants.TILE = false;
-		      sbgnLayout.runLayout();
-
-		      SBGNPolishing.addPerComponentPolishment(components, directions);
-		      sbgnLayout.repopulateCompounds();
-		      /*     verticalAlignments.push(polishingInfo.verticalAlignments);
-		          horizontalAlignments.push(polishingInfo.horizontalAlignments);
-		          verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);
-		          horizontalAlignments = sbgnLayout.mergeArrays(horizontalAlignments);
-		          alignmentConstraint = {vertical: verticalAlignments, horizontal: horizontalAlignments};
-		      
-		          let relativePlacementConstraints = graphInfo.constraints.relativePlacementConstraint.concat(polishingInfo.relativePlacementConstraints);
-		      
-		          // Apply an incremental layout to polish each component
-		          sbgnLayout.constraints["alignmentConstraint"] = alignmentConstraint;
-		          sbgnLayout.constraints["relativePlacementConstraint"] = relativePlacementConstraints;
-		          graphManager.allNodesToApplyGravitation = undefined;
-		          sbgnLayout.initParameters();
-		          sbgnLayout.initSpringEmbedder();
-		          CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
-		          CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
-		          CoSEConstants.TILE = false;
-		          sbgnLayout.runLayout(); */
 		    }
 
 		    // Get the top most ones of a list of nodes
@@ -52817,7 +54099,7 @@
 		module.exports = Layout;
 
 		/***/ }),
-		/* 12 */
+		/* 13 */
 		/***/ (function(module, exports, __webpack_require__) {
 
 
@@ -52829,15 +54111,15 @@
 		 A generic continuous layout class
 		 */
 
-		var assign = __webpack_require__(1);
-		var makeBoundingBox = __webpack_require__(13);
+		var assign = __webpack_require__(3);
+		var makeBoundingBox = __webpack_require__(14);
 
-		var _require = __webpack_require__(14),
+		var _require = __webpack_require__(15),
 		    setInitialPositionState = _require.setInitialPositionState,
 		    refreshPositions = _require.refreshPositions,
 		    getNodePositionData = _require.getNodePositionData;
 
-		var _require2 = __webpack_require__(15),
+		var _require2 = __webpack_require__(16),
 		    multitick = _require2.multitick;
 
 		var Layout = function () {
@@ -53047,7 +54329,7 @@
 		module.exports = Layout;
 
 		/***/ }),
-		/* 13 */
+		/* 14 */
 		/***/ (function(module, exports, __webpack_require__) {
 
 
@@ -53076,11 +54358,11 @@
 		};
 
 		/***/ }),
-		/* 14 */
+		/* 15 */
 		/***/ (function(module, exports, __webpack_require__) {
 
 
-		var assign = __webpack_require__(1);
+		var assign = __webpack_require__(3);
 
 		var setInitialPositionState = function setInitialPositionState(node, state) {
 		  var p = node.position();
@@ -53116,7 +54398,7 @@
 		module.exports = { setInitialPositionState: setInitialPositionState, getNodePositionData: getNodePositionData, refreshPositions: refreshPositions };
 
 		/***/ }),
-		/* 15 */
+		/* 16 */
 		/***/ (function(module, exports, __webpack_require__) {
 
 
@@ -53166,7 +54448,7 @@
 		module.exports = { tick: tick, multitick: multitick };
 
 		/***/ }),
-		/* 16 */
+		/* 17 */
 		/***/ (function(module, exports, __webpack_require__) {
 
 		(function webpackUniversalModuleDefinition(root, factory) {
@@ -58297,9 +59579,30 @@
 		}).then(function (data) {
 			cyGraph = convert(data);
 			cy.add(cyGraph);
-			if(cy.nodes("[class='process']")[0].css('content'))
-				cy.nodes("[class='process']").css("content", ".");
-			cy.layout({ name: 'sbgn-layout' }).run();
+			cy.layout({ name: 'preset' }).run();
+
+			cy.nodes().forEach(node => {			
+				let bbox = node.data('bbox');
+				node.css('width', bbox.w);
+				node.css('height', bbox.h);
+				node.css('font-size', 11);
+				node.position({x: bbox.x, y: bbox.y});
+				if(node.data("class") == "process" || node.data("class") == "omitted process" || node.data("class") == "uncertain process" || node.data("class") == "association" || node.data("class") == "dissociation") {
+					if(node.css("content")) {
+						node.css("content", ".");
+					}
+				}
+				if(node.data("class") != "compartment" && node.data("class") != "complex") {
+					node.css('padding', 0);
+				} else if (node.data("class") == "complex") {
+					if (node.children().length > 0) {
+						node.css('padding', 10);
+					} else {
+						node.css('padding', 0);
+					}
+				}
+			});
+			cy.fit();
 		});
 	};
 
@@ -58307,22 +59610,22 @@
 		let sample = event.target.value;
 		let filename = "";
 		if(sample == "sample1") {
-			filename = "glycolysis_cropped.sbgn";
-		}
-		else if(sample == "sample2") {
-			filename = "glycolysis.sbgn";
-		}
-		else if(sample == "sample3") {
-			filename = "WP121.sbgn";
-		}
-		else if(sample == "sample4") {
 			filename = "R-HSA-5652084.sbgn";
 		}
+		else if(sample == "sample2") {
+			filename = "R-HSA-70370.sbgn";
+		}
+		else if(sample == "sample3") {
+			filename = "R-HSA-72764.sbgn";
+		}
+		else if(sample == "sample4") {
+			filename = "glycolysis.sbgn";
+		}
 		else if(sample == "sample5") {
-			filename = "Beta_oxidation_of_hexanoyl-CoA_to_butanoyl-CoA.xml";
+			filename = "vitamins_b6_activation_to_pyridoxal_phosphate.sbgn";
 		}
 		else if(sample == "sample6") {
-			filename = "vitamins_b6_activation_to_pyridoxal_phosphate.sbgn";
+			filename = "R-HSA-70326.sbgn";
 		}
 		else if(sample == "sample7") {
 			filename = "Artemether_Metabolism_Pathway.xml";
@@ -58344,6 +59647,15 @@
 		}
 		else if(sample == "sample13") {
 			filename = "Synthesis_of_Ketone_Bodies.sbgn";
+		}
+		else if(sample == "sample14") {
+			filename = "glycolysis_cropped.sbgn";
+		}
+		else if(sample == "sample15") {
+			filename = "WP121.sbgn";
+		}
+		else if(sample == "sample16") {
+			filename = "Beta_oxidation_of_hexanoyl-CoA_to_butanoyl-CoA.xml";
 		}
 		loadSample('examples/' + filename);
 		document.getElementById("fileName").innerHTML = filename;
