@@ -5,10 +5,10 @@ body {
 
 #cy {
     position: absolute;
-    left: 10;
-    top: 65;
-    bottom: 10;
-    right: 10;
+    left: 20;
+    top: 70;
+    bottom: 20;
+    right: 20;
     z-index: 999;
     border-radius: 1px;
     border-width: 2px;
@@ -17,9 +17,27 @@ body {
 }
 
 h1 {
+    margin-left: 10;
     opacity: 0.5;
     font-size: 1.15em;
     font-weight: bold;
+}
+
+#menuSection {
+    margin-left: 10;
+}
+
+#optionsMenu {
+    position: absolute;
+    top: 65;
+    left: 10;
+    width: 18%;
+    bottom: 20;
+    z-index: 999;
+    border-radius: 1px;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
 }
 
 #layoutButton {

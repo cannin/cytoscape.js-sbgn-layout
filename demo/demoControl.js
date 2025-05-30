@@ -42,7 +42,7 @@ let loadSample = function (fname) {
 				}
 			}
 		});
-		cy.fit();
+		cy.fit(cy.elements(), 30);
 	});
 };
 
