@@ -7,8 +7,16 @@ sbgnLayout(cytoscape);
 
 let cy = window.cy = cytoscape({
 	container: document.getElementById('cy'),
-	style: sbgnStylesheet(cytoscape)
+	style: sbgnStylesheet(cytoscape),
 });
+
+cy.style().selector('.pinned')
+    .style({
+      'underlay-color': 'lightgrey',
+			'underlay-padding': '5px',
+			'underlay-opacity': 1,
+    })
+	.update(); // indicate the end of your new stylesheet so that it can be updated on elements
 
 let cyGraph = null;
 
@@ -106,8 +114,32 @@ document.getElementById("randomizeButton").addEventListener("click", function ()
 });
 
 document.getElementById("layoutButton").addEventListener("click", function () {
-	cy.layout({
-		name: "sbgn-layout",
-		randomize: !document.getElementById("randomize").checked
-	}).run();
+	let selectedEles = cy.elements(":selected");
+	if(selectedEles.length > 0) {
+		let layoutElements = selectedEles.not(".pinned");
+		layoutElements.layout({
+			name: "sbgn-layout",
+			randomize: !document.getElementById("randomize").checked,
+			idealEdgeLength: parseFloat(document.getElementById("idealEdgeLength").value),
+			fit: false
+		}).run();
+	} else {
+		let layoutElements = cy.elements().not(".pinned");
+		layoutElements.layout({
+			name: "sbgn-layout",
+			randomize: !document.getElementById("randomize").checked,
+			idealEdgeLength: parseFloat(document.getElementById("idealEdgeLength").value)
+		}).run();
+	}
+});
+
+document.getElementById("pinButton").addEventListener("click", function () {
+	let selectedNodes = cy.nodes(":selected");
+	selectedNodes.addClass("pinned");
+	selectedNodes.lock();
+});
+
+document.getElementById("unpinButton").addEventListener("click", function () {
+  cy.nodes().removeClass("pinned");
+	cy.nodes().unlock();
 });
