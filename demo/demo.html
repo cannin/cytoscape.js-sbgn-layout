@@ -16,71 +16,70 @@
 </head>
 
 <body>
-	<h4>cytoscape sbgn-layout demo</h4>
+	<h4>cytoscape-sbgn-layout demo</h4>
 
 	<div id="menuSection">
+		<div id="menu">
+			<label for="samples" style="padding-bottom: 7px;">Sample SBGN file:</label>
 
-		<button id="randomizeButton" class="btn btn-secondary btn-sm" style="display: none;">Randomize</button>
-		<button id="layoutButton" class="btn btn-secondary btn-sm">SBGN Layout</button>
-
-		<label for="randomize" style="display: none;">Incremental:</label>
-		<input type="checkbox" id="randomize" name="randomize" style="display: none;" checked/>&nbsp;&nbsp;
-
-		<label for="samples">Sample SBGN file:</label>
-
-		<select name="samples" id="samples">
-			<option value="" disabled selected>Select</option>
-		  <option value="sample1">Sample 1</option>
-		  <option value="sample2">Sample 2</option>
-		  <option value="sample3">Sample 3</option>
-			<option value="sample4">Sample 4</option>
-			<option value="sample5">Sample 5</option>
-			<option value="sample6">Sample 6</option>
-			<option value="sample7">Sample 7</option>
-			<option value="sample8">Sample 8</option>
-			<option value="sample9">Sample 9</option>
-			<option value="sample10">Sample 10</option>
-			<option value="sample11">Sample 11</option>
-			<option value="sample12">Sample 12</option>
-			<option value="sample13">Sample 13</option>
-			<option value="sample14">Sample 14</option>
-			<option value="sample15">Sample 15</option>
-			<option value="sample16">Sample 16</option>
-		</select>
-
-		<span id="fileName" class="text-secondary mt-2 mr-5"></span>
-		
-	</div>
-	<div id="menu">
-		<button id="pinButton" class="btn btn-secondary btn-sm">Pin Selected</button>
-		<button id="unpinButton" class="btn btn-secondary btn-sm">Unpin All</button>
-		<hr class="line">
-		<div id="optionsMenu">
-			<table>
-				<thead>
+			<select name="samples" id="samples">
+				<option value="" disabled selected>Select</option>
+				<option value="sample1">Sample 1</option>
+				<option value="sample2">Sample 2</option>
+				<option value="sample3">Sample 3</option>
+				<option value="sample4">Sample 4</option>
+				<option value="sample5">Sample 5</option>
+				<option value="sample6">Sample 6</option>
+				<option value="sample7">Sample 7</option>
+				<option value="sample8">Sample 8</option>
+				<option value="sample9">Sample 9</option>
+				<option value="sample10">Sample 10</option>
+				<option value="sample11">Sample 11</option>
+				<option value="sample12">Sample 12</option>
+				<option value="sample13">Sample 13</option>
+				<option value="sample14">Sample 14</option>
+				<option value="sample15">Sample 15</option>
+				<option value="sample16">Sample 16</option>
+			</select><br>
+			<span id="fileName" class="text-secondary"></span>
+			
+			<hr class="line">
+			<div id="optionsMenu">
+				<table>
+					<thead>
+						<tr>
+							<th colspan="2" >Layout options</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
 					<tr>
-						<th colspan="2" >Layout options</th>
+						<td><span class="add-on layout-text" title="Whether to enable incremental mode"> Incremental </span></td>
+						<td>        
+							<div class="custom-control custom-control-inline custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="randomize" name="randomize" checked>
+								<label class="custom-control-label" for="randomize"></label>
+							</div>
+						</td>
 					</tr>
-				</thead>
-				<tbody></tbody>
-				<tr>
-					<td><span class="add-on layout-text" title="Whether to enable incremental mode"> Incremental </span></td>
-					<td>        
-						<div class="custom-control custom-control-inline custom-checkbox">
-							<input type="checkbox" class="custom-control-input" id="randomize" name="randomize" checked>
-							<label class="custom-control-label" for="randomize"></label>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td><span class="add-on layout-text" title="Ideal (intra-graph) edge length"> Ideal Edge Length </span></td>
-					<td><input id="idealEdgeLength" class="textField form-control form-control-sm" type="text" value="75" maxlength=5 size="5"></td>
-				</tr>
-				</tbody>
-			</table>
+					<tr>
+						<td><span class="add-on layout-text" title="Ideal (intra-graph) edge length"> Ideal Edge Length </span></td>
+						<td><input id="idealEdgeLength" class="textField form-control form-control-sm" type="text" value="75" maxlength=5 size="5"></td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="buttonsMenu">
+			<button id="layoutButton" class="btn btn-secondary btn-sm">SBGN Layout</button>
+			<button id="pinSelected" class="btn btn-info btn-sm">Pin Selected</button>
+			<button id="unpinSelected" class="btn btn-info btn-sm">Unpin Selected</button>
+			<button id="unpinAll" class="btn btn-info btn-sm">Unpin All</button>
+			<button id="selectAll" class="btn btn-info btn-sm">Select All</button>
+			<a href="https://github.com/sciluna/cytoscape.js-sbgn-layout" target="_blank">
+				<img class="ui image" src="images/github-mark.svg" title="Go to GitHub Repository" style="height: 30px; float: right">
+			</a>
 		</div>
 	</div>
-
 
 	<div id="cy"></div>
 

@@ -59669,10 +59669,6 @@
 		document.getElementById("fileName").innerHTML = filename;
 	});
 
-	document.getElementById("randomizeButton").addEventListener("click", function () {
-		cy.layout({name: "random"}).run();
-	});
-
 	document.getElementById("layoutButton").addEventListener("click", function () {
 		let selectedEles = cy.elements(":selected");
 		if(selectedEles.length > 0) {
@@ -59693,15 +59689,25 @@
 		}
 	});
 
-	document.getElementById("pinButton").addEventListener("click", function () {
+	document.getElementById("pinSelected").addEventListener("click", function () {
 		let selectedNodes = cy.nodes(":selected");
 		selectedNodes.addClass("pinned");
 		selectedNodes.lock();
 	});
 
-	document.getElementById("unpinButton").addEventListener("click", function () {
+	document.getElementById("unpinSelected").addEventListener("click", function () {
+		let selectedNodes = cy.nodes(":selected");
+		selectedNodes.removeClass("pinned");
+		selectedNodes.unlock();
+	});
+
+	document.getElementById("unpinAll").addEventListener("click", function () {
 	  cy.nodes().removeClass("pinned");
 		cy.nodes().unlock();
+	});
+
+	document.getElementById("selectAll").addEventListener("click", function () {
+	  cy.elements().select();
 	});
 
 	return demoControl;
