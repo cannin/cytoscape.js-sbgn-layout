@@ -2,9 +2,9 @@
   "name": "cytoscape-sbgn-layout",
   "version": "1.0.0",
   "description": "Cytoscape SBGN layout extension",
-  "main": "dist/bundle.cjs.js",
-  "module": "dist/bundle.esm.js",
-  "browser": "dist/bundle.umd.js",
+  "main": "dist/cytoscape-sbgn-layout.umd.js",
+  "module": "dist/cytoscape-sbgn-layout.umd.js",
+  "browser": "dist/cytoscape-sbgn-layout.umd.js",
   "type": "commonjs",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",

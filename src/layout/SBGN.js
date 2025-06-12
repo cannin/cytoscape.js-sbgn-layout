@@ -40,10 +40,8 @@ let defaults = {
   // infinite layout options
   infinite: false, // overrides all other options for a forces-all-the-time mode
 
-  // layout event callbacks
-  ready: function () { }, // on layoutready
-  stop: function () { }, // on layoutstop
-
+  // map type - PD or AF
+  mapType: "PD",
   // positioning options
   randomize: true, // use random node positions at beginning of layout
   // Include labels in node dimensions
@@ -73,7 +71,11 @@ let defaults = {
   // Gravity range (constant)
   gravityRange: 2.8,
   // Initial cooling factor for incremental layout
-  initialEnergyOnIncremental: 0.5
+  initialEnergyOnIncremental: 0.5,
+
+  // layout event callbacks
+  ready: function () { }, // on layoutready
+  stop: function () { }, // on layoutstop
 };
 
 let getUserOptions = function (options) {
@@ -304,7 +306,7 @@ class Layout extends ContinuousLayout {
     else {  // incremental
       //sbgnLayout.clearCompounds();
 
-      let constraints = SBGNPolishingNew.generateConstraints(sbgnLayout);
+      let constraints = SBGNPolishingNew.generateConstraints(sbgnLayout, this.options.mapType);
       sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
       sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
 
@@ -315,7 +317,9 @@ class Layout extends ContinuousLayout {
       CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
       CoSEConstants.TILE = true;
       sbgnLayout.runLayout();
-      SBGNPolishingNew.polish(sbgnLayout);
+      if (this.options.mapType == "PD") {
+        SBGNPolishingNew.polish(sbgnLayout);
+      }
       sbgnLayout.repopulateCompounds();
     }
   }

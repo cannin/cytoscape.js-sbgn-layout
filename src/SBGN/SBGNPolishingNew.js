@@ -55,7 +55,7 @@ SBGNPolishingNew.polish = function (sbgnLayout) {
   this.addPerProcessPolishment(processNodes);
 }
 
-SBGNPolishingNew.generateConstraints = function (sbgnLayout) {
+SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType) {
   let allNodes = sbgnLayout.getAllNodes();
   let oneDegreeNodes = new Set();
   let multiDegreeNodes = new Set();
@@ -74,7 +74,7 @@ SBGNPolishingNew.generateConstraints = function (sbgnLayout) {
   allEdges.forEach(edge => {
     let source = edge.getSource();
     let target = edge.getTarget();
-    if (!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target)){
+    if ((!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target) && mapType == "PD") || (mapType == "AF")){
       let direction = this.getDirection(source, target);
       edge.direction = direction;
       if (direction == "l-r") {
@@ -134,7 +134,7 @@ SBGNPolishingNew.generateConstraints = function (sbgnLayout) {
 };
 
 // calculates line direction
-SBGNPolishingNew.getDirection = function(source, target, slopeThreshold = 0.40) {
+SBGNPolishingNew.getDirection = function(source, target, slopeThreshold = 0.7) {
   let direction = "l-r";
   if (Math.abs(target.getCenterY() - source.getCenterY()) / Math.abs(target.getCenterX() - source.getCenterX()) < slopeThreshold) {
     if (target.getCenterX() - source.getCenterX() > 0) {
