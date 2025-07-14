@@ -1787,7 +1787,7 @@ SBGNPolishingNew.polish = function (sbgnLayout) {
   this.addPerProcessPolishment(processNodes);
 };
 
-SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType) {
+SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType, slopeThreshold) {
   var _this = this;
 
   var allNodes = sbgnLayout.getAllNodes();
@@ -1809,7 +1809,7 @@ SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType) {
     var source = edge.getSource();
     var target = edge.getTarget();
     if (!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target) && mapType == "PD" || mapType == "AF") {
-      var direction = _this.getDirection(source, target);
+      var direction = _this.getDirection(source, target, slopeThreshold);
       edge.direction = direction;
       if (direction == "l-r") {
         var relativePlacement = [];
@@ -1869,7 +1869,7 @@ SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType) {
 
 // calculates line direction
 SBGNPolishingNew.getDirection = function (source, target) {
-  var slopeThreshold = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.7;
+  var slopeThreshold = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.5;
 
   var direction = "l-r";
   if (Math.abs(target.getCenterY() - source.getCenterY()) / Math.abs(target.getCenterX() - source.getCenterX()) < slopeThreshold) {
@@ -3074,6 +3074,8 @@ var defaults = {
 
   // map type - PD or AF
   mapType: "PD",
+  // slope threshold to decide orientation during polishing
+  slopeThreshold: 0.5,
   // positioning options
   randomize: true, // use random node positions at beginning of layout
   // Include labels in node dimensions
@@ -3332,7 +3334,7 @@ var Layout = function (_ContinuousLayout) {
         // incremental
         //sbgnLayout.clearCompounds();
 
-        var constraints = SBGNPolishingNew.generateConstraints(sbgnLayout, this.options.mapType);
+        var constraints = SBGNPolishingNew.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
         sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
         sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
 

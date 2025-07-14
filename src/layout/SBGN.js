@@ -42,6 +42,8 @@ let defaults = {
 
   // map type - PD or AF
   mapType: "PD",
+  // slope threshold to decide orientation during polishing
+  slopeThreshold: 0.5,
   // positioning options
   randomize: true, // use random node positions at beginning of layout
   // Include labels in node dimensions
@@ -141,7 +143,7 @@ class Layout extends ContinuousLayout {
     // If incremental is true, skip over Phase I
     if (state.randomize) {
       sbgnLayout.runLayout();
-          let graphInfo = sbgnLayout.constructSkeleton();
+      let graphInfo = sbgnLayout.constructSkeleton();
 
       // Apply an incremental layout to give a shape to reaction blocks
       sbgnLayout.constraints["alignmentConstraint"] = graphInfo.constraints.alignmentConstraint;
@@ -306,7 +308,7 @@ class Layout extends ContinuousLayout {
     else {  // incremental
       //sbgnLayout.clearCompounds();
 
-      let constraints = SBGNPolishingNew.generateConstraints(sbgnLayout, this.options.mapType);
+      let constraints = SBGNPolishingNew.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
       sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
       sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
 

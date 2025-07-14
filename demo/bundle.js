@@ -52352,7 +52352,7 @@
 		  this.addPerProcessPolishment(processNodes);
 		};
 
-		SBGNPolishingNew.generateConstraints = function (sbgnLayout) {
+		SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType, slopeThreshold) {
 		  var _this = this;
 
 		  var allNodes = sbgnLayout.getAllNodes();
@@ -52373,8 +52373,8 @@
 		  allEdges.forEach(function (edge) {
 		    var source = edge.getSource();
 		    var target = edge.getTarget();
-		    if (!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target)) {
-		      var direction = _this.getDirection(source, target);
+		    if (!oneDegreeNodes.has(source) && !oneDegreeNodes.has(target) && mapType == "PD" || mapType == "AF") {
+		      var direction = _this.getDirection(source, target, slopeThreshold);
 		      edge.direction = direction;
 		      if (direction == "l-r") {
 		        var relativePlacement = [];
@@ -52434,7 +52434,7 @@
 
 		// calculates line direction
 		SBGNPolishingNew.getDirection = function (source, target) {
-		  var slopeThreshold = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.40;
+		  var slopeThreshold = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.5;
 
 		  var direction = "l-r";
 		  if (Math.abs(target.getCenterY() - source.getCenterY()) / Math.abs(target.getCenterX() - source.getCenterX()) < slopeThreshold) {
@@ -53633,10 +53633,10 @@
 		  // infinite layout options
 		  infinite: false, // overrides all other options for a forces-all-the-time mode
 
-		  // layout event callbacks
-		  ready: function ready() {}, // on layoutready
-		  stop: function stop() {}, // on layoutstop
-
+		  // map type - PD or AF
+		  mapType: "PD",
+		  // slope threshold to decide orientation during polishing
+		  slopeThreshold: 0.5,
 		  // positioning options
 		  randomize: true, // use random node positions at beginning of layout
 		  // Include labels in node dimensions
@@ -53666,7 +53666,11 @@
 		  // Gravity range (constant)
 		  gravityRange: 2.8,
 		  // Initial cooling factor for incremental layout
-		  initialEnergyOnIncremental: 0.5
+		  initialEnergyOnIncremental: 0.5,
+
+		  // layout event callbacks
+		  ready: function ready() {}, // on layoutready
+		  stop: function stop() {} // on layoutstop
 		};
 
 		var getUserOptions = function getUserOptions(options) {
@@ -53889,7 +53893,7 @@
 		        // incremental
 		        //sbgnLayout.clearCompounds();
 
-		        var constraints = SBGNPolishingNew.generateConstraints(sbgnLayout);
+		        var constraints = SBGNPolishingNew.generateConstraints(sbgnLayout, this.options.mapType, this.options.slopeThreshold);
 		        sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
 		        sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
 
@@ -53900,7 +53904,9 @@
 		        CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
 		        CoSEConstants.TILE = true;
 		        sbgnLayout.runLayout();
-		        SBGNPolishingNew.polish(sbgnLayout);
+		        if (this.options.mapType == "PD") {
+		          SBGNPolishingNew.polish(sbgnLayout);
+		        }
 		        sbgnLayout.repopulateCompounds();
 		      }
 		    }
