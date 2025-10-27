@@ -108,7 +108,7 @@ module.exports = SBGNConstants;
 
 
 var CoSENode = __webpack_require__(0).CoSENode;
-var IMath = __webpack_require__(17).IMath;
+var IMath = __webpack_require__(18).IMath;
 
 function SBGNNode(gm, loc, size, vNode) {
   // the constructor of LNode handles alternative constructors
@@ -1729,6 +1729,8 @@ module.exports = SBGNPolishing;
 "use strict";
 
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var SBGNConstants = __webpack_require__(1);
@@ -1862,6 +1864,35 @@ SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType, slopeThres
     horizontalAlignments = mergeArrays(horizontalAlignments);
   }
 
+  // remove conflicts between relative and alignment constraints
+  // traverse relative constraints and if both nodes are found in 
+  // opposite alignment constraints, remove that relative constraint
+
+  var _loop = function _loop(i) {
+    var constraint = relativePlacementConstraints[i];
+    if (constraint.left) {
+      var left = constraint.left;
+      var right = constraint.right;
+      verticalAlignments.forEach(function (verticalAlignment) {
+        if (verticalAlignment.includes(left) && verticalAlignment.includes(right)) {
+          relativePlacementConstraints.splice(i, 1);
+        }
+      });
+    } else if (constraint.top) {
+      var top = constraint.top;
+      var bottom = constraint.bottom;
+      horizontalAlignments.forEach(function (horizontalAlignment) {
+        if (horizontalAlignment.includes(top) && horizontalAlignment.includes(bottom)) {
+          relativePlacementConstraints.splice(i, 1);
+        }
+      });
+    }
+  };
+
+  for (var i = relativePlacementConstraints.length - 1; i >= 0; i--) {
+    _loop(i);
+  }
+
   var alignmentConstraints = { vertical: verticalAlignments.length > 0 ? verticalAlignments : undefined, horizontal: horizontalAlignments.length > 0 ? horizontalAlignments : undefined };
 
   return { relativePlacementConstraint: relativePlacementConstraints, alignmentConstraint: alignmentConstraints };
@@ -1935,28 +1966,229 @@ var mergeArrays = function mergeArrays(arrays) {
   return arrays;
 };
 
+var calculatePosition = function calculatePosition(nodeA, nodeB, idealEdgeLength, degree) {
+  if (degree == 0) {
+    return { x: nodeA.getCenterX() + (nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength), y: nodeA.getCenterY() };
+  } else if (degree == 90) {
+    return { x: nodeA.getCenterX(), y: nodeA.getCenterY() - (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
+  } else if (degree == 180) {
+    return { x: nodeA.getCenterX() - (nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength), y: nodeA.getCenterY() };
+  } else if (degree == 270) {
+    return { x: nodeA.getCenterX(), y: nodeA.getCenterY() + (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
+  } else {
+    var radian = degree * Math.PI / 180;
+    var radius = idealEdgeLength / 2 + (nodeA.getDiagonal() / 2 + nodeB.getDiagonal() / 2);
+    return { x: nodeA.getCenterX() + radius * Math.cos(radian), y: nodeA.getCenterY() - radius * Math.sin(radian) };
+  }
+};
+
+var placeInputs = function placeInputs(node, inputs) {
+  var direction = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'l-r';
+  var idealEdgeLength = arguments[3];
+  var isFirstNode = arguments[4];
+  var horizontalAlignments = arguments[5];
+  var verticalAlignments = arguments[6];
+  var relativePlacementConstraints = arguments[7];
+
+  var n = inputs.length;
+  if (n === 0) return;
+
+  // Direction configuration
+  var directionConfig = {
+    'l-r': { start: 270, end: 90, center: 180 }, // left side
+    'r-l': { start: -90, end: 90, center: 0 }, // right side
+    't-b': { start: 180, end: 0, center: 90 }, // above
+    'b-t': { start: 180, end: 360, center: 270 } // below
+  };
+
+  var _directionConfig$dire = directionConfig[direction],
+      start = _directionConfig$dire.start,
+      end = _directionConfig$dire.end,
+      center = _directionConfig$dire.center;
+
+  // Spread scaling: narrower when few inputs, full range when many
+
+  var maxSpread = Math.abs(end - start);
+  var spread = n === 1 ? 0 : Math.min(maxSpread, 90 + (n - 2) * 22.5); // grows smoothly
+
+  var startAngle = center + spread / 2;
+  var endAngle = center - spread / 2;
+  var step = n === 1 ? 0 : (endAngle - startAngle) / (n - 1);
+
+  for (var i = 0; i < n; i++) {
+    var angle = void 0;
+
+    if (n === 1) {
+      // single input special cases
+      if (isFirstNode) {
+        angle = center; // perfectly centered
+      } else {
+        // place at first-position angle (as if there were 2 inputs)
+        angle = direction === 'l-r' ? 225 : direction === 'r-l' ? -45 : direction === 't-b' ? 135 : 225; // fallback
+      }
+    } else {
+      angle = startAngle + step * i;
+    }
+
+    // Normalize to [0, 360)
+    angle = (angle + 360) % 360;
+
+    var position = calculatePosition(node, inputs[i], idealEdgeLength, angle);
+    inputs[i].setCenter(position.x, position.y);
+
+    var alignedAngle = Math.round(angle); // avoid float precision
+    if (alignedAngle === 0 || alignedAngle === 180) {
+      horizontalAlignments.push([node, inputs[i]]);
+    } else if (alignedAngle === 90 || alignedAngle === 270) {
+      verticalAlignments.push([node, inputs[i]]);
+    }
+  }
+
+  // Add relative constraints if many inputs
+  if (n > 3) {
+    inputs.forEach(function (input) {
+      if (direction == "l-r") relativePlacementConstraints.push({ left: input.id, right: node.id });else if (direction == "r-l") relativePlacementConstraints.push({ right: input.id, left: node.id });else if (direction == "t-b") relativePlacementConstraints.push({ top: input.id, bottom: node.id });else if (direction == "r-l") relativePlacementConstraints.push({ bottom: input.id, top: node.id });
+    });
+  }
+};
+
+var placeOutputs = function placeOutputs(node, outputs) {
+  var direction = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'l-r';
+  var idealEdgeLength = arguments[3];
+  var isLastNode = arguments[4];
+  var horizontalAlignments = arguments[5];
+  var verticalAlignments = arguments[6];
+  var relativePlacementConstraints = arguments[7];
+
+  var n = outputs.length;
+  if (n === 0) return;
+
+  // Direction configuration
+  var directionConfig = {
+    'l-r': { start: -90, end: 90, center: 0 }, // right side
+    'r-l': { start: 270, end: 90, center: 180 }, // left side
+    't-b': { start: 180, end: 360, center: 270 }, // below
+    'b-t': { start: 180, end: 0, center: 90 } // above
+  };
+
+  var _directionConfig$dire2 = directionConfig[direction],
+      start = _directionConfig$dire2.start,
+      end = _directionConfig$dire2.end,
+      center = _directionConfig$dire2.center;
+
+  // Spread scaling: narrower when few inputs, full range when many
+
+  var maxSpread = Math.abs(end - start);
+  var spread = n === 1 ? 0 : Math.min(maxSpread, 90 + (n - 2) * 22.5); // grows smoothly
+
+  var startAngle = center + spread / 2;
+  var endAngle = center - spread / 2;
+  var step = n === 1 ? 0 : (endAngle - startAngle) / (n - 1);
+
+  for (var i = 0; i < n; i++) {
+    var angle = void 0;
+
+    if (n === 1) {
+      // single input special cases
+      if (isLastNode) {
+        angle = center; // perfectly centered
+      } else {
+        // place at first-position angle (as if there were 2 inputs)
+        angle = direction === 'l-r' ? -45 : direction === 'r-l' ? 225 : direction === 't-b' ? 225 : 135; // fallback
+      }
+    } else {
+      angle = startAngle + step * i;
+    }
+
+    // Normalize to [0, 360)
+    angle = (angle + 360) % 360;
+
+    var position = calculatePosition(node, outputs[i], idealEdgeLength, angle);
+    outputs[i].setCenter(position.x, position.y);
+
+    var alignedAngle = Math.round(angle); // avoid float precision
+    if (alignedAngle === 0 || alignedAngle === 180) {
+      horizontalAlignments.push([node, outputs[i]]);
+    } else if (alignedAngle === 90 || alignedAngle === 270) {
+      verticalAlignments.push([node, outputs[i]]);
+    }
+  }
+
+  // Add relative constraints if many inputs
+  if (n > 3) {
+    outputs.forEach(function (output) {
+      if (direction == "l-r") relativePlacementConstraints.push({ right: output.id, left: node.id });else if (direction == "r-l") relativePlacementConstraints.push({ left: output.id, right: node.id });else if (direction == "t-b") relativePlacementConstraints.push({ bottom: output.id, top: node.id });else if (direction == "r-l") relativePlacementConstraints.push({ top: output.id, bottom: node.id });
+    });
+  }
+};
+
+var placeModulators = function placeModulators(node, modulators) {
+  var direction = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'l-r';
+  var idealEdgeLength = arguments[3];
+  var horizontalAlignments = arguments[4];
+  var verticalAlignments = arguments[5];
+
+  var n = modulators.length;
+  if (n === 0) return;
+
+  // Define angle bands depending on direction (supports all 4)
+  var directionConfig = {
+    'l-r': { belowRange: [225, 315], aboveRange: [45, 135] },
+    'r-l': { belowRange: [225, 315], aboveRange: [45, 135] },
+    't-b': { belowRange: [135, 225], aboveRange: [-45, 45] },
+    'b-t': { belowRange: [135, 225], aboveRange: [-45, 45] }
+  };
+
+  var _directionConfig$dire3 = directionConfig[direction],
+      belowRange = _directionConfig$dire3.belowRange,
+      aboveRange = _directionConfig$dire3.aboveRange;
+
+
+  var aboveCount = Math.ceil(n / 2);
+  var belowCount = n - aboveCount;
+
+  var aboveNodes = modulators.slice(0, aboveCount);
+  var belowNodes = modulators.slice(aboveCount);
+
+  // Helper: distribute within a range
+  var distribute = function distribute(nodes, _ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        start = _ref2[0],
+        end = _ref2[1];
+
+    var count = nodes.length;
+    if (count === 0) return [];
+    if (count === 1) return [(start + end) / 2];
+
+    var step = (end - start) / (count - 1);
+    return Array.from({ length: count }, function (_, i) {
+      return start + step * i;
+    });
+  };
+
+  var belowAngles = distribute(belowNodes, belowRange);
+  var aboveAngles = distribute(aboveNodes, aboveRange);
+
+  // Combine (above first, then below)
+  var allAngles = [].concat(_toConsumableArray(aboveAngles), _toConsumableArray(belowAngles));
+
+  // Apply placement
+  allAngles.forEach(function (angle, i) {
+    var position = calculatePosition(node, modulators[i], idealEdgeLength, angle);
+    modulators[i].setCenter(position.x, position.y);
+
+    // Alignment tagging
+    var alignedAngle = Math.round(angle % 360);
+    if (alignedAngle === 0 || alignedAngle === 180) horizontalAlignments.push([node, modulators[i]]);else if (alignedAngle === 90 || alignedAngle === 270) verticalAlignments.push([node, modulators[i]]);
+  });
+};
+
 SBGNPolishingNew.addPerProcessPolishment = function (processes, directions) {
   var horizontalAlignments = [];
   var verticalAlignments = [];
   var relativePlacementConstraints = [];
 
   var idealEdgeLength = SBGNConstants.DEFAULT_EDGE_LENGTH;
-
-  var calculatePosition = function calculatePosition(nodeA, nodeB, idealEdgeLength, degree) {
-    if (degree == 0) {
-      return { x: nodeA.getCenterX() + (nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength), y: nodeA.getCenterY() };
-    } else if (degree == 90) {
-      return { x: nodeA.getCenterX(), y: nodeA.getCenterY() - (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
-    } else if (degree == 180) {
-      return { x: nodeA.getCenterX() - (nodeA.getWidth() / 2 + nodeB.getWidth() / 2 + idealEdgeLength), y: nodeA.getCenterY() };
-    } else if (degree == 270) {
-      return { x: nodeA.getCenterX(), y: nodeA.getCenterY() + (nodeA.getHeight() / 2 + nodeB.getHeight() / 2 + idealEdgeLength) };
-    } else {
-      var radian = degree * Math.PI / 180;
-      var radius = idealEdgeLength / 2 + (nodeA.getDiagonal() / 2 + nodeB.getDiagonal() / 2);
-      return { x: nodeA.getCenterX() + radius * Math.cos(radian), y: nodeA.getCenterY() - radius * Math.sin(radian) };
-    }
-  };
 
   var placeLogicalOperators = function placeLogicalOperators(modulator, a1, a2, a3) {
     var incomers = modulator.getIncomerNodes();
@@ -2002,981 +2234,12 @@ SBGNPolishingNew.addPerProcessPolishment = function (processes, directions) {
         return true;
       }
     });
-    if (node.status == 'first') {
-      // first node and not connected to ring
-      if (node.direction == "l-r") {
-        // process inputs
-        if (inputs.length == 1) {
-          var position = calculatePosition(node, inputs[0], idealEdgeLength, 180);
-          inputs[0].setCenter(position.x, position.y);
-          horizontalAlignments.push([node, inputs[0]]);
-        } else if (inputs.length == 2) {
-          var _position2 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
-          inputs[0].setCenter(_position2.x, _position2.y);
-          _position2 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
-          inputs[1].setCenter(_position2.x, _position2.y);
-        } else if (inputs.length == 3) {
-          var _position3 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
-          inputs[0].setCenter(_position3.x, _position3.y);
-          _position3 = calculatePosition(node, inputs[1], idealEdgeLength, 180);
-          inputs[1].setCenter(_position3.x, _position3.y);
-          _position3 = calculatePosition(node, inputs[2], idealEdgeLength, 225);
-          inputs[2].setCenter(_position3.x, _position3.y);
-          horizontalAlignments.push([node, inputs[1]]);
-        } else if (inputs.length > 3) {
-          var _position4 = calculatePosition(node, inputs[0], idealEdgeLength, 126);
-          inputs[0].setCenter(_position4.x, _position4.y);
-          _position4 = calculatePosition(node, inputs[1], idealEdgeLength, 162);
-          inputs[1].setCenter(_position4.x, _position4.y);
-          _position4 = calculatePosition(node, inputs[2], idealEdgeLength, 198);
-          inputs[2].setCenter(_position4.x, _position4.y);
-          _position4 = calculatePosition(node, inputs[3], idealEdgeLength, 234);
-          inputs[3].setCenter(_position4.x, _position4.y);
-          inputs.forEach(function (input) {
-            relativePlacementConstraints.push({ left: input.id, right: node.id });
-          });
-        }
-        // process modulators
-        if (modulators.length == 1) {
-          var _position5 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-          modulators[0].setCenter(_position5.x, _position5.y);
-          verticalAlignments.push([node, modulators[0]]);
-        } else if (modulators.length >= 2) {
-          var _position6 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-          modulators[0].setCenter(_position6.x, _position6.y);
-          _position6 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-          modulators[1].setCenter(_position6.x, _position6.y);
-          if (modulators[2]) {
-            if (inputs.length == 1) {
-              _position6 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
-              modulators[2].setCenter(_position6.x, _position6.y);
-            }
-            if (inputs.length == 2) {
-              _position6 = calculatePosition(node, modulators[2], idealEdgeLength, 180);
-              modulators[2].setCenter(_position6.x, _position6.y);
-            }
-          }
-        }
-        // process outputs
-        if (outputs.length == 1) {
-          var _position7 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-          outputs[0].setCenter(_position7.x, _position7.y);
-        } else if (outputs.length == 2) {
-          var _position8 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-          outputs[0].setCenter(_position8.x, _position8.y);
-          _position8 = calculatePosition(node, outputs[1], idealEdgeLength, 45);
-          outputs[1].setCenter(_position8.x, _position8.y);
-        } else if (outputs.length > 2) {
-          var _position9 = calculatePosition(node, outputs[0], idealEdgeLength, 330);
-          outputs[0].setCenter(_position9.x, _position9.y);
-          _position9 = calculatePosition(node, outputs[1], idealEdgeLength, 30);
-          outputs[1].setCenter(_position9.x, _position9.y);
-          if (outputs[2]) {
-            _position9 = calculatePosition(node, outputs[2], idealEdgeLength, 310);
-            outputs[2].setCenter(_position9.x, _position9.y);
-            if (outputs[3]) {
-              _position9 = calculatePosition(node, outputs[3], idealEdgeLength, 60);
-              outputs[3].setCenter(_position9.x, _position9.y);
-            }
-          }
-        }
-      }
-      if (node.direction == "r-l") {
-        // process inputs
-        if (inputs.length == 1) {
-          var _position10 = calculatePosition(node, inputs[0], idealEdgeLength, 0);
-          inputs[0].setCenter(_position10.x, _position10.y);
-          horizontalAlignments.push([node, inputs[0]]);
-        } else if (inputs.length == 2) {
-          var _position11 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-          inputs[0].setCenter(_position11.x, _position11.y);
-          _position11 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
-          inputs[1].setCenter(_position11.x, _position11.y);
-        } else if (inputs.length == 3) {
-          var _position12 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-          inputs[0].setCenter(_position12.x, _position12.y);
-          _position12 = calculatePosition(node, inputs[1], idealEdgeLength, 0);
-          inputs[1].setCenter(_position12.x, _position12.y);
-          _position12 = calculatePosition(node, inputs[2], idealEdgeLength, 315);
-          inputs[2].setCenter(_position12.x, _position12.y);
-          horizontalAlignments.push([node, inputs[1]]);
-        } else if (inputs.length > 3) {
-          var _position13 = calculatePosition(node, inputs[0], idealEdgeLength, 36);
-          inputs[0].setCenter(_position13.x, _position13.y);
-          _position13 = calculatePosition(node, inputs[1], idealEdgeLength, 324);
-          inputs[1].setCenter(_position13.x, _position13.y);
-          _position13 = calculatePosition(node, inputs[2], idealEdgeLength, 72);
-          inputs[2].setCenter(_position13.x, _position13.y);
-          _position13 = calculatePosition(node, inputs[3], idealEdgeLength, 288);
-          inputs[3].setCenter(_position13.x, _position13.y);
-          inputs.forEach(function (input) {
-            relativePlacementConstraints.push({ left: input.id, right: node.id });
-          });
-        }
-        // process modulators
-        if (modulators.length == 1) {
-          var _position14 = calculatePosition(node, modulators[0], idealEdgeLength, 270);
-          modulators[0].setCenter(_position14.x, _position14.y);
-          verticalAlignments.push([node, modulators[0]]);
-        } else if (modulators.length >= 2) {
-          var _position15 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-          modulators[0].setCenter(_position15.x, _position15.y);
-          _position15 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-          modulators[1].setCenter(_position15.x, _position15.y);
-          if (modulators[2]) {
-            if (inputs.length == 1) {
-              _position15 = calculatePosition(node, modulators[2], idealEdgeLength, 45);
-              modulators[2].setCenter(_position15.x, _position15.y);
-            }
-            if (inputs.length == 2) {
-              _position15 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
-              modulators[2].setCenter(_position15.x, _position15.y);
-            }
-          }
-        }
-        // process outputs
-        if (outputs.length == 1) {
 
-          var _position16 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
-          outputs[0].setCenter(_position16.x, _position16.y);
-        } else if (outputs.length == 2) {
-          var _position17 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
-          outputs[0].setCenter(_position17.x, _position17.y);
-          _position17 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
-          outputs[1].setCenter(_position17.x, _position17.y);
-        } else if (outputs.length > 2) {
-          var _position18 = calculatePosition(node, outputs[0], idealEdgeLength, 210);
-          outputs[0].setCenter(_position18.x, _position18.y);
-          _position18 = calculatePosition(node, outputs[1], idealEdgeLength, 150);
-          outputs[1].setCenter(_position18.x, _position18.y);
-          if (outputs[2]) {
-            _position18 = calculatePosition(node, outputs[2], idealEdgeLength, 240);
-            outputs[2].setCenter(_position18.x, _position18.y);
-            if (outputs[3]) {
-              _position18 = calculatePosition(node, outputs[3], idealEdgeLength, 120);
-              outputs[3].setCenter(_position18.x, _position18.y);
-            }
-          }
-        }
-      }
-      if (node.direction == "t-b") {
-        // process inputs
-        if (inputs.length == 1) {
-          var _position19 = calculatePosition(node, inputs[0], idealEdgeLength, 90);
-          inputs[0].setCenter(_position19.x, _position19.y);
-          verticalAlignments.push([node, inputs[0]]);
-        } else if (inputs.length == 2) {
-          var _position20 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-          inputs[0].setCenter(_position20.x, _position20.y);
-          _position20 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
-          inputs[1].setCenter(_position20.x, _position20.y);
-        } else if (inputs.length == 3) {
-          var _position21 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-          inputs[0].setCenter(_position21.x, _position21.y);
-          _position21 = calculatePosition(node, inputs[1], idealEdgeLength, 90);
-          inputs[1].setCenter(_position21.x, _position21.y);
-          _position21 = calculatePosition(node, inputs[2], idealEdgeLength, 135);
-          inputs[2].setCenter(_position21.x, _position21.y);
-          horizontalAlignments.push([node, inputs[1]]);
-        } else if (inputs.length > 3) {
-          var _position22 = calculatePosition(node, inputs[0], idealEdgeLength, 72);
-          inputs[0].setCenter(_position22.x, _position22.y);
-          _position22 = calculatePosition(node, inputs[1], idealEdgeLength, 108);
-          inputs[1].setCenter(_position22.x, _position22.y);
-          _position22 = calculatePosition(node, inputs[2], idealEdgeLength, 36);
-          inputs[2].setCenter(_position22.x, _position22.y);
-          _position22 = calculatePosition(node, inputs[3], idealEdgeLength, 144);
-          inputs[3].setCenter(_position22.x, _position22.y);
-          inputs.forEach(function (input) {
-            relativePlacementConstraints.push({ left: input.id, right: node.id });
-          });
-        }
-        // process modulators
-        if (modulators.length == 1) {
-          var _position23 = calculatePosition(node, modulators[0], idealEdgeLength, 0);
-          modulators[0].setCenter(_position23.x, _position23.y);
-          horizontalAlignments.push([node, modulators[0]]);
-        } else if (modulators.length >= 2) {
-          var _position24 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-          modulators[0].setCenter(_position24.x, _position24.y);
-          _position24 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-          modulators[1].setCenter(_position24.x, _position24.y);
-          if (modulators[2]) {
-            if (inputs.length == 1) {
-              _position24 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
-              modulators[2].setCenter(_position24.x, _position24.y);
-            }
-            if (inputs.length == 2) {
-              _position24 = calculatePosition(node, modulators[2], idealEdgeLength, 90);
-              modulators[2].setCenter(_position24.x, _position24.y);
-            }
-          }
-        }
-        // process outputs
-        if (outputs.length == 1) {
-          var _position25 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-          outputs[0].setCenter(_position25.x, _position25.y);
-        } else if (outputs.length == 2) {
-          var _position26 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-          outputs[0].setCenter(_position26.x, _position26.y);
-          _position26 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
-          outputs[1].setCenter(_position26.x, _position26.y);
-        } else if (outputs.length > 2) {
-          var _position27 = calculatePosition(node, outputs[0], idealEdgeLength, 300);
-          outputs[0].setCenter(_position27.x, _position27.y);
-          _position27 = calculatePosition(node, outputs[1], idealEdgeLength, 240);
-          outputs[1].setCenter(_position27.x, _position27.y);
-          if (outputs[2]) {
-            _position27 = calculatePosition(node, outputs[2], idealEdgeLength, 330);
-            outputs[2].setCenter(_position27.x, _position27.y);
-            if (outputs[3]) {
-              _position27 = calculatePosition(node, outputs[3], idealEdgeLength, 210);
-              outputs[3].setCenter(_position27.x, _position27.y);
-            }
-          }
-        }
-      }
-      if (node.direction == "b-t") {
-        // process inputs
-        if (inputs.length == 1) {
-          var _position28 = calculatePosition(node, inputs[0], idealEdgeLength, 270);
-          inputs[0].setCenter(_position28.x, _position28.y);
-          verticalAlignments.push([node, inputs[0]]);
-        } else if (inputs.length == 2) {
-          var _position29 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
-          inputs[0].setCenter(_position29.x, _position29.y);
-          _position29 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
-          inputs[1].setCenter(_position29.x, _position29.y);
-        } else if (inputs.length == 3) {
-          var _position30 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
-          inputs[0].setCenter(_position30.x, _position30.y);
-          _position30 = calculatePosition(node, inputs[1], idealEdgeLength, 270);
-          inputs[1].setCenter(_position30.x, _position30.y);
-          _position30 = calculatePosition(node, inputs[2], idealEdgeLength, 225);
-          inputs[2].setCenter(_position30.x, _position30.y);
-          verticalAlignments.push([node, inputs[1]]);
-        } else if (inputs.length > 3) {
-          var _position31 = calculatePosition(node, inputs[0], idealEdgeLength, 288);
-          inputs[0].setCenter(_position31.x, _position31.y);
-          _position31 = calculatePosition(node, inputs[1], idealEdgeLength, 252);
-          inputs[1].setCenter(_position31.x, _position31.y);
-          _position31 = calculatePosition(node, inputs[2], idealEdgeLength, 324);
-          inputs[2].setCenter(_position31.x, _position31.y);
-          _position31 = calculatePosition(node, inputs[3], idealEdgeLength, 216);
-          inputs[3].setCenter(_position31.x, _position31.y);
-        }
-        // process modulators
-        if (modulators.length == 1) {
-          var _position32 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-          modulators[0].setCenter(_position32.x, _position32.y);
-          horizontalAlignments.push([node, modulators[0]]);
-        } else if (modulators.length >= 2) {
-          var _position33 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-          modulators[0].setCenter(_position33.x, _position33.y);
-          _position33 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-          modulators[1].setCenter(_position33.x, _position33.y);
-          if (modulators[2]) {
-            if (inputs.length == 1) {
-              _position33 = calculatePosition(node, modulators[2], idealEdgeLength, 225);
-              modulators[2].setCenter(_position33.x, _position33.y);
-            }
-            if (inputs.length == 2) {
-              _position33 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
-              modulators[2].setCenter(_position33.x, _position33.y);
-            }
-          }
-        }
-        // process outputs
-        if (outputs.length == 1) {
-          var _position34 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-          outputs[0].setCenter(_position34.x, _position34.y);
-        } else if (outputs.length == 2) {
-          var _position35 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-          outputs[0].setCenter(_position35.x, _position35.y);
-          _position35 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
-          outputs[1].setCenter(_position35.x, _position35.y);
-        } else if (outputs.length > 2) {
-          var _position36 = calculatePosition(node, outputs[0], idealEdgeLength, 60);
-          outputs[0].setCenter(_position36.x, _position36.y);
-          _position36 = calculatePosition(node, outputs[1], idealEdgeLength, 120);
-          outputs[1].setCenter(_position36.x, _position36.y);
-          if (outputs[2]) {
-            _position36 = calculatePosition(node, outputs[2], idealEdgeLength, 30);
-            outputs[2].setCenter(_position36.x, _position36.y);
-            if (outputs[3]) {
-              _position36 = calculatePosition(node, outputs[3], idealEdgeLength, 150);
-              outputs[3].setCenter(_position36.x, _position36.y);
-            }
-          }
-        }
-      }
-    } else if (node.status == 'middle') {
-      // an intermediate node - think about if connected to ring
-      if (node.direction == "l-r") {
-        // process inputs
-        if (inputs.length == 1) {
-          var _position37 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
-          inputs[0].setCenter(_position37.x, _position37.y);
-        } else if (inputs.length == 2) {
-          var _position38 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
-          inputs[0].setCenter(_position38.x, _position38.y);
-          _position38 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
-          inputs[1].setCenter(_position38.x, _position38.y);
-        } else if (inputs.length > 2) {
-          var _position39 = calculatePosition(node, inputs[0], idealEdgeLength, 210);
-          inputs[0].setCenter(_position39.x, _position39.y);
-          _position39 = calculatePosition(node, inputs[1], idealEdgeLength, 150);
-          inputs[1].setCenter(_position39.x, _position39.y);
-          if (inputs[2]) {
-            _position39 = calculatePosition(node, inputs[2], idealEdgeLength, 240);
-            inputs[2].setCenter(_position39.x, _position39.y);
-            if (inputs[3]) {
-              _position39 = calculatePosition(node, inputs[3], idealEdgeLength, 120);
-              inputs[3].setCenter(_position39.x, _position39.y);
-            }
-          }
-        }
-        // process modulators
-        if (modulators.length == 1) {
-          var _position40 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-          modulators[0].setCenter(_position40.x, _position40.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 90, 45, 135);
-          }
-        } else if (modulators.length == 2) {
-          var _position41 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-          modulators[0].setCenter(_position41.x, _position41.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 90, 45, 135);
-          }
-          _position41 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-          modulators[1].setCenter(_position41.x, _position41.y);
-          if (modulators[1].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[1], 270, 225, 315);
-          }
-        } else if (modulators.length > 2) {
-          var _position42 = calculatePosition(node, modulators[0], idealEdgeLength, 60);
-          modulators[0].setCenter(_position42.x, _position42.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 90, 45, 135);
-          }
-          _position42 = calculatePosition(node, modulators[1], idealEdgeLength, 120);
-          modulators[1].setCenter(_position42.x, _position42.y);
-          if (modulators[1].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[1], 90, 45, 135);
-          }
-          _position42 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
-          modulators[2].setCenter(_position42.x, _position42.y);
-          if (modulators[2].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[2], 270, 225, 315);
-          }
-        }
-        // process outputs
-        if (outputs.length == 1) {
-          var _position43 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-          outputs[0].setCenter(_position43.x, _position43.y);
-        } else if (outputs.length == 2) {
-          var _position44 = calculatePosition(node, outputs[0], idealEdgeLength, 315);
-          outputs[0].setCenter(_position44.x, _position44.y);
-          _position44 = calculatePosition(node, outputs[1], idealEdgeLength, 45);
-          outputs[1].setCenter(_position44.x, _position44.y);
-        } else if (outputs.length > 2) {
-          var _position45 = calculatePosition(node, outputs[0], idealEdgeLength, 330);
-          outputs[0].setCenter(_position45.x, _position45.y);
-          _position45 = calculatePosition(node, outputs[1], idealEdgeLength, 30);
-          outputs[1].setCenter(_position45.x, _position45.y);
-          if (outputs[2]) {
-            _position45 = calculatePosition(node, outputs[2], idealEdgeLength, 300);
-            outputs[2].setCenter(_position45.x, _position45.y);
-            if (outputs[3]) {
-              _position45 = calculatePosition(node, outputs[3], idealEdgeLength, 60);
-              outputs[3].setCenter(_position45.x, _position45.y);
-            }
-          }
-        }
-      }
-      if (node.direction == "r-l") {
-        // process inputs
-        if (inputs.length == 1) {
-          var _position46 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-          inputs[0].setCenter(_position46.x, _position46.y);
-        } else if (inputs.length == 2) {
-          var _position47 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-          inputs[0].setCenter(_position47.x, _position47.y);
-          _position47 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
-          inputs[1].setCenter(_position47.x, _position47.y);
-        } else if (inputs.length > 2) {
-          var _position48 = calculatePosition(node, inputs[0], idealEdgeLength, 330);
-          inputs[0].setCenter(_position48.x, _position48.y);
-          _position48 = calculatePosition(node, inputs[1], idealEdgeLength, 30);
-          inputs[1].setCenter(_position48.x, _position48.y);
-          if (inputs[2]) {
-            _position48 = calculatePosition(node, inputs[2], idealEdgeLength, 300);
-            inputs[2].setCenter(_position48.x, _position48.y);
-            if (inputs[3]) {
-              _position48 = calculatePosition(node, inputs[3], idealEdgeLength, 60);
-              inputs[3].setCenter(_position48.x, _position48.y);
-            }
-          }
-          inputs.forEach(function (input) {
-            relativePlacementConstraints.push({ left: node.id, right: input.id });
-          });
-        }
-        // process modulators
-        if (modulators.length == 1) {
-          var _position49 = calculatePosition(node, modulators[0], idealEdgeLength, 270);
-          modulators[0].setCenter(_position49.x, _position49.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 270, 225, 315);
-          }
-        } else if (modulators.length == 2) {
-          var _position50 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-          modulators[0].setCenter(_position50.x, _position50.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 90, 45, 135);
-          }
-          _position50 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-          modulators[1].setCenter(_position50.x, _position50.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 270, 225, 315);
-          }
-        } else if (modulators.length > 2) {
-          var _position51 = calculatePosition(node, modulators[0], idealEdgeLength, 60);
-          modulators[0].setCenter(_position51.x, _position51.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 90, 45, 135);
-          }
-          _position51 = calculatePosition(node, modulators[1], idealEdgeLength, 120);
-          modulators[1].setCenter(_position51.x, _position51.y);
-          if (modulators[1].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[1], 90, 45, 135);
-          }
-          _position51 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
-          modulators[2].setCenter(_position51.x, _position51.y);
-          if (modulators[2].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[2], 270, 225, 315);
-          }
-        }
-        // process outputs
-        if (outputs.length == 1) {
-          var _position52 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
-          outputs[0].setCenter(_position52.x, _position52.y);
-        } else if (outputs.length == 2) {
-          var _position53 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
-          outputs[0].setCenter(_position53.x, _position53.y);
-          _position53 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
-          outputs[1].setCenter(_position53.x, _position53.y);
-        } else if (outputs.length > 2) {
-          var _position54 = calculatePosition(node, outputs[0], idealEdgeLength, 210);
-          outputs[0].setCenter(_position54.x, _position54.y);
-          _position54 = calculatePosition(node, outputs[1], idealEdgeLength, 150);
-          outputs[1].setCenter(_position54.x, _position54.y);
-          if (outputs[2]) {
-            _position54 = calculatePosition(node, outputs[2], idealEdgeLength, 240);
-            outputs[2].setCenter(_position54.x, _position54.y);
-            if (outputs[3]) {
-              _position54 = calculatePosition(node, outputs[3], idealEdgeLength, 120);
-              outputs[3].setCenter(_position54.x, _position54.y);
-            }
-          }
-        }
-      }
-      if (node.direction == "t-b") {
-        // process inputs
-        if (inputs.length == 1) {
-          var _position55 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
-          inputs[0].setCenter(_position55.x, _position55.y);
-        } else if (inputs.length == 2) {
-          var _position56 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
-          inputs[0].setCenter(_position56.x, _position56.y);
-          _position56 = calculatePosition(node, inputs[1], idealEdgeLength, 45);
-          inputs[1].setCenter(_position56.x, _position56.y);
-        } else if (inputs.length > 2) {
-          var _position57 = calculatePosition(node, inputs[0], idealEdgeLength, 60);
-          inputs[0].setCenter(_position57.x, _position57.y);
-          _position57 = calculatePosition(node, inputs[1], idealEdgeLength, 120);
-          inputs[1].setCenter(_position57.x, _position57.y);
-          if (inputs[2]) {
-            _position57 = calculatePosition(node, inputs[2], idealEdgeLength, 30);
-            inputs[2].setCenter(_position57.x, _position57.y);
-            if (inputs[3]) {
-              _position57 = calculatePosition(node, inputs[3], idealEdgeLength, 150);
-              inputs[3].setCenter(_position57.x, _position57.y);
-            }
-          }
-          inputs.forEach(function (input) {
-            relativePlacementConstraints.push({ top: input.id, bottom: node.id });
-          });
-        }
-        // process modulators
-        if (modulators.length == 1) {
-          var _position58 = calculatePosition(node, modulators[0], idealEdgeLength, 0);
-          modulators[0].setCenter(_position58.x, _position58.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 0, 45, 315);
-          }
-        } else if (modulators.length == 2) {
-          var _position59 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-          modulators[0].setCenter(_position59.x, _position59.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 180, 135, 225);
-          }
-          _position59 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-          modulators[1].setCenter(_position59.x, _position59.y);
-          if (modulators[1].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[1], 0, 45, 315);
-          }
-        } else if (modulators.length > 2) {
-          var _position60 = calculatePosition(node, modulators[0], idealEdgeLength, 150);
-          modulators[0].setCenter(_position60.x, _position60.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 180, 135, 225);
-          }
-          _position60 = calculatePosition(node, modulators[1], idealEdgeLength, 210);
-          modulators[1].setCenter(_position60.x, _position60.y);
-          if (modulators[1].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[1], 180, 135, 225);
-          }
-          _position60 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
-          modulators[2].setCenter(_position60.x, _position60.y);
-          if (modulators[2].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[2], 0, 45, 315);
-          }
-        }
-        // process outputs
-        if (outputs.length == 1) {
-          var _position61 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
-          outputs[0].setCenter(_position61.x, _position61.y);
-        } else if (outputs.length == 2) {
-          var _position62 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
-          outputs[0].setCenter(_position62.x, _position62.y);
-          _position62 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
-          outputs[1].setCenter(_position62.x, _position62.y);
-        } else if (outputs.length > 2) {
-          var _position63 = calculatePosition(node, outputs[0], idealEdgeLength, 300);
-          outputs[0].setCenter(_position63.x, _position63.y);
-          _position63 = calculatePosition(node, outputs[1], idealEdgeLength, 240);
-          outputs[1].setCenter(_position63.x, _position63.y);
-          if (outputs[2]) {
-            _position63 = calculatePosition(node, outputs[2], idealEdgeLength, 330);
-            outputs[2].setCenter(_position63.x, _position63.y);
-            if (outputs[3]) {
-              _position63 = calculatePosition(node, outputs[3], idealEdgeLength, 210);
-              outputs[3].setCenter(_position63.x, _position63.y);
-            }
-          }
-        }
-      }
-      if (node.direction == "b-t") {
-        // process inputs
-        if (inputs.length == 1) {
-          var _position64 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
-          inputs[0].setCenter(_position64.x, _position64.y);
-        } else if (inputs.length == 2) {
-          var _position65 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
-          inputs[0].setCenter(_position65.x, _position65.y);
-          _position65 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
-          inputs[1].setCenter(_position65.x, _position65.y);
-        } else if (inputs.length > 2) {
-          var _position66 = calculatePosition(node, inputs[0], idealEdgeLength, 300);
-          inputs[0].setCenter(_position66.x, _position66.y);
-          _position66 = calculatePosition(node, inputs[1], idealEdgeLength, 240);
-          inputs[1].setCenter(_position66.x, _position66.y);
-          if (inputs[2]) {
-            _position66 = calculatePosition(node, inputs[2], idealEdgeLength, 330);
-            inputs[2].setCenter(_position66.x, _position66.y);
-            if (inputs[3]) {
-              _position66 = calculatePosition(node, inputs[3], idealEdgeLength, 210);
-              inputs[3].setCenter(_position66.x, _position66.y);
-            }
-          }
-          inputs.forEach(function (input) {
-            relativePlacementConstraints.push({ top: node.id, bottom: input.id });
-          });
-        }
-        // process modulators
-        if (modulators.length == 1) {
-          var _position67 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-          modulators[0].setCenter(_position67.x, _position67.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 180, 135, 225);
-          }
-        } else if (modulators.length == 2) {
-          var _position68 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-          modulators[0].setCenter(_position68.x, _position68.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 180, 135, 225);
-          }
-          _position68 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-          modulators[1].setCenter(_position68.x, _position68.y);
-          if (modulators[1].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[1], 0, 45, 315);
-          }
-        } else if (modulators.length > 2) {
-          var _position69 = calculatePosition(node, modulators[0], idealEdgeLength, 150);
-          modulators[0].setCenter(_position69.x, _position69.y);
-          if (modulators[0].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[0], 180, 135, 225);
-          }
-          _position69 = calculatePosition(node, modulators[1], idealEdgeLength, 210);
-          modulators[1].setCenter(_position69.x, _position69.y);
-          if (modulators[1].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[1], 180, 135, 225);
-          }
-          _position69 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
-          modulators[2].setCenter(_position69.x, _position69.y);
-          if (modulators[1].isLogicalOperator()) {
-            // if logical operator
-            placeLogicalOperators(modulators[1], 0, 45, 315);
-          }
-        }
-        // process outputs
-        if (outputs.length == 1) {
-          var _position70 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-          outputs[0].setCenter(_position70.x, _position70.y);
-        } else if (outputs.length == 2) {
-          var _position71 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-          outputs[0].setCenter(_position71.x, _position71.y);
-          _position71 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
-          outputs[1].setCenter(_position71.x, _position71.y);
-        } else if (outputs.length > 2) {
-          var _position72 = calculatePosition(node, outputs[0], idealEdgeLength, 60);
-          outputs[0].setCenter(_position72.x, _position72.y);
-          _position72 = calculatePosition(node, outputs[1], idealEdgeLength, 120);
-          outputs[1].setCenter(_position72.x, _position72.y);
-          if (outputs[2]) {
-            _position72 = calculatePosition(node, outputs[2], idealEdgeLength, 30);
-            outputs[2].setCenter(_position72.x, _position72.y);
-            if (outputs[3]) {
-              _position72 = calculatePosition(node, outputs[3], idealEdgeLength, 150);
-              outputs[3].setCenter(_position72.x, _position72.y);
-            }
-          }
-        }
-      }
-    } else {
-      //if last node and not connected to ring, or first node, connected to ring but connected as a target
-      if (node.direction == "l-r") {
-        // process inputs
-        if (inputs.length == 1) {
-          var _position73 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
-          inputs[0].setCenter(_position73.x, _position73.y);
-        } else if (inputs.length == 2) {
-          var _position74 = calculatePosition(node, inputs[0], idealEdgeLength, 225);
-          inputs[0].setCenter(_position74.x, _position74.y);
-          _position74 = calculatePosition(node, inputs[1], idealEdgeLength, 135);
-          inputs[1].setCenter(_position74.x, _position74.y);
-        } else if (inputs.length > 2) {
-          var _position75 = calculatePosition(node, inputs[0], idealEdgeLength, 210);
-          inputs[0].setCenter(_position75.x, _position75.y);
-          _position75 = calculatePosition(node, inputs[1], idealEdgeLength, 150);
-          inputs[1].setCenter(_position75.x, _position75.y);
-          if (inputs[2]) {
-            _position75 = calculatePosition(node, inputs[2], idealEdgeLength, 240);
-            inputs[2].setCenter(_position75.x, _position75.y);
-            if (inputs[3]) {
-              _position75 = calculatePosition(node, inputs[3], idealEdgeLength, 120);
-              inputs[3].setCenter(_position75.x, _position75.y);
-            }
-          }
-        }
-        // process modulators
-        if (modulators.length == 1) {
-          var _position76 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-          modulators[0].setCenter(_position76.x, _position76.y);
-          verticalAlignments.push([node, modulators[0]]);
-        } else if (modulators.length >= 2) {
-          var _position77 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-          modulators[0].setCenter(_position77.x, _position77.y);
-          _position77 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-          modulators[1].setCenter(_position77.x, _position77.y);
-          if (modulators[2]) {
-            if (inputs.length == 1) {
-              _position77 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
-              modulators[2].setCenter(_position77.x, _position77.y);
-            }
-            if (inputs.length == 2) {
-              _position77 = calculatePosition(node, modulators[2], idealEdgeLength, 180);
-              modulators[2].setCenter(_position77.x, _position77.y);
-            }
-          }
-        }
-        // process outputs
-        if (outputs.length == 1) {
-          var _position78 = calculatePosition(node, outputs[0], idealEdgeLength, 0);
-          outputs[0].setCenter(_position78.x, _position78.y);
-        } else if (outputs.length == 2) {
-          var _position79 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-          outputs[0].setCenter(_position79.x, _position79.y);
-          _position79 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
-          outputs[1].setCenter(_position79.x, _position79.y);
-        } else if (outputs.length == 3) {
-          var _position80 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-          outputs[0].setCenter(_position80.x, _position80.y);
-          _position80 = calculatePosition(node, outputs[1], idealEdgeLength, 0);
-          outputs[1].setCenter(_position80.x, _position80.y);
-          _position80 = calculatePosition(node, outputs[2], idealEdgeLength, 315);
-          outputs[2].setCenter(_position80.x, _position80.y);
-        } else if (outputs.length == 4) {
-          var _position81 = calculatePosition(node, outputs[0], idealEdgeLength, 54);
-          outputs[0].setCenter(_position81.x, _position81.y);
-          _position81 = calculatePosition(node, outputs[1], idealEdgeLength, 18);
-          outputs[1].setCenter(_position81.x, _position81.y);
-          _position81 = calculatePosition(node, outputs[2], idealEdgeLength, 342);
-          outputs[2].setCenter(_position81.x, _position81.y);
-          _position81 = calculatePosition(node, outputs[3], idealEdgeLength, 306);
-          outputs[3].setCenter(_position81.x, _position81.y);
-        }
-      }
-      if (node.direction == "r-l") {
-        // process inputs
-        if (inputs.length == 1) {
-          var _position82 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-          inputs[0].setCenter(_position82.x, _position82.y);
-        } else if (inputs.length == 2) {
-          var _position83 = calculatePosition(node, inputs[0], idealEdgeLength, 45);
-          inputs[0].setCenter(_position83.x, _position83.y);
-          _position83 = calculatePosition(node, inputs[1], idealEdgeLength, 315);
-          inputs[1].setCenter(_position83.x, _position83.y);
-        } else if (inputs.length > 2) {
-          var _position84 = calculatePosition(node, inputs[0], idealEdgeLength, 330);
-          inputs[0].setCenter(_position84.x, _position84.y);
-          _position84 = calculatePosition(node, inputs[1], idealEdgeLength, 30);
-          inputs[1].setCenter(_position84.x, _position84.y);
-          if (inputs[2]) {
-            _position84 = calculatePosition(node, inputs[2], idealEdgeLength, 300);
-            inputs[2].setCenter(_position84.x, _position84.y);
-            if (inputs[3]) {
-              _position84 = calculatePosition(node, inputs[3], idealEdgeLength, 60);
-              inputs[3].setCenter(_position84.x, _position84.y);
-            }
-          }
-          inputs.forEach(function (input) {
-            relativePlacementConstraints.push({ left: node.id, right: input.id });
-          });
-        }
-        // process modulators
-        if (modulators.length == 1) {
-          var _position85 = calculatePosition(node, modulators[0], idealEdgeLength, 270);
-          modulators[0].setCenter(_position85.x, _position85.y);
-          verticalAlignments.push([node, modulators[0]]);
-        } else if (modulators.length >= 2) {
-          var _position86 = calculatePosition(node, modulators[0], idealEdgeLength, 90);
-          modulators[0].setCenter(_position86.x, _position86.y);
-          _position86 = calculatePosition(node, modulators[1], idealEdgeLength, 270);
-          modulators[1].setCenter(_position86.x, _position86.y);
-          if (modulators[2]) {
-            if (inputs.length == 1) {
-              _position86 = calculatePosition(node, modulators[2], idealEdgeLength, 45);
-              modulators[2].setCenter(_position86.x, _position86.y);
-            }
-            if (inputs.length == 2) {
-              _position86 = calculatePosition(node, modulators[2], idealEdgeLength, 0);
-              modulators[2].setCenter(_position86.x, _position86.y);
-            }
-          }
-        }
-        // process outputs
-        if (outputs.length == 1) {
-          var _position87 = calculatePosition(node, outputs[0], idealEdgeLength, 180);
-          outputs[0].setCenter(_position87.x, _position87.y);
-        } else if (outputs.length == 2) {
-          var _position88 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
-          outputs[0].setCenter(_position88.x, _position88.y);
-          _position88 = calculatePosition(node, outputs[1], idealEdgeLength, 225);
-          outputs[1].setCenter(_position88.x, _position88.y);
-        } else if (outputs.length == 3) {
-          var _position89 = calculatePosition(node, outputs[0], idealEdgeLength, 135);
-          outputs[0].setCenter(_position89.x, _position89.y);
-          _position89 = calculatePosition(node, outputs[1], idealEdgeLength, 180);
-          outputs[1].setCenter(_position89.x, _position89.y);
-          _position89 = calculatePosition(node, outputs[2], idealEdgeLength, 225);
-          outputs[2].setCenter(_position89.x, _position89.y);
-        } else if (outputs.length == 4) {
-          var _position90 = calculatePosition(node, outputs[0], idealEdgeLength, 126);
-          outputs[0].setCenter(_position90.x, _position90.y);
-          _position90 = calculatePosition(node, outputs[1], idealEdgeLength, 162);
-          outputs[1].setCenter(_position90.x, _position90.y);
-          _position90 = calculatePosition(node, outputs[2], idealEdgeLength, 198);
-          outputs[2].setCenter(_position90.x, _position90.y);
-          _position90 = calculatePosition(node, outputs[3], idealEdgeLength, 234);
-          outputs[3].setCenter(_position90.x, _position90.y);
-        }
-      }
-      if (node.direction == "t-b") {
-        // process inputs
-        if (inputs.length == 1) {
-          var _position91 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
-          inputs[0].setCenter(_position91.x, _position91.y);
-        } else if (inputs.length == 2) {
-          var _position92 = calculatePosition(node, inputs[0], idealEdgeLength, 135);
-          inputs[0].setCenter(_position92.x, _position92.y);
-          _position92 = calculatePosition(node, inputs[1], idealEdgeLength, 45);
-          inputs[1].setCenter(_position92.x, _position92.y);
-        } else if (inputs.length > 2) {
-          var _position93 = calculatePosition(node, inputs[0], idealEdgeLength, 60);
-          inputs[0].setCenter(_position93.x, _position93.y);
-          _position93 = calculatePosition(node, inputs[1], idealEdgeLength, 120);
-          inputs[1].setCenter(_position93.x, _position93.y);
-          if (inputs[2]) {
-            _position93 = calculatePosition(node, inputs[2], idealEdgeLength, 30);
-            inputs[2].setCenter(_position93.x, _position93.y);
-            if (inputs[3]) {
-              _position93 = calculatePosition(node, inputs[3], idealEdgeLength, 150);
-              inputs[3].setCenter(_position93.x, _position93.y);
-            }
-          }
-          inputs.forEach(function (input) {
-            relativePlacementConstraints.push({ top: input.id, bottom: node.id });
-          });
-        }
-        // process modulators
-        if (modulators.length == 1) {
-          var _position94 = calculatePosition(node, modulators[0], idealEdgeLength, 0);
-          modulators[0].setCenter(_position94.x, _position94.y);
-          horizontalAlignments.push([node, modulators[0]]);
-        } else if (modulators.length >= 2) {
-          var _position95 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-          modulators[0].setCenter(_position95.x, _position95.y);
-          _position95 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-          modulators[1].setCenter(_position95.x, _position95.y);
-          if (modulators[2]) {
-            if (inputs.length == 1) {
-              _position95 = calculatePosition(node, modulators[2], idealEdgeLength, 135);
-              modulators[2].setCenter(_position95.x, _position95.y);
-            }
-            if (inputs.length == 2) {
-              _position95 = calculatePosition(node, modulators[2], idealEdgeLength, 90);
-              modulators[2].setCenter(_position95.x, _position95.y);
-            }
-          }
-        }
-        // process outputs
-        if (outputs.length == 1) {
-          var _position96 = calculatePosition(node, outputs[0], idealEdgeLength, 270);
-          outputs[0].setCenter(_position96.x, _position96.y);
-        } else if (outputs.length == 2) {
-          var _position97 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
-          outputs[0].setCenter(_position97.x, _position97.y);
-          _position97 = calculatePosition(node, outputs[1], idealEdgeLength, 315);
-          outputs[1].setCenter(_position97.x, _position97.y);
-        } else if (outputs.length == 3) {
-          var _position98 = calculatePosition(node, outputs[0], idealEdgeLength, 225);
-          outputs[0].setCenter(_position98.x, _position98.y);
-          _position98 = calculatePosition(node, outputs[1], idealEdgeLength, 270);
-          outputs[1].setCenter(_position98.x, _position98.y);
-          _position98 = calculatePosition(node, outputs[2], idealEdgeLength, 315);
-          outputs[2].setCenter(_position98.x, _position98.y);
-        } else if (outputs.length == 4) {
-          var _position99 = calculatePosition(node, outputs[0], idealEdgeLength, 216);
-          outputs[0].setCenter(_position99.x, _position99.y);
-          _position99 = calculatePosition(node, outputs[1], idealEdgeLength, 252);
-          outputs[1].setCenter(_position99.x, _position99.y);
-          _position99 = calculatePosition(node, outputs[2], idealEdgeLength, 288);
-          outputs[2].setCenter(_position99.x, _position99.y);
-          _position99 = calculatePosition(node, outputs[3], idealEdgeLength, 324);
-          outputs[3].setCenter(_position99.x, _position99.y);
-        }
-      }
-      if (node.direction == "b-t") {
-        // process inputs
-        if (inputs.length == 1) {
-          var _position100 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
-          inputs[0].setCenter(_position100.x, _position100.y);
-        } else if (inputs.length == 2) {
-          var _position101 = calculatePosition(node, inputs[0], idealEdgeLength, 315);
-          inputs[0].setCenter(_position101.x, _position101.y);
-          _position101 = calculatePosition(node, inputs[1], idealEdgeLength, 225);
-          inputs[1].setCenter(_position101.x, _position101.y);
-        } else if (inputs.length > 2) {
-          var _position102 = calculatePosition(node, inputs[0], idealEdgeLength, 300);
-          inputs[0].setCenter(_position102.x, _position102.y);
-          _position102 = calculatePosition(node, inputs[1], idealEdgeLength, 240);
-          inputs[1].setCenter(_position102.x, _position102.y);
-          if (inputs[2]) {
-            _position102 = calculatePosition(node, inputs[2], idealEdgeLength, 330);
-            inputs[2].setCenter(_position102.x, _position102.y);
-            if (inputs[3]) {
-              _position102 = calculatePosition(node, inputs[3], idealEdgeLength, 210);
-              inputs[3].setCenter(_position102.x, _position102.y);
-            }
-          }
-          inputs.forEach(function (input) {
-            relativePlacementConstraints.push({ top: node.id, bottom: input.id });
-          });
-        }
-        // process modulators
-        if (modulators.length == 1) {
-          var _position103 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-          modulators[0].setCenter(_position103.x, _position103.y);
-          horizontalAlignments.push([node, modulators[0]]);
-        } else if (modulators.length >= 2) {
-          var _position104 = calculatePosition(node, modulators[0], idealEdgeLength, 180);
-          modulators[0].setCenter(_position104.x, _position104.y);
-          _position104 = calculatePosition(node, modulators[1], idealEdgeLength, 0);
-          modulators[1].setCenter(_position104.x, _position104.y);
-          if (modulators[2]) {
-            if (inputs.length == 1) {
-              _position104 = calculatePosition(node, modulators[2], idealEdgeLength, 225);
-              modulators[2].setCenter(_position104.x, _position104.y);
-            }
-            if (inputs.length == 2) {
-              _position104 = calculatePosition(node, modulators[2], idealEdgeLength, 270);
-              modulators[2].setCenter(_position104.x, _position104.y);
-            }
-          }
-        }
-        // process outputs
-        if (outputs.length == 1) {
-          var _position105 = calculatePosition(node, outputs[0], idealEdgeLength, 90);
-          outputs[0].setCenter(_position105.x, _position105.y);
-        } else if (outputs.length == 2) {
-          var _position106 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-          outputs[0].setCenter(_position106.x, _position106.y);
-          _position106 = calculatePosition(node, outputs[1], idealEdgeLength, 135);
-          outputs[1].setCenter(_position106.x, _position106.y);
-        } else if (outputs.length == 3) {
-          var _position107 = calculatePosition(node, outputs[0], idealEdgeLength, 45);
-          outputs[0].setCenter(_position107.x, _position107.y);
-          _position107 = calculatePosition(node, outputs[1], idealEdgeLength, 90);
-          outputs[1].setCenter(_position107.x, _position107.y);
-          _position107 = calculatePosition(node, outputs[2], idealEdgeLength, 135);
-          outputs[2].setCenter(_position107.x, _position107.y);
-        } else if (outputs.length == 4) {
-          var _position108 = calculatePosition(node, outputs[0], idealEdgeLength, 36);
-          outputs[0].setCenter(_position108.x, _position108.y);
-          _position108 = calculatePosition(node, outputs[1], idealEdgeLength, 72);
-          outputs[1].setCenter(_position108.x, _position108.y);
-          _position108 = calculatePosition(node, outputs[2], idealEdgeLength, 108);
-          outputs[2].setCenter(_position108.x, _position108.y);
-          _position108 = calculatePosition(node, outputs[3], idealEdgeLength, 144);
-          outputs[3].setCenter(_position108.x, _position108.y);
-        }
-      }
-    }
+    var isFirstNode = node.status === 'first';
+    var isLastNode = node.status === 'last';
+    placeInputs(node, inputs, node.direction, idealEdgeLength, isFirstNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
+    placeOutputs(node, outputs, node.direction, idealEdgeLength, isLastNode, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
+    placeModulators(node, modulators, node.direction, idealEdgeLength, horizontalAlignments, verticalAlignments, relativePlacementConstraints);
   });
 
   return { horizontalAlignments: horizontalAlignments, verticalAlignments: verticalAlignments, relativePlacementConstraints: relativePlacementConstraints };
@@ -3044,6 +2307,7 @@ var SBGNPolishingNew = __webpack_require__(10);
 
 var ContinuousLayout = __webpack_require__(13);
 var assign = __webpack_require__(3);
+var glyphMapping = __webpack_require__(17);
 var isFn = function isFn(fn) {
   return typeof fn === 'function';
 };
@@ -3348,7 +2612,7 @@ var Layout = function (_ContinuousLayout) {
         if (this.options.mapType == "PD") {
           SBGNPolishingNew.polish(sbgnLayout);
         }
-        sbgnLayout.repopulateCompounds();
+        //sbgnLayout.repopulateCompounds();
       }
     }
 
@@ -3399,7 +2663,7 @@ var Layout = function (_ContinuousLayout) {
         }
         // Attach id and class to the layout node
         theNode.id = theChild.data("id");
-        theNode.class = theChild.data("class");
+        theNode.class = theChild.data("class") && glyphMapping.isSbgnGlyph(theChild.data("class")) ? theChild.data("class") : theChild.classes() ? glyphMapping.getGlyph(theChild.classes()) : undefined;
 
         // Attach the paddings of cy node to layout node
         theNode.paddingLeft = parseInt(theChild.css('padding'));
@@ -3905,6 +3169,38 @@ module.exports = { tick: tick, multitick: multitick };
 
 /***/ }),
 /* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Mapping between SBGN glyps and Reactome element types
+ */
+var mapping = {};
+
+mapping.isSbgnGlyph = function (glyph) {
+  var sbgnGlyphs = ["unspecified entitiy", "simple chemical", "macromolecule", "nucleic acid feature", "complex", "empty set", "source and sink", "perturbing agent", "simple chemical multimer", "macromolecule multimer", "nucleic acid feature multimer", "complex multimer", "compartment", "process", "omitted process", "uncertain process", "association", "dissociation", "phenotype", "and", "or", "not", "equivalence", "tag", "submap"];
+  return sbgnGlyphs.includes(glyph);
+};
+
+mapping.getGlyph = function (classes) {
+  if (classes.includes("Protein")) return "macromolecule";
+  if (classes.includes("Complex")) return "complex";
+  if (classes.includes("Chemical")) return "simple chemical";
+  if (classes.includes("Compartment")) return "compartment";
+
+  if (classes.includes("dissociation")) return "dissociation";
+  if (classes.includes("association")) return "association";
+  if (classes.includes("transition")) return "process";
+
+  return "unspecified entity";
+};
+
+module.exports = mapping;
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {

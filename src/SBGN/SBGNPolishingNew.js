@@ -1,6 +1,4 @@
 const SBGNConstants = require('./SBGNConstants');
-const SBGNNode = require('../SBGN/SBGNNode');
-const SBGNLayout = require('../SBGN/SBGNLayout');
 
 function SBGNPolishingNew() {
 }
@@ -128,6 +126,30 @@ SBGNPolishingNew.generateConstraints = function (sbgnLayout, mapType, slopeThres
     horizontalAlignments = mergeArrays(horizontalAlignments);
   }
 
+  // remove conflicts between relative and alignment constraints
+  // traverse relative constraints and if both nodes are found in 
+  // opposite alignment constraints, remove that relative constraint
+  for(let i = relativePlacementConstraints.length - 1; i >= 0; i--) {
+    let constraint = relativePlacementConstraints[i];  
+    if (constraint.left) {
+      let left = constraint.left;
+      let right = constraint.right;
+      verticalAlignments.forEach(verticalAlignment => {
+        if(verticalAlignment.includes(left) && verticalAlignment.includes(right)) {
+          relativePlacementConstraints.splice(i, 1);
+        }
+      });
+    } else if (constraint.top) {
+      let top = constraint.top;
+      let bottom = constraint.bottom;
+      horizontalAlignments.forEach(horizontalAlignment => {
+        if(horizontalAlignment.includes(top) && horizontalAlignment.includes(bottom)) {
+          relativePlacementConstraints.splice(i, 1);
+        }
+      });
+    }
+  }
+  
   let alignmentConstraints = { vertical: verticalAlignments.length > 0 ? verticalAlignments : undefined, horizontal: horizontalAlignments.length > 0 ? horizontalAlignments : undefined }
 
   return { relativePlacementConstraint: relativePlacementConstraints, alignmentConstraint: alignmentConstraints }

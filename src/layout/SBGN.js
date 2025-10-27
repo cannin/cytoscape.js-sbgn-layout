@@ -10,10 +10,11 @@ let FDLayoutConstants = require('cose-base').layoutBase.FDLayoutConstants;
 const SBGNLayout = require('../SBGN/SBGNLayout');
 const SBGNNode = require('../SBGN/SBGNNode');
 let SBGNPolishing = require('../SBGN/SBGNPolishing');
-let SBGNPolishingNew = require('../SBGN/SBGNPolishingNew');
+let SBGNPolishingNew = require('../SBGN/SBGNPolishingNew2');
 
 const ContinuousLayout = require('./continuous-base');
 const assign = require('../assign');
+const glyphMapping = require('./elementMapping.js');
 const isFn = fn => typeof fn === 'function';
 
 const optFn = (opt, ele) => {
@@ -322,7 +323,7 @@ class Layout extends ContinuousLayout {
       if (this.options.mapType == "PD") {
         SBGNPolishingNew.polish(sbgnLayout);
       }
-      sbgnLayout.repopulateCompounds();
+      //sbgnLayout.repopulateCompounds();
     }
   }
 
@@ -371,7 +372,7 @@ class Layout extends ContinuousLayout {
       }
       // Attach id and class to the layout node
       theNode.id = theChild.data("id");
-      theNode.class = theChild.data("class");
+      theNode.class = (theChild.data("class") && glyphMapping.isSbgnGlyph(theChild.data("class"))) ? theChild.data("class") : (theChild.classes() ? glyphMapping.getGlyph(theChild.classes()) : undefined);
 
       // Attach the paddings of cy node to layout node
       theNode.paddingLeft = parseInt(theChild.css('padding'));
