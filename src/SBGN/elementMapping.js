@@ -13,7 +13,6 @@ mapping.getGlyph = function(classes) {
   if (classes.includes("Complex")) return "complex";
   if (classes.includes("Chemical")) return "simple chemical";
   if (classes.includes("Compartment")) return "compartment";
-  
   if (classes.includes("dissociation")) return "dissociation";
   if (classes.includes("association")) return "association";
   if (classes.includes("transition")) return "process";

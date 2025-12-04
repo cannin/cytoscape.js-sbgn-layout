@@ -11,10 +11,11 @@ const SBGNLayout = require('../SBGN/SBGNLayout');
 const SBGNNode = require('../SBGN/SBGNNode');
 let SBGNPolishing = require('../SBGN/SBGNPolishing');
 let SBGNPolishingNew = require('../SBGN/SBGNPolishingNew2');
+let sketchLay = require('sketchlay');
 
 const ContinuousLayout = require('./continuous-base');
 const assign = require('../assign');
-const glyphMapping = require('./elementMapping.js');
+const glyphMapping = require('../SBGN/elementMapping.js');
 const isFn = fn => typeof fn === 'function';
 
 const optFn = (opt, ele) => {
@@ -79,6 +80,10 @@ let defaults = {
   // layout event callbacks
   ready: function () { }, // on layoutready
   stop: function () { }, // on layoutstop
+
+  // sketchlay option
+  imageData: undefined,
+  subset: undefined
 };
 
 let getUserOptions = function (options) {
@@ -122,7 +127,7 @@ class Layout extends ContinuousLayout {
     getUserOptions(options);
   }
 
-  prerun() {
+  async prerun() {
     let self = this;
     let state = this.state; // options object combined with current state
 
@@ -143,7 +148,42 @@ class Layout extends ContinuousLayout {
     // First phase of the algorithm - Apply a static layout and construct skeleton
     // If incremental is true, skip over Phase I
     if (state.randomize) {
-      sbgnLayout.runLayout();
+      if (this.options.imageData) {
+        let sketchLayResult = await sketchLay.generateConstraints({cy: this.options.cy, imageData: this.options.imageData, subset: this.options.subset, idealEdgeLength: this.options.idealEdgeLength});
+
+        let constraints = sketchLayResult.constraints;
+        let applyIncremental = sketchLayResult.applyIncremental;
+
+        sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
+        sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
+        
+        graphManager.allNodesToApplyGravitation = undefined;
+        sbgnLayout.initParameters();
+        sbgnLayout.initSpringEmbedder();
+        CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+        CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+        CoSEConstants.TILE = false;
+        sbgnLayout.runLayout();
+
+/*         setTimeout(() => {
+          let constraints = sketchLayResult.constraints;
+          let applyIncremental = sketchLayResult.applyIncremental;
+
+          sbgnLayout.constraints["alignmentConstraint"] = constraints.alignmentConstraint;
+          sbgnLayout.constraints["relativePlacementConstraint"] = constraints.relativePlacementConstraint;
+          
+          graphManager.allNodesToApplyGravitation = undefined;
+          sbgnLayout.initParameters();
+          sbgnLayout.initSpringEmbedder();
+          CoSEConstants.DEFAULT_INCREMENTAL = FDLayoutConstants.DEFAULT_INCREMENTAL = LayoutConstants.DEFAULT_INCREMENTAL = true;
+          CoSEConstants.TREE_REDUCTION_ON_INCREMENTAL = false;
+          CoSEConstants.TILE = false;
+          sbgnLayout.runLayout();
+        }, 2000); */
+
+      }
+
+/*       sbgnLayout.runLayout();
       let graphInfo = sbgnLayout.constructSkeleton();
 
       // Apply an incremental layout to give a shape to reaction blocks
@@ -286,7 +326,7 @@ class Layout extends ContinuousLayout {
       sbgnLayout.runLayout();
 
       let polishingInfo = SBGNPolishing.addPerComponentPolishment(components, directions);
-      sbgnLayout.repopulateCompounds();
+      sbgnLayout.repopulateCompounds(); */
       /*     verticalAlignments.push(polishingInfo.verticalAlignments);
           horizontalAlignments.push(polishingInfo.horizontalAlignments);
           verticalAlignments = sbgnLayout.mergeArrays(verticalAlignments);

@@ -1,0 +1,5997 @@
+{
+  "elements": {
+    "nodes": [
+      {
+        "data": {
+          "id": "72-outer",
+          "displayName": "cytosol",
+          "textX": -1969.0000000000007,
+          "textY": -2827,
+          "width": 3738.928287411532,
+          "height": 2981.8451040747605,
+          "radius": 24
+        },
+        "position": {
+          "x": 2286.5358562942347,
+          "y": 1798.0774479626198
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": false,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Compartment outer"
+      },
+      {
+        "data": {
+          "id": "72-inner",
+          "width": 3635.8590866007,
+          "height": 2898.0279650518764,
+          "radius": 10
+        },
+        "position": {
+          "x": 2324.070456699652,
+          "y": 1824.9860174740618
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": false,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Compartment inner"
+      },
+      {
+        "data": {
+          "id": "76-outer",
+          "displayName": "lysosomal lumen",
+          "textX": -631,
+          "textY": -141,
+          "width": 3040,
+          "height": 2044,
+          "radius": 30
+        },
+        "position": {
+          "x": 2338,
+          "y": 1938
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": false,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Compartment outer"
+      },
+      {
+        "data": {
+          "id": "76-inner",
+          "width": 2996,
+          "height": 2002,
+          "radius": 10
+        },
+        "position": {
+          "x": 2336,
+          "y": 1937
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": false,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Compartment inner hover"
+      },
+      {
+        "data": {
+          "id": "64",
+          "inputs": [
+            {
+              "id": 45,
+              "points": [
+                {
+                  "x": 887,
+                  "y": 1497
+                }
+              ]
+            },
+            {
+              "id": 62,
+              "points": [
+                {
+                  "x": 872,
+                  "y": 1552
+                }
+              ]
+            }
+          ],
+          "output": [
+            {
+              "id": 28
+            }
+          ],
+          "reactomeId": 9626038,
+          "reactionId": 64,
+          "graph": {
+            "dbId": 9626038,
+            "stId": "R-HSA-9626038",
+            "displayName": "EEF1A1 binds GTP",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626034
+            ],
+            "following": [
+              9626067
+            ],
+            "inputs": [
+              29438,
+              9626022
+            ],
+            "outputs": [
+              9626061
+            ],
+            "efs": [],
+            "diagramIds": [
+              64
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 1400,
+          "y": 3056
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "association reaction"
+      },
+      {
+        "data": {
+          "id": "65",
+          "inputs": [
+            {
+              "id": 66,
+              "points": [
+                {
+                  "x": 561,
+                  "y": 440
+                }
+              ]
+            },
+            {
+              "id": 40,
+              "points": [
+                {
+                  "x": 563,
+                  "y": 399
+                }
+              ]
+            }
+          ],
+          "output": [
+            {
+              "id": 26
+            }
+          ],
+          "reactomeId": 9620197,
+          "reactionId": 65,
+          "graph": {
+            "dbId": 9620197,
+            "stId": "R-HSA-9620197",
+            "displayName": "HSPA8:Substrate binds LAMP2a",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9615721,
+              9626276
+            ],
+            "following": [
+              9622840
+            ],
+            "inputs": [
+              9615717,
+              2029007
+            ],
+            "outputs": [
+              9620204
+            ],
+            "efs": [],
+            "diagramIds": [
+              65
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 1230,
+          "y": 838
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "association reaction"
+      },
+      {
+        "data": {
+          "id": "34",
+          "inputs": [
+            {
+              "id": 27,
+              "points": [
+                {
+                  "x": 1035,
+                  "y": 1455
+                }
+              ]
+            },
+            {
+              "id": 69,
+              "points": [
+                {
+                  "x": 1840,
+                  "y": 648
+                }
+              ]
+            }
+          ],
+          "output": [
+            {
+              "id": 70
+            }
+          ],
+          "reactomeId": 9626039,
+          "reactionId": 34,
+          "graph": {
+            "dbId": 9626039,
+            "stId": "R-HSA-9626039",
+            "displayName": "pGFAP binds GFAP in LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626060,
+              9626034
+            ],
+            "following": [
+              9626242
+            ],
+            "inputs": [
+              9626058,
+              9626054
+            ],
+            "outputs": [
+              9626048
+            ],
+            "efs": [],
+            "diagramIds": [
+              34
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 1172,
+          "y": 2592
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "association reaction"
+      },
+      {
+        "data": {
+          "id": "35",
+          "inputs": [
+            {
+              "id": 58
+            }
+          ],
+          "output": [
+            {
+              "id": 67,
+              "points": [
+                {
+                  "x": 861,
+                  "y": 554
+                }
+              ]
+            },
+            {
+              "id": 66,
+              "points": [
+                {
+                  "x": 530,
+                  "y": 482
+                }
+              ]
+            }
+          ],
+          "reactomeId": 9626276,
+          "reactionId": 35,
+          "graph": {
+            "dbId": 9626276,
+            "stId": "R-HSA-9626276",
+            "displayName": "HSP90 dissociates from LAMP2a",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626235
+            ],
+            "following": [
+              9620197,
+              9622831
+            ],
+            "inputs": [
+              9626023
+            ],
+            "outputs": [
+              9622845,
+              2029007
+            ],
+            "efs": [],
+            "diagramIds": [
+              35
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 938,
+          "y": 1150
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "dissociation reaction"
+      },
+      {
+        "data": {
+          "id": "36",
+          "inputs": [
+            {
+              "id": 26
+            }
+          ],
+          "output": [
+            {
+              "id": 54,
+              "points": [
+                {
+                  "x": 864,
+                  "y": 432
+                }
+              ]
+            },
+            {
+              "id": 63,
+              "points": [
+                {
+                  "x": 600,
+                  "y": 261
+                }
+              ]
+            }
+          ],
+          "reactomeId": 9622840,
+          "reactionId": 36,
+          "graph": {
+            "dbId": 9622840,
+            "stId": "R-HSA-9622840",
+            "displayName": "HSPA8 dissociates from LAMP2A-bound substrate",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9620197
+            ],
+            "following": [
+              9626253,
+              9622831,
+              9615721
+            ],
+            "inputs": [
+              9620204
+            ],
+            "outputs": [
+              9622841,
+              264476
+            ],
+            "efs": [],
+            "diagramIds": [
+              36
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 1562,
+          "y": 830
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "dissociation reaction"
+      },
+      {
+        "data": {
+          "id": "38",
+          "inputs": [
+            {
+              "id": 28
+            }
+          ],
+          "output": [
+            {
+              "id": 60
+            }
+          ],
+          "reactomeId": 9626067,
+          "reactionId": 38,
+          "graph": {
+            "dbId": 9626067,
+            "stId": "R-HSA-9626067",
+            "displayName": "EEF1A1:GTP translocates from lysosomal membrane to cytosol",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626038
+            ],
+            "inputs": [
+              9626061
+            ],
+            "outputs": [
+              9626045
+            ],
+            "efs": [],
+            "diagramIds": [
+              38
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 984,
+          "y": 3028
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "transition reaction"
+      },
+      {
+        "data": {
+          "id": "71",
+          "inputs": [
+            {
+              "id": 45,
+              "points": [
+                {
+                  "x": 915,
+                  "y": 1455
+                }
+              ]
+            },
+            {
+              "id": 27,
+              "points": [
+                {
+                  "x": 1019,
+                  "y": 1455
+                }
+              ]
+            }
+          ],
+          "output": [
+            {
+              "id": 33
+            }
+          ],
+          "reactomeId": 9626046,
+          "reactionId": 71,
+          "graph": {
+            "dbId": 9626046,
+            "stId": "R-HSA-9626046",
+            "displayName": "p-GFAP binds EEF1A1",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626034
+            ],
+            "following": [
+              9626034
+            ],
+            "inputs": [
+              9626022,
+              9626054
+            ],
+            "outputs": [
+              9626070
+            ],
+            "efs": [],
+            "diagramIds": [
+              71
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 1654,
+          "y": 2842
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "association reaction"
+      },
+      {
+        "data": {
+          "id": "39",
+          "inputs": [
+            {
+              "id": 61,
+              "points": [
+                {
+                  "x": 1465,
+                  "y": 500
+                }
+              ]
+            },
+            {
+              "id": 32,
+              "points": [
+                {
+                  "x": 1465,
+                  "y": 536
+                }
+              ]
+            }
+          ],
+          "output": [
+            {
+              "id": 59
+            }
+          ],
+          "reactomeId": 9625196,
+          "reactionId": 39,
+          "graph": {
+            "dbId": 9625196,
+            "stId": "R-HSA-9625196",
+            "displayName": "Unfolded substrate in LAMP2a multimeric complex binds HSPA8",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9625197
+            ],
+            "following": [
+              9625188
+            ],
+            "inputs": [
+              9625181,
+              9625182
+            ],
+            "outputs": [
+              9625165
+            ],
+            "efs": [],
+            "diagramIds": [
+              39
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 3032,
+          "y": 1044
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "association reaction"
+      },
+      {
+        "data": {
+          "id": "41",
+          "inputs": [
+            {
+              "id": 43
+            }
+          ],
+          "output": [
+            {
+              "id": 69,
+              "points": [
+                {
+                  "x": 1840,
+                  "y": 600
+                }
+              ]
+            },
+            {
+              "id": 51,
+              "points": [
+                {
+                  "x": 1730,
+                  "y": 600
+                }
+              ]
+            }
+          ],
+          "reactomeId": 9626060,
+          "reactionId": 41,
+          "graph": {
+            "dbId": 9626060,
+            "stId": "R-HSA-9626060",
+            "displayName": "HSPA8:Substrate dissociates from LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9625188
+            ],
+            "following": [
+              9626039
+            ],
+            "inputs": [
+              9625189
+            ],
+            "outputs": [
+              9626058,
+              9626049
+            ],
+            "efs": [],
+            "diagramIds": [
+              41
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 3564,
+          "y": 1104
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "dissociation reaction"
+      },
+      {
+        "data": {
+          "id": "44",
+          "inputs": [
+            {
+              "id": 37,
+              "points": [
+                {
+                  "x": 402,
+                  "y": 1007
+                }
+              ]
+            },
+            {
+              "id": 63,
+              "points": [
+                {
+                  "x": 553,
+                  "y": 261
+                },
+                {
+                  "x": 313,
+                  "y": 339
+                }
+              ]
+            }
+          ],
+          "output": [
+            {
+              "id": 52
+            }
+          ],
+          "reactomeId": 9626253,
+          "reactionId": 44,
+          "graph": {
+            "dbId": 9626253,
+            "stId": "R-HSA-9626253",
+            "displayName": "HSPA8 binds LAMP2a multimers",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9622840,
+              9626235,
+              9626242
+            ],
+            "following": [
+              9626256
+            ],
+            "inputs": [
+              9626026,
+              264476
+            ],
+            "outputs": [
+              9626247
+            ],
+            "efs": [],
+            "diagramIds": [
+              44
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 666,
+          "y": 1746
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "transition reaction"
+      },
+      {
+        "data": {
+          "id": "46",
+          "inputs": [
+            {
+              "id": 57
+            }
+          ],
+          "output": [
+            {
+              "id": 68
+            }
+          ],
+          "reactomeId": 9624158,
+          "reactionId": 46,
+          "graph": {
+            "dbId": 9624158,
+            "stId": "R-HSA-9624158",
+            "displayName": "Substrate:LAMP2a:HSP90 polymerizes",
+            "schemaClass": "Polymerisation",
+            "speciesId": 0,
+            "preceding": [
+              9622831
+            ],
+            "following": [
+              9625197
+            ],
+            "inputs": [
+              9622836
+            ],
+            "outputs": [
+              9624156
+            ],
+            "efs": [],
+            "diagramIds": [
+              46
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 2294,
+          "y": 1014
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "transition reaction"
+      },
+      {
+        "data": {
+          "id": "47",
+          "inputs": [
+            {
+              "id": 52
+            }
+          ],
+          "output": [
+            {
+              "id": 29
+            }
+          ],
+          "reactomeId": 9626256,
+          "reactionId": 47,
+          "graph": {
+            "dbId": 9626256,
+            "stId": "R-HSA-9626256",
+            "displayName": "HSPA8:LAMP2a multimers depolymerizes to monomers",
+            "schemaClass": "Depolymerisation",
+            "speciesId": 0,
+            "preceding": [
+              9626253
+            ],
+            "following": [
+              9626235
+            ],
+            "inputs": [
+              9626247
+            ],
+            "outputs": [
+              9626246
+            ],
+            "efs": [],
+            "diagramIds": [
+              47
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 932,
+          "y": 1652
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "transition reaction"
+      },
+      {
+        "data": {
+          "id": "50",
+          "inputs": [
+            {
+              "id": 54,
+              "points": [
+                {
+                  "x": 948,
+                  "y": 488
+                }
+              ]
+            },
+            {
+              "id": 67,
+              "points": [
+                {
+                  "x": 957,
+                  "y": 524
+                }
+              ]
+            }
+          ],
+          "output": [
+            {
+              "id": 57
+            }
+          ],
+          "reactomeId": 9622831,
+          "reactionId": 50,
+          "graph": {
+            "dbId": 9622831,
+            "stId": "R-HSA-9622831",
+            "displayName": "Substrate:LAMP2a binds HSP90",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9622840,
+              9626276
+            ],
+            "following": [
+              9624158
+            ],
+            "inputs": [
+              9622845,
+              9622841
+            ],
+            "outputs": [
+              9622836
+            ],
+            "efs": [],
+            "diagramIds": [
+              50
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 2012,
+          "y": 1024
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "association reaction"
+      },
+      {
+        "data": {
+          "id": "53",
+          "inputs": [
+            {
+              "id": 59
+            }
+          ],
+          "output": [
+            {
+              "id": 43
+            }
+          ],
+          "reactomeId": 9625188,
+          "reactionId": 53,
+          "graph": {
+            "dbId": 9625188,
+            "stId": "R-HSA-9625188",
+            "displayName": "HSPA8 transports unfolded substrate to lysosomal lumen for degradation",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9625196
+            ],
+            "following": [
+              9626060
+            ],
+            "inputs": [
+              9625165
+            ],
+            "outputs": [
+              9625189
+            ],
+            "efs": [],
+            "diagramIds": [
+              53
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 3386,
+          "y": 1058
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "transition reaction"
+      },
+      {
+        "data": {
+          "id": "55",
+          "inputs": [
+            {
+              "id": 70
+            }
+          ],
+          "output": [
+            {
+              "id": 37,
+              "points": [
+                {
+                  "x": 435,
+                  "y": 1063
+                }
+              ]
+            },
+            {
+              "id": 42,
+              "points": [
+                {
+                  "x": 460,
+                  "y": 1150
+                }
+              ]
+            }
+          ],
+          "reactomeId": 9626242,
+          "reactionId": 55,
+          "graph": {
+            "dbId": 9626242,
+            "stId": "R-HSA-9626242",
+            "displayName": "p-GFAP:GFAP dissociates from LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626039
+            ],
+            "following": [
+              9626253
+            ],
+            "inputs": [
+              9626048
+            ],
+            "outputs": [
+              9626026,
+              9626245
+            ],
+            "efs": [],
+            "diagramIds": [
+              55
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 998,
+          "y": 2446
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "dissociation reaction"
+      },
+      {
+        "data": {
+          "id": "56",
+          "inputs": [
+            {
+              "id": 33
+            }
+          ],
+          "output": [
+            {
+              "id": 45,
+              "points": [
+                {
+                  "x": 903,
+                  "y": 1455
+                }
+              ]
+            },
+            {
+              "id": 27,
+              "points": [
+                {
+                  "x": 1011,
+                  "y": 1461
+                }
+              ]
+            }
+          ],
+          "reactomeId": 9626034,
+          "reactionId": 56,
+          "graph": {
+            "dbId": 9626034,
+            "stId": "R-HSA-9626034",
+            "displayName": "EEF1A1 dissociates from p-GFAP",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626046
+            ],
+            "following": [
+              9626039,
+              9626038,
+              9626046
+            ],
+            "inputs": [
+              9626070
+            ],
+            "outputs": [
+              9626022,
+              9626054
+            ],
+            "efs": [],
+            "diagramIds": [
+              56
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 1710,
+          "y": 2862
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "dissociation reaction"
+      },
+      {
+        "data": {
+          "id": "25",
+          "inputs": [
+            {
+              "id": 29
+            }
+          ],
+          "output": [
+            {
+              "id": 58,
+              "points": [
+                {
+                  "x": 384,
+                  "y": 635
+                }
+              ]
+            },
+            {
+              "id": 63,
+              "points": [
+                {
+                  "x": 567,
+                  "y": 261
+                },
+                {
+                  "x": 333,
+                  "y": 396
+                }
+              ]
+            }
+          ],
+          "reactomeId": 9626235,
+          "reactionId": 25,
+          "graph": {
+            "dbId": 9626235,
+            "stId": "R-HSA-9626235",
+            "displayName": "HSPA8 dissociates from LAMP2a",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626256
+            ],
+            "following": [
+              9626253,
+              9615721,
+              9626276
+            ],
+            "inputs": [
+              9626246
+            ],
+            "outputs": [
+              264476,
+              9626023
+            ],
+            "efs": [],
+            "diagramIds": [
+              25
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 666,
+          "y": 1388
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "dissociation reaction"
+      },
+      {
+        "data": {
+          "id": "30",
+          "inputs": [
+            {
+              "id": 48,
+              "points": [
+                {
+                  "x": 1274,
+                  "y": 528
+                }
+              ]
+            },
+            {
+              "id": 68,
+              "points": [
+                {
+                  "x": 1272,
+                  "y": 492
+                }
+              ]
+            }
+          ],
+          "output": [
+            {
+              "id": 61
+            }
+          ],
+          "reactomeId": 9625197,
+          "reactionId": 30,
+          "graph": {
+            "dbId": 9625197,
+            "stId": "R-HSA-9625197",
+            "displayName": "GFAP binds LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9624158
+            ],
+            "following": [
+              9625196
+            ],
+            "inputs": [
+              9624156,
+              9625195
+            ],
+            "outputs": [
+              9625181
+            ],
+            "efs": [],
+            "diagramIds": [
+              30
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 2684,
+          "y": 1030
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "association reaction"
+      },
+      {
+        "data": {
+          "id": "31",
+          "inputs": [
+            {
+              "id": 49,
+              "points": [
+                {
+                  "x": 463,
+                  "y": 267
+                }
+              ]
+            },
+            {
+              "id": 63,
+              "points": [
+                {
+                  "x": 574,
+                  "y": 261
+                }
+              ]
+            }
+          ],
+          "output": [
+            {
+              "id": 40
+            }
+          ],
+          "reactomeId": 9615721,
+          "reactionId": 31,
+          "graph": {
+            "dbId": 9615721,
+            "stId": "R-HSA-9615721",
+            "displayName": "HSPA8 binds substrate",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9622840,
+              9626235
+            ],
+            "following": [
+              9620197
+            ],
+            "inputs": [
+              264476,
+              9615715
+            ],
+            "outputs": [
+              9615717
+            ],
+            "efs": [],
+            "diagramIds": [
+              31
+            ],
+            "entityFunctionalStatus": []
+          }
+        },
+        "position": {
+          "x": 1055.0761226571847,
+          "y": 630.1014968762462
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "association reaction"
+      },
+      {
+        "data": {
+          "id": "66",
+          "reactomeId": 2029007,
+          "displayName": "LAMP2",
+          "height": 72,
+          "width": 232,
+          "graph": {
+            "dbId": 2029007,
+            "stId": "R-HSA-2029007",
+            "displayName": "LAMP2 [lysosomal membrane]",
+            "schemaClass": "EntityWithAccessionedSequence",
+            "speciesId": 48887,
+            "diagramIds": [
+              66
+            ],
+            "identifier": "P13473",
+            "referenceType": "ReferenceGeneProduct",
+            "geneNames": [
+              "LAMP2"
+            ],
+            "parents": [
+              9620204,
+              9622841,
+              9625163,
+              9626023
+            ],
+            "children": []
+          },
+          "acc": "P13473",
+          "html": "<video loop id=\"video-66\" width=\"242\" height=\"82\">\n                <source src=\"https://s3.amazonaws.com/download.reactome.org/structures/P13473.mov\" type=\"video/quicktime\">\n                <source src=\"https://s3.amazonaws.com/download.reactome.org/structures/P13473.webm\" type=\"video/webm\">\n              </video>",
+          "isBackground": false
+        },
+        "position": {
+          "x": 1078,
+          "y": 922
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Protein PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "67",
+          "reactomeId": 9622845,
+          "displayName": "HSP90AA1,​ HSP90AB1",
+          "height": 100,
+          "width": 224,
+          "graph": {
+            "dbId": 9622845,
+            "stId": "R-HSA-9622845",
+            "displayName": "HSP90AA1, HSP90AB1 [lysosomal lumen]",
+            "schemaClass": "DefinedSet",
+            "speciesId": 48887,
+            "diagramIds": [
+              67
+            ],
+            "parents": [
+              9622836,
+              9625175,
+              9626023
+            ],
+            "children": [
+              9622846,
+              9622850
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 1846,
+          "y": 1110
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "EntitySet PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "68",
+          "reactomeId": 9624156,
+          "displayName": "LAMP2a multimer complex",
+          "height": 100,
+          "width": 252,
+          "graph": {
+            "dbId": 9622836,
+            "stId": "R-HSA-9622836",
+            "displayName": "Substrate:LAMP2a:HSP90 [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              57
+            ],
+            "parents": [
+              9624156
+            ],
+            "children": [
+              9622845,
+              9622841
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 2484,
+          "y": 928
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "GenomeEncodedEntity PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "69",
+          "reactomeId": 9626058,
+          "displayName": "LAMP2a multimer complex:​GFAP",
+          "height": 128,
+          "width": 228,
+          "graph": {
+            "dbId": 9626058,
+            "stId": "R-HSA-9626058",
+            "displayName": "LAMP2a multimer complex:GFAP [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              69
+            ],
+            "parents": [
+              9626048
+            ],
+            "children": [
+              9625195,
+              9626026
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 3800,
+          "y": 1234
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "70",
+          "reactomeId": 9626048,
+          "displayName": "p-​GFAP:​GFAP:​LAMP2a multimer",
+          "height": 128,
+          "width": 228,
+          "graph": {
+            "dbId": 9626048,
+            "stId": "R-HSA-9626048",
+            "displayName": "p-GFAP:GFAP:LAMP2a multimer [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              70
+            ],
+            "parents": [],
+            "children": [
+              9626058,
+              9626054
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 836,
+          "y": 2596
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "26",
+          "reactomeId": 9620204,
+          "displayName": "HSPA8:​Substrate:​LAMP2a",
+          "height": 100,
+          "width": 246,
+          "graph": {
+            "dbId": 9620204,
+            "stId": "R-HSA-9620204",
+            "displayName": "HSPA8:Substrate:LAMP2a [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              26
+            ],
+            "parents": [],
+            "children": [
+              9615717,
+              2029007
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 1506,
+          "y": 916
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "27",
+          "reactomeId": 9626054,
+          "displayName": "p-​GFAP",
+          "height": 72,
+          "width": 244,
+          "graph": {
+            "dbId": 9626054,
+            "stId": "R-HSA-9626054",
+            "displayName": "p-GFAP [lysosomal membrane]",
+            "schemaClass": "EntityWithAccessionedSequence",
+            "speciesId": 48887,
+            "diagramIds": [
+              27
+            ],
+            "identifier": "P14136",
+            "referenceType": "ReferenceGeneProduct",
+            "geneNames": [
+              "GFAP"
+            ],
+            "parents": [
+              9626245,
+              9626048,
+              9626070
+            ],
+            "children": []
+          },
+          "acc": "P14136",
+          "html": "<video loop id=\"video-27\" width=\"254\" height=\"82\">\n                <source src=\"https://s3.amazonaws.com/download.reactome.org/structures/P14136.mov\" type=\"video/quicktime\">\n                <source src=\"https://s3.amazonaws.com/download.reactome.org/structures/P14136.webm\" type=\"video/webm\">\n              </video>",
+          "isBackground": false
+        },
+        "position": {
+          "x": 2150,
+          "y": 2952
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Protein PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "27-9613532",
+          "reactomeId": 9613532,
+          "nodeId": 27,
+          "nodeReactomeId": 9626054,
+          "displayName": "P",
+          "height": 24,
+          "width": 24,
+          "isBackground": false
+        },
+        "position": {
+          "x": 2060,
+          "y": 2916
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Modification"
+      },
+      {
+        "data": {
+          "id": "28",
+          "reactomeId": 9626061,
+          "displayName": "EEF1A1:​GTP",
+          "height": 100,
+          "width": 170,
+          "graph": {
+            "dbId": 9626061,
+            "stId": "R-HSA-9626061",
+            "displayName": "EEF1A1:GTP [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              28
+            ],
+            "parents": [],
+            "children": [
+              29438,
+              9626022
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 1164,
+          "y": 2952
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "29",
+          "reactomeId": 9626246,
+          "displayName": "HSPA8:​LAMP2a multimers",
+          "height": 72,
+          "width": 234,
+          "graph": {
+            "dbId": 9626246,
+            "stId": "R-HSA-9626246",
+            "displayName": "HSPA8:LAMP2a multimers [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              29
+            ],
+            "parents": [
+              9626247
+            ],
+            "children": [
+              264476,
+              9626023
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 852,
+          "y": 1520
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "32",
+          "reactomeId": 9625182,
+          "displayName": "HSPA8",
+          "height": 72,
+          "width": 230,
+          "graph": {
+            "dbId": 9625182,
+            "stId": "R-HSA-9625182",
+            "displayName": "HSPA8 [lysosomal lumen]",
+            "schemaClass": "EntityWithAccessionedSequence",
+            "speciesId": 48887,
+            "diagramIds": [
+              32
+            ],
+            "identifier": "P11142",
+            "referenceType": "ReferenceGeneProduct",
+            "geneNames": [
+              "HSPA8",
+              "HSC70",
+              "HSP73",
+              "HSPA10"
+            ],
+            "parents": [
+              9625165,
+              9626049,
+              9625189
+            ],
+            "children": []
+          },
+          "acc": "P11142",
+          "html": "<video loop id=\"video-32\" width=\"240\" height=\"82\">\n                <source src=\"https://s3.amazonaws.com/download.reactome.org/structures/P11142.mov\" type=\"video/quicktime\">\n                <source src=\"https://s3.amazonaws.com/download.reactome.org/structures/P11142.webm\" type=\"video/webm\">\n              </video>",
+          "isBackground": false
+        },
+        "position": {
+          "x": 2892,
+          "y": 1114
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Protein PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "33",
+          "reactomeId": 9626070,
+          "displayName": "p-​GFAP:​EEF1A1",
+          "height": 100,
+          "width": 212,
+          "graph": {
+            "dbId": 9626070,
+            "stId": "R-HSA-9626070",
+            "displayName": "p-GFAP:EEF1A1 [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              33
+            ],
+            "parents": [],
+            "children": [
+              9626054,
+              9626022
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 1508,
+          "y": 2950
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "37",
+          "reactomeId": 9626026,
+          "displayName": "LAMP2a multimer complex",
+          "height": 100,
+          "width": 252,
+          "graph": {
+            "dbId": 9626023,
+            "stId": "R-HSA-9626023",
+            "displayName": "LAMP2a:HSP90 [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              58
+            ],
+            "parents": [
+              9626026,
+              9626246
+            ],
+            "children": [
+              9622845,
+              2029007
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 840,
+          "y": 2070
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "GenomeEncodedEntity PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "40",
+          "reactomeId": 9615717,
+          "displayName": "HSPA8 bound autophagic substrates",
+          "height": 100,
+          "width": 240,
+          "graph": {
+            "dbId": 9615717,
+            "stId": "R-HSA-9615717",
+            "displayName": "HSPA8 bound autophagic substrates [cytosol]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              40
+            ],
+            "parents": [
+              9620204
+            ],
+            "children": [
+              264476,
+              9615715
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 1066,
+          "y": 742
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "42",
+          "reactomeId": 9626245,
+          "displayName": "p-​GFAP:​GFAP",
+          "height": 100,
+          "width": 184,
+          "graph": {
+            "dbId": 9626245,
+            "stId": "R-HSA-9626245",
+            "displayName": "p-GFAP:GFAP [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              42
+            ],
+            "parents": [],
+            "children": [
+              9625195,
+              9626054
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 822,
+          "y": 2268
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "43",
+          "reactomeId": 9625189,
+          "displayName": "HSPA8:​LAMP2a multimeric complex",
+          "height": 100,
+          "width": 252,
+          "graph": {
+            "dbId": 9625189,
+            "stId": "R-HSA-9625189",
+            "displayName": "HSPA8:LAMP2a multimeric complex [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              43
+            ],
+            "parents": [],
+            "children": [
+              9625182,
+              9625169
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 3564,
+          "y": 936
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "45",
+          "reactomeId": 9626022,
+          "displayName": "EEF1A1",
+          "height": 72,
+          "width": 242,
+          "graph": {
+            "dbId": 9626022,
+            "stId": "R-HSA-9626022",
+            "displayName": "EEF1A1 [lysosomal membrane]",
+            "schemaClass": "EntityWithAccessionedSequence",
+            "speciesId": 48887,
+            "diagramIds": [
+              45
+            ],
+            "identifier": "P68104",
+            "referenceType": "ReferenceGeneProduct",
+            "geneNames": [
+              "EEF1A1",
+              "EEF1A",
+              "EF1A",
+              "LENG7"
+            ],
+            "parents": [
+              9626061,
+              9626070
+            ],
+            "children": []
+          },
+          "acc": "P68104",
+          "html": "<video loop id=\"video-45\" width=\"252\" height=\"82\">\n                <source src=\"https://s3.amazonaws.com/download.reactome.org/structures/P68104.mov\" type=\"video/quicktime\">\n                <source src=\"https://s3.amazonaws.com/download.reactome.org/structures/P68104.webm\" type=\"video/webm\">\n              </video>",
+          "isBackground": false
+        },
+        "position": {
+          "x": 1838,
+          "y": 2952
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Protein PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "48",
+          "reactomeId": 9625195,
+          "displayName": "GFAP",
+          "height": 72,
+          "width": 214,
+          "graph": {
+            "dbId": 9625195,
+            "stId": "R-HSA-9625195",
+            "displayName": "GFAP [lysosomal membrane]",
+            "schemaClass": "EntityWithAccessionedSequence",
+            "speciesId": 48887,
+            "diagramIds": [
+              48
+            ],
+            "identifier": "P14136",
+            "referenceType": "ReferenceGeneProduct",
+            "geneNames": [
+              "GFAP"
+            ],
+            "parents": [
+              9625181,
+              9625169,
+              9626245,
+              9626058
+            ],
+            "children": []
+          },
+          "acc": "P14136",
+          "html": "<video loop id=\"video-48\" width=\"224\" height=\"82\">\n                <source src=\"https://s3.amazonaws.com/download.reactome.org/structures/P14136.mov\" type=\"video/quicktime\">\n                <source src=\"https://s3.amazonaws.com/download.reactome.org/structures/P14136.webm\" type=\"video/webm\">\n              </video>",
+          "isBackground": false
+        },
+        "position": {
+          "x": 2482,
+          "y": 1098
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Protein PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "49",
+          "reactomeId": 9615715,
+          "displayName": "Substrates for chaperone mediated autophagy",
+          "height": 103.25814042827426,
+          "width": 180.22822015135068,
+          "graph": {
+            "dbId": 9615715,
+            "stId": "R-HSA-9615715",
+            "displayName": "Substrates for chaperone mediated autophagy [cytosol]",
+            "schemaClass": "DefinedSet",
+            "speciesId": 48887,
+            "diagramIds": [
+              49
+            ],
+            "parents": [
+              9615717,
+              9622841
+            ],
+            "children": [
+              9646686,
+              1008196,
+              9613669,
+              9615716
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 692.5959102827858,
+          "y": 503.1257100609733
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "EntitySet PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "51",
+          "reactomeId": 9626049,
+          "displayName": "HSPA8:​Substrates for CMA",
+          "height": 100,
+          "width": 270,
+          "graph": {
+            "dbId": 9626049,
+            "stId": "R-HSA-9626049",
+            "displayName": "HSPA8:Substrates for CMA [lysosomal lumen]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              51
+            ],
+            "parents": [],
+            "children": [
+              9625182,
+              9625158
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 3330,
+          "y": 1256
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "52",
+          "reactomeId": 9626247,
+          "displayName": "HSPA8:​LAMP2a multimers",
+          "height": 72,
+          "width": 234,
+          "graph": {
+            "dbId": 9626246,
+            "stId": "R-HSA-9626246",
+            "displayName": "HSPA8:LAMP2a multimers [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              29
+            ],
+            "parents": [
+              9626247
+            ],
+            "children": [
+              264476,
+              9626023
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 864,
+          "y": 1754
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "GenomeEncodedEntity PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "54",
+          "reactomeId": 9622841,
+          "displayName": "Substrate:​LAMP2a",
+          "height": 100,
+          "width": 234,
+          "graph": {
+            "dbId": 9622841,
+            "stId": "R-HSA-9622841",
+            "displayName": "Substrate:LAMP2a [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              54
+            ],
+            "parents": [
+              9622836
+            ],
+            "children": [
+              9615715,
+              2029007
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 1834,
+          "y": 920
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "57",
+          "reactomeId": 9622836,
+          "displayName": "Substrate:​LAMP2a:​HSP90",
+          "height": 100,
+          "width": 234,
+          "graph": {
+            "dbId": 9622836,
+            "stId": "R-HSA-9622836",
+            "displayName": "Substrate:LAMP2a:HSP90 [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              57
+            ],
+            "parents": [
+              9624156
+            ],
+            "children": [
+              9622845,
+              9622841
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 2146,
+          "y": 922
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "58",
+          "reactomeId": 9626023,
+          "displayName": "LAMP2a:​HSP90",
+          "height": 72,
+          "width": 224,
+          "graph": {
+            "dbId": 9626023,
+            "stId": "R-HSA-9626023",
+            "displayName": "LAMP2a:HSP90 [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              58
+            ],
+            "parents": [
+              9626026,
+              9626246
+            ],
+            "children": [
+              9622845,
+              2029007
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 852,
+          "y": 1228
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "59",
+          "reactomeId": 9625165,
+          "displayName": "HSPA8:​LAMP2a multimeric complex",
+          "height": 128,
+          "width": 252,
+          "graph": {
+            "dbId": 9625165,
+            "stId": "R-HSA-9625165",
+            "displayName": "HSPA8:LAMP2a multimeric complex [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              59
+            ],
+            "parents": [],
+            "children": [
+              9625181,
+              9625182
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 3206,
+          "y": 938
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "60",
+          "reactomeId": 9626045,
+          "displayName": "EEF1A1:​GTP",
+          "height": 72,
+          "width": 170,
+          "graph": {
+            "dbId": 9626045,
+            "stId": "R-HSA-9626045",
+            "displayName": "EEF1A1:GTP [cytosol]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              60
+            ],
+            "parents": [],
+            "children": [
+              29438,
+              156905
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 804,
+          "y": 3122
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "61",
+          "reactomeId": 9625181,
+          "displayName": "LAMP2a multimer complex:​GFAP",
+          "height": 128,
+          "width": 228,
+          "graph": {
+            "dbId": 9625181,
+            "stId": "R-HSA-9625181",
+            "displayName": "LAMP2a multimer complex:GFAP [lysosomal membrane]",
+            "schemaClass": "Complex",
+            "speciesId": 48887,
+            "diagramIds": [
+              61
+            ],
+            "parents": [
+              9625165
+            ],
+            "children": [
+              9624156,
+              9625195
+            ]
+          },
+          "isBackground": false
+        },
+        "position": {
+          "x": 2878,
+          "y": 930
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Complex PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "62",
+          "reactomeId": 29438,
+          "displayName": "GTP",
+          "height": 60,
+          "width": 184,
+          "graph": {
+            "dbId": 29438,
+            "stId": "R-ALL-29438",
+            "displayName": "GTP [cytosol]",
+            "schemaClass": "SimpleEntity",
+            "speciesId": 0,
+            "diagramIds": [
+              62
+            ],
+            "identifier": "37565",
+            "referenceType": "ReferenceMolecule",
+            "parents": [
+              9626061,
+              9626045
+            ],
+            "children": []
+          },
+          "acc": "37565",
+          "isBackground": false
+        },
+        "position": {
+          "x": 1796,
+          "y": 3140
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Molecule PhysicalEntity"
+      },
+      {
+        "data": {
+          "id": "63",
+          "reactomeId": 264476,
+          "displayName": "HSPA8",
+          "height": 44,
+          "width": 196,
+          "graph": {
+            "dbId": 264476,
+            "stId": "R-HSA-264476",
+            "displayName": "HSPA8 [cytosol]",
+            "schemaClass": "EntityWithAccessionedSequence",
+            "speciesId": 48887,
+            "diagramIds": [
+              63
+            ],
+            "identifier": "P11142",
+            "referenceType": "ReferenceGeneProduct",
+            "geneNames": [
+              "HSPA8",
+              "HSC70",
+              "HSP73",
+              "HSPA10"
+            ],
+            "parents": [
+              9615717,
+              9626246
+            ],
+            "children": []
+          },
+          "acc": "P11142",
+          "html": "<video loop id=\"video-63\" width=\"206\" height=\"54\">\n                <source src=\"https://s3.amazonaws.com/download.reactome.org/structures/P11142.mov\" type=\"video/quicktime\">\n                <source src=\"https://s3.amazonaws.com/download.reactome.org/structures/P11142.webm\" type=\"video/webm\">\n              </video>",
+          "isBackground": false
+        },
+        "position": {
+          "x": 1126.3791792202137,
+          "y": 460.7509272282914
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "Protein PhysicalEntity"
+      }
+    ],
+    "edges": [
+      {
+        "data": {
+          "id": "49 --- 31",
+          "graph": {
+            "dbId": 9615721,
+            "stId": "R-HSA-9615721",
+            "displayName": "HSPA8 binds substrate",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9622840,
+              9626235
+            ],
+            "following": [
+              9620197
+            ],
+            "inputs": [
+              264476,
+              9615715
+            ],
+            "outputs": [
+              9615717
+            ],
+            "efs": [],
+            "diagramIds": [
+              31
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "49",
+          "target": "31",
+          "reactomeId": 9615721,
+          "reactionId": 31,
+          "curveStyle": "round-segments",
+          "weights": "0.2786627086642567 0.9063040955137752",
+          "distances": "-34.145813663990474 -55.58865370695476",
+          "sourceEndpoint": "93.1141100756754 3.5092052544819126",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "35 --> 66",
+          "graph": {
+            "dbId": 9626276,
+            "stId": "R-HSA-9626276",
+            "displayName": "HSP90 dissociates from LAMP2a",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626235
+            ],
+            "following": [
+              9620197,
+              9622831
+            ],
+            "inputs": [
+              9626023
+            ],
+            "outputs": [
+              9622845,
+              2029007
+            ],
+            "efs": [],
+            "diagramIds": [
+              35
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "35",
+          "target": "66",
+          "reactomeId": 9626276,
+          "reactionId": 35,
+          "curveStyle": "round-segments",
+          "weights": "0.28237475375164567",
+          "distances": "21.017968959931615",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-18.45161290322585 39"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "35 --> 67",
+          "graph": {
+            "dbId": 9626276,
+            "stId": "R-HSA-9626276",
+            "displayName": "HSP90 dissociates from LAMP2a",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626235
+            ],
+            "following": [
+              9620197,
+              9622831
+            ],
+            "inputs": [
+              9626023
+            ],
+            "outputs": [
+              9622845,
+              2029007
+            ],
+            "efs": [],
+            "diagramIds": [
+              35
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "35",
+          "target": "67",
+          "reactomeId": 9626276,
+          "reactionId": 35,
+          "curveStyle": "round-segments",
+          "weights": "0.06808769077901876",
+          "distances": "-39.30878133134532",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-115 -0.26869158878503185"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "45 --- 64",
+          "graph": {
+            "dbId": 9626038,
+            "stId": "R-HSA-9626038",
+            "displayName": "EEF1A1 binds GTP",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626034
+            ],
+            "following": [
+              9626067
+            ],
+            "inputs": [
+              29438,
+              9626022
+            ],
+            "outputs": [
+              9626061
+            ],
+            "efs": [],
+            "diagramIds": [
+              64
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "45",
+          "target": "64",
+          "reactomeId": 9626038,
+          "reactionId": 64,
+          "curveStyle": "round-segments",
+          "weights": "0.33549568871792146",
+          "distances": "-45.88373020037149",
+          "sourceEndpoint": "-67.69811320754707 39",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "46 --> 68",
+          "graph": {
+            "dbId": 9624158,
+            "stId": "R-HSA-9624158",
+            "displayName": "Substrate:LAMP2a:HSP90 polymerizes",
+            "schemaClass": "Polymerisation",
+            "speciesId": 0,
+            "preceding": [
+              9622831
+            ],
+            "following": [
+              9625197
+            ],
+            "inputs": [
+              9622836
+            ],
+            "outputs": [
+              9624156
+            ],
+            "efs": [],
+            "diagramIds": [
+              46
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "46",
+          "target": "68",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-112 56",
+          "reactomeId": 9624158,
+          "reactionId": 46
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "32 --- 39",
+          "graph": {
+            "dbId": 9625196,
+            "stId": "R-HSA-9625196",
+            "displayName": "Unfolded substrate in LAMP2a multimeric complex binds HSPA8",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9625197
+            ],
+            "following": [
+              9625188
+            ],
+            "inputs": [
+              9625181,
+              9625182
+            ],
+            "outputs": [
+              9625165
+            ],
+            "efs": [],
+            "diagramIds": [
+              39
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "32",
+          "target": "39",
+          "reactomeId": 9625196,
+          "reactionId": 39,
+          "curveStyle": "round-segments",
+          "weights": "0.42958688197222106",
+          "distances": "-20.648896132974475",
+          "sourceEndpoint": "42.25 -39",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "67 --- 50",
+          "graph": {
+            "dbId": 9622831,
+            "stId": "R-HSA-9622831",
+            "displayName": "Substrate:LAMP2a binds HSP90",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9622840,
+              9626276
+            ],
+            "following": [
+              9624158
+            ],
+            "inputs": [
+              9622845,
+              9622841
+            ],
+            "outputs": [
+              9622836
+            ],
+            "efs": [],
+            "diagramIds": [
+              50
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "67",
+          "target": "50",
+          "reactomeId": 9622831,
+          "reactionId": 50,
+          "curveStyle": "round-segments",
+          "weights": "0.5571706498975498",
+          "distances": "-15.524134163435688",
+          "sourceEndpoint": "73.95348837209303 -53",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "41 --> 69",
+          "graph": {
+            "dbId": 9626060,
+            "stId": "R-HSA-9626060",
+            "displayName": "HSPA8:Substrate dissociates from LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9625188
+            ],
+            "following": [
+              9626039
+            ],
+            "inputs": [
+              9625189
+            ],
+            "outputs": [
+              9626058,
+              9626049
+            ],
+            "efs": [],
+            "diagramIds": [
+              41
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "41",
+          "target": "69",
+          "reactomeId": 9626060,
+          "reactionId": 41,
+          "curveStyle": "round-segments",
+          "weights": "0.25476959759392515",
+          "distances": "48.19813323557716",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-117 -33.71186440677957"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "34 --> 70",
+          "graph": {
+            "dbId": 9626039,
+            "stId": "R-HSA-9626039",
+            "displayName": "pGFAP binds GFAP in LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626060,
+              9626034
+            ],
+            "following": [
+              9626242
+            ],
+            "inputs": [
+              9626058,
+              9626054
+            ],
+            "outputs": [
+              9626048
+            ],
+            "efs": [],
+            "diagramIds": [
+              34
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "34",
+          "target": "70",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "120 -2",
+          "reactomeId": 9626039,
+          "reactionId": 34
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "70 --- 55",
+          "graph": {
+            "dbId": 9626242,
+            "stId": "R-HSA-9626242",
+            "displayName": "p-GFAP:GFAP dissociates from LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626039
+            ],
+            "following": [
+              9626253
+            ],
+            "inputs": [
+              9626048
+            ],
+            "outputs": [
+              9626026,
+              9626245
+            ],
+            "efs": [],
+            "diagramIds": [
+              55
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "70",
+          "target": "55",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "68 -70",
+          "targetEndpoint": "0 0",
+          "reactomeId": 9626242,
+          "reactionId": 55
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "65 --> 26",
+          "graph": {
+            "dbId": 9620197,
+            "stId": "R-HSA-9620197",
+            "displayName": "HSPA8:Substrate binds LAMP2a",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9615721,
+              9626276
+            ],
+            "following": [
+              9622840
+            ],
+            "inputs": [
+              9615717,
+              2029007
+            ],
+            "outputs": [
+              9620204
+            ],
+            "efs": [],
+            "diagramIds": [
+              65
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "65",
+          "target": "26",
+          "reactomeId": 9620197,
+          "reactionId": 65,
+          "curveStyle": "round-segments",
+          "weights": "0.3426730107944363",
+          "distances": "-11.8468819764977",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-126 -44.270270270270316"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "26 --- 36",
+          "graph": {
+            "dbId": 9622840,
+            "stId": "R-HSA-9622840",
+            "displayName": "HSPA8 dissociates from LAMP2A-bound substrate",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9620197
+            ],
+            "following": [
+              9626253,
+              9622831,
+              9615721
+            ],
+            "inputs": [
+              9620204
+            ],
+            "outputs": [
+              9622841,
+              264476
+            ],
+            "efs": [],
+            "diagramIds": [
+              36
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "26",
+          "target": "36",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "34 -56",
+          "targetEndpoint": "0 0",
+          "reactomeId": 9622840,
+          "reactionId": 36
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "63 --- 44",
+          "graph": {
+            "dbId": 9626253,
+            "stId": "R-HSA-9626253",
+            "displayName": "HSPA8 binds LAMP2a multimers",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9622840,
+              9626235,
+              9626242
+            ],
+            "following": [
+              9626256
+            ],
+            "inputs": [
+              9626026,
+              264476
+            ],
+            "outputs": [
+              9626247
+            ],
+            "efs": [],
+            "diagramIds": [
+              44
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "63",
+          "target": "44",
+          "reactomeId": 9626253,
+          "reactionId": 44,
+          "curveStyle": "round-segments",
+          "weights": "0.24030051884320922 1.0119656117824556",
+          "distances": "363.2488526914199 49.5315494244046",
+          "sourceEndpoint": "-57.58127904025923 25",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "27 --- 71",
+          "graph": {
+            "dbId": 9626046,
+            "stId": "R-HSA-9626046",
+            "displayName": "p-GFAP binds EEF1A1",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626034
+            ],
+            "following": [
+              9626034
+            ],
+            "inputs": [
+              9626022,
+              9626054
+            ],
+            "outputs": [
+              9626070
+            ],
+            "efs": [],
+            "diagramIds": [
+              71
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "27",
+          "target": "71",
+          "reactomeId": 9626046,
+          "reactionId": 71,
+          "curveStyle": "round-segments",
+          "weights": "0.5779932930778677",
+          "distances": "28.45634502141649",
+          "sourceEndpoint": "-119.88888888888891 -39",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "56 --> 27",
+          "graph": {
+            "dbId": 9626034,
+            "stId": "R-HSA-9626034",
+            "displayName": "EEF1A1 dissociates from p-GFAP",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626046
+            ],
+            "following": [
+              9626039,
+              9626038,
+              9626046
+            ],
+            "inputs": [
+              9626070
+            ],
+            "outputs": [
+              9626022,
+              9626054
+            ],
+            "efs": [],
+            "diagramIds": [
+              56
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "56",
+          "target": "27",
+          "reactomeId": 9626034,
+          "reactionId": 56,
+          "curveStyle": "round-segments",
+          "weights": "0.15296490729007733",
+          "distances": "-9.529045607052277",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-125 -28.84615384615381"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "64 --> 28",
+          "graph": {
+            "dbId": 9626038,
+            "stId": "R-HSA-9626038",
+            "displayName": "EEF1A1 binds GTP",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626034
+            ],
+            "following": [
+              9626067
+            ],
+            "inputs": [
+              29438,
+              9626022
+            ],
+            "outputs": [
+              9626061
+            ],
+            "efs": [],
+            "diagramIds": [
+              64
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "64",
+          "target": "28",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "92 36",
+          "reactomeId": 9626038,
+          "reactionId": 64
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "28 --- 38",
+          "graph": {
+            "dbId": 9626067,
+            "stId": "R-HSA-9626067",
+            "displayName": "EEF1A1:GTP translocates from lysosomal membrane to cytosol",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626038
+            ],
+            "inputs": [
+              9626061
+            ],
+            "outputs": [
+              9626045
+            ],
+            "efs": [],
+            "diagramIds": [
+              38
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "28",
+          "target": "38",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "-90 34",
+          "targetEndpoint": "0 0",
+          "reactomeId": 9626067,
+          "reactionId": 38
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "47 --> 29",
+          "graph": {
+            "dbId": 9626256,
+            "stId": "R-HSA-9626256",
+            "displayName": "HSPA8:LAMP2a multimers depolymerizes to monomers",
+            "schemaClass": "Depolymerisation",
+            "speciesId": 0,
+            "preceding": [
+              9626253
+            ],
+            "following": [
+              9626235
+            ],
+            "inputs": [
+              9626247
+            ],
+            "outputs": [
+              9626246
+            ],
+            "efs": [],
+            "diagramIds": [
+              47
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "47",
+          "target": "29",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "20 42",
+          "reactomeId": 9626256,
+          "reactionId": 47
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "29 --- 25",
+          "graph": {
+            "dbId": 9626235,
+            "stId": "R-HSA-9626235",
+            "displayName": "HSPA8 dissociates from LAMP2a",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626256
+            ],
+            "following": [
+              9626253,
+              9615721,
+              9626276
+            ],
+            "inputs": [
+              9626246
+            ],
+            "outputs": [
+              264476,
+              9626023
+            ],
+            "efs": [],
+            "diagramIds": [
+              25
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "29",
+          "target": "25",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "-52 -42",
+          "targetEndpoint": "0 0",
+          "reactomeId": 9626235,
+          "reactionId": 25
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "27 --- 34",
+          "graph": {
+            "dbId": 9626039,
+            "stId": "R-HSA-9626039",
+            "displayName": "pGFAP binds GFAP in LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626060,
+              9626034
+            ],
+            "following": [
+              9626242
+            ],
+            "inputs": [
+              9626058,
+              9626054
+            ],
+            "outputs": [
+              9626048
+            ],
+            "efs": [],
+            "diagramIds": [
+              34
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "27",
+          "target": "34",
+          "reactomeId": 9626039,
+          "reactionId": 34,
+          "curveStyle": "round-segments",
+          "weights": "0.8115206867228306",
+          "distances": "64.29498924297536",
+          "sourceEndpoint": "-85.36666666666679 -39",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "71 --> 33",
+          "graph": {
+            "dbId": 9626046,
+            "stId": "R-HSA-9626046",
+            "displayName": "p-GFAP binds EEF1A1",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626034
+            ],
+            "following": [
+              9626034
+            ],
+            "inputs": [
+              9626022,
+              9626054
+            ],
+            "outputs": [
+              9626070
+            ],
+            "efs": [],
+            "diagramIds": [
+              71
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "71",
+          "target": "33",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "66 -56",
+          "reactomeId": 9626046,
+          "reactionId": 71
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "33 --- 56",
+          "graph": {
+            "dbId": 9626034,
+            "stId": "R-HSA-9626034",
+            "displayName": "EEF1A1 dissociates from p-GFAP",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626046
+            ],
+            "following": [
+              9626039,
+              9626038,
+              9626046
+            ],
+            "inputs": [
+              9626070
+            ],
+            "outputs": [
+              9626022,
+              9626054
+            ],
+            "efs": [],
+            "diagramIds": [
+              56
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "33",
+          "target": "56",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "112 -48",
+          "targetEndpoint": "0 0",
+          "reactomeId": 9626034,
+          "reactionId": 56
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "66 --- 65",
+          "graph": {
+            "dbId": 9620197,
+            "stId": "R-HSA-9620197",
+            "displayName": "HSPA8:Substrate binds LAMP2a",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9615721,
+              9626276
+            ],
+            "following": [
+              9622840
+            ],
+            "inputs": [
+              9615717,
+              2029007
+            ],
+            "outputs": [
+              9620204
+            ],
+            "efs": [],
+            "diagramIds": [
+              65
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "66",
+          "target": "65",
+          "reactomeId": 9620197,
+          "reactionId": 65,
+          "curveStyle": "round-segments",
+          "weights": "0.610513155814856",
+          "distances": "-19.105580537917984",
+          "sourceEndpoint": "48.28571428571422 -39",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "55 --> 37",
+          "graph": {
+            "dbId": 9626242,
+            "stId": "R-HSA-9626242",
+            "displayName": "p-GFAP:GFAP dissociates from LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626039
+            ],
+            "following": [
+              9626253
+            ],
+            "inputs": [
+              9626048
+            ],
+            "outputs": [
+              9626026,
+              9626245
+            ],
+            "efs": [],
+            "diagramIds": [
+              55
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "55",
+          "target": "37",
+          "reactomeId": 9626242,
+          "reactionId": 55,
+          "curveStyle": "round-segments",
+          "weights": "0.3100136377744221",
+          "distances": "43.84234142174224",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "32.61538461538464 53"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "40 --- 65",
+          "graph": {
+            "dbId": 9620197,
+            "stId": "R-HSA-9620197",
+            "displayName": "HSPA8:Substrate binds LAMP2a",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9615721,
+              9626276
+            ],
+            "following": [
+              9622840
+            ],
+            "inputs": [
+              9615717,
+              2029007
+            ],
+            "outputs": [
+              9620204
+            ],
+            "efs": [],
+            "diagramIds": [
+              65
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "40",
+          "target": "65",
+          "reactomeId": 9620197,
+          "reactionId": 65,
+          "curveStyle": "round-segments",
+          "weights": "0.5947863890120925",
+          "distances": "18.968001857866348",
+          "sourceEndpoint": "64.04166666666674 53",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "31 --> 40",
+          "graph": {
+            "dbId": 9615721,
+            "stId": "R-HSA-9615721",
+            "displayName": "HSPA8 binds substrate",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9622840,
+              9626235
+            ],
+            "following": [
+              9620197
+            ],
+            "inputs": [
+              264476,
+              9615715
+            ],
+            "outputs": [
+              9615717
+            ],
+            "efs": [],
+            "diagramIds": [
+              31
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "31",
+          "target": "40",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-2 -56",
+          "reactomeId": 9615721,
+          "reactionId": 31
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "55 --> 42",
+          "graph": {
+            "dbId": 9626242,
+            "stId": "R-HSA-9626242",
+            "displayName": "p-GFAP:GFAP dissociates from LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626039
+            ],
+            "following": [
+              9626253
+            ],
+            "inputs": [
+              9626048
+            ],
+            "outputs": [
+              9626026,
+              9626245
+            ],
+            "efs": [],
+            "diagramIds": [
+              55
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "55",
+          "target": "42",
+          "reactomeId": 9626242,
+          "reactionId": 55,
+          "curveStyle": "round-segments",
+          "weights": "0.6040496689246824",
+          "distances": "58.34414298444442",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "95 33.08988764044943"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "43 --- 41",
+          "graph": {
+            "dbId": 9626060,
+            "stId": "R-HSA-9626060",
+            "displayName": "HSPA8:Substrate dissociates from LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9625188
+            ],
+            "following": [
+              9626039
+            ],
+            "inputs": [
+              9625189
+            ],
+            "outputs": [
+              9626058,
+              9626049
+            ],
+            "efs": [],
+            "diagramIds": [
+              41
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "43",
+          "target": "41",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 56",
+          "targetEndpoint": "0 0",
+          "reactomeId": 9626060,
+          "reactionId": 41
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "53 --> 43",
+          "graph": {
+            "dbId": 9625188,
+            "stId": "R-HSA-9625188",
+            "displayName": "HSPA8 transports unfolded substrate to lysosomal lumen for degradation",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9625196
+            ],
+            "following": [
+              9626060
+            ],
+            "inputs": [
+              9625165
+            ],
+            "outputs": [
+              9625189
+            ],
+            "efs": [],
+            "diagramIds": [
+              53
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "53",
+          "target": "43",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-74 56",
+          "reactomeId": 9625188,
+          "reactionId": 53
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "69 --- 34",
+          "graph": {
+            "dbId": 9626039,
+            "stId": "R-HSA-9626039",
+            "displayName": "pGFAP binds GFAP in LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626060,
+              9626034
+            ],
+            "following": [
+              9626242
+            ],
+            "inputs": [
+              9626058,
+              9626054
+            ],
+            "outputs": [
+              9626048
+            ],
+            "efs": [],
+            "diagramIds": [
+              34
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "69",
+          "target": "34",
+          "reactomeId": 9626039,
+          "reactionId": 34,
+          "curveStyle": "round-segments",
+          "weights": "0.9401882681777957",
+          "distances": "-86.97367915032987",
+          "sourceEndpoint": "-117 65.17063166529942",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "45 --- 71",
+          "graph": {
+            "dbId": 9626046,
+            "stId": "R-HSA-9626046",
+            "displayName": "p-GFAP binds EEF1A1",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626034
+            ],
+            "following": [
+              9626034
+            ],
+            "inputs": [
+              9626022,
+              9626054
+            ],
+            "outputs": [
+              9626070
+            ],
+            "efs": [],
+            "diagramIds": [
+              71
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "45",
+          "target": "71",
+          "reactomeId": 9626046,
+          "reactionId": 71,
+          "curveStyle": "round-segments",
+          "weights": "0.1972321423104218",
+          "distances": "59.26649997921549",
+          "sourceEndpoint": "-7.222222222222172 -39",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "56 --> 45",
+          "graph": {
+            "dbId": 9626034,
+            "stId": "R-HSA-9626034",
+            "displayName": "EEF1A1 dissociates from p-GFAP",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626046
+            ],
+            "following": [
+              9626039,
+              9626038,
+              9626046
+            ],
+            "inputs": [
+              9626070
+            ],
+            "outputs": [
+              9626022,
+              9626054
+            ],
+            "efs": [],
+            "diagramIds": [
+              56
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "56",
+          "target": "45",
+          "reactomeId": 9626034,
+          "reactionId": 56,
+          "curveStyle": "round-segments",
+          "weights": "0.4104703938424211",
+          "distances": "-23.80513484528487",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-33.799999999999955 -39"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "48 --- 30",
+          "graph": {
+            "dbId": 9625197,
+            "stId": "R-HSA-9625197",
+            "displayName": "GFAP binds LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9624158
+            ],
+            "following": [
+              9625196
+            ],
+            "inputs": [
+              9624156,
+              9625195
+            ],
+            "outputs": [
+              9625181
+            ],
+            "efs": [],
+            "diagramIds": [
+              30
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "48",
+          "target": "30",
+          "reactomeId": 9625197,
+          "reactionId": 30,
+          "curveStyle": "round-segments",
+          "weights": "0.44206966948204285",
+          "distances": "-16.57928164774836",
+          "sourceEndpoint": "72.26470588235316 -39",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "68 --- 30",
+          "graph": {
+            "dbId": 9625197,
+            "stId": "R-HSA-9625197",
+            "displayName": "GFAP binds LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9624158
+            ],
+            "following": [
+              9625196
+            ],
+            "inputs": [
+              9624156,
+              9625195
+            ],
+            "outputs": [
+              9625181
+            ],
+            "efs": [],
+            "diagramIds": [
+              30
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "68",
+          "target": "30",
+          "reactomeId": 9625197,
+          "reactionId": 30,
+          "curveStyle": "round-segments",
+          "weights": "0.5041728249590823",
+          "distances": "25.83380870946524",
+          "sourceEndpoint": "64.43137254901967 53",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "41 --> 51",
+          "graph": {
+            "dbId": 9626060,
+            "stId": "R-HSA-9626060",
+            "displayName": "HSPA8:Substrate dissociates from LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9625188
+            ],
+            "following": [
+              9626039
+            ],
+            "inputs": [
+              9625189
+            ],
+            "outputs": [
+              9626058,
+              9626049
+            ],
+            "efs": [],
+            "diagramIds": [
+              41
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "41",
+          "target": "51",
+          "reactomeId": 9626060,
+          "reactionId": 41,
+          "curveStyle": "round-segments",
+          "weights": "0.3221127405087477",
+          "distances": "-43.20731418125069",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "137.80000000000018 -53"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "44 --> 52",
+          "graph": {
+            "dbId": 9626253,
+            "stId": "R-HSA-9626253",
+            "displayName": "HSPA8 binds LAMP2a multimers",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9622840,
+              9626235,
+              9626242
+            ],
+            "following": [
+              9626256
+            ],
+            "inputs": [
+              9626026,
+              264476
+            ],
+            "outputs": [
+              9626247
+            ],
+            "efs": [],
+            "diagramIds": [
+              44
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "44",
+          "target": "52",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-122 -6",
+          "reactomeId": 9626253,
+          "reactionId": 44
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "52 --- 47",
+          "graph": {
+            "dbId": 9626256,
+            "stId": "R-HSA-9626256",
+            "displayName": "HSPA8:LAMP2a multimers depolymerizes to monomers",
+            "schemaClass": "Depolymerisation",
+            "speciesId": 0,
+            "preceding": [
+              9626253
+            ],
+            "following": [
+              9626235
+            ],
+            "inputs": [
+              9626247
+            ],
+            "outputs": [
+              9626246
+            ],
+            "efs": [],
+            "diagramIds": [
+              47
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "52",
+          "target": "47",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "24 -42",
+          "targetEndpoint": "0 0",
+          "reactomeId": 9626256,
+          "reactionId": 47
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "36 --> 54",
+          "graph": {
+            "dbId": 9622840,
+            "stId": "R-HSA-9622840",
+            "displayName": "HSPA8 dissociates from LAMP2A-bound substrate",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9620197
+            ],
+            "following": [
+              9626253,
+              9622831,
+              9615721
+            ],
+            "inputs": [
+              9620204
+            ],
+            "outputs": [
+              9622841,
+              264476
+            ],
+            "efs": [],
+            "diagramIds": [
+              36
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "36",
+          "target": "54",
+          "reactomeId": 9622840,
+          "reactionId": 36,
+          "curveStyle": "round-segments",
+          "weights": "0.10376156150061863",
+          "distances": "-32.673124892041905",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-111.38983050847446 -53"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "54 --- 50",
+          "graph": {
+            "dbId": 9622831,
+            "stId": "R-HSA-9622831",
+            "displayName": "Substrate:LAMP2a binds HSP90",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9622840,
+              9626276
+            ],
+            "following": [
+              9624158
+            ],
+            "inputs": [
+              9622845,
+              9622841
+            ],
+            "outputs": [
+              9622836
+            ],
+            "efs": [],
+            "diagramIds": [
+              50
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "54",
+          "target": "50",
+          "reactomeId": 9622831,
+          "reactionId": 50,
+          "curveStyle": "round-segments",
+          "weights": "0.6572795415747936",
+          "distances": "19.24353918443618",
+          "sourceEndpoint": "67.26923076923072 53",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "57 --- 46",
+          "graph": {
+            "dbId": 9624158,
+            "stId": "R-HSA-9624158",
+            "displayName": "Substrate:LAMP2a:HSP90 polymerizes",
+            "schemaClass": "Polymerisation",
+            "speciesId": 0,
+            "preceding": [
+              9622831
+            ],
+            "following": [
+              9625197
+            ],
+            "inputs": [
+              9622836
+            ],
+            "outputs": [
+              9624156
+            ],
+            "efs": [],
+            "diagramIds": [
+              46
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "57",
+          "target": "46",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "80 56",
+          "targetEndpoint": "0 0",
+          "reactomeId": 9624158,
+          "reactionId": 46
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "50 --> 57",
+          "graph": {
+            "dbId": 9622831,
+            "stId": "R-HSA-9622831",
+            "displayName": "Substrate:LAMP2a binds HSP90",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9622840,
+              9626276
+            ],
+            "following": [
+              9624158
+            ],
+            "inputs": [
+              9622845,
+              9622841
+            ],
+            "outputs": [
+              9622836
+            ],
+            "efs": [],
+            "diagramIds": [
+              50
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "50",
+          "target": "57",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-66 56",
+          "reactomeId": 9622831,
+          "reactionId": 50
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "58 --- 35",
+          "graph": {
+            "dbId": 9626276,
+            "stId": "R-HSA-9626276",
+            "displayName": "HSP90 dissociates from LAMP2a",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626235
+            ],
+            "following": [
+              9620197,
+              9622831
+            ],
+            "inputs": [
+              9626023
+            ],
+            "outputs": [
+              9622845,
+              2029007
+            ],
+            "efs": [],
+            "diagramIds": [
+              35
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "58",
+          "target": "35",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "38 -42",
+          "targetEndpoint": "0 0",
+          "reactomeId": 9626276,
+          "reactionId": 35
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "25 --> 58",
+          "graph": {
+            "dbId": 9626235,
+            "stId": "R-HSA-9626235",
+            "displayName": "HSPA8 dissociates from LAMP2a",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626256
+            ],
+            "following": [
+              9626253,
+              9615721,
+              9626276
+            ],
+            "inputs": [
+              9626246
+            ],
+            "outputs": [
+              264476,
+              9626023
+            ],
+            "efs": [],
+            "diagramIds": [
+              25
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "25",
+          "target": "58",
+          "reactomeId": 9626235,
+          "reactionId": 25,
+          "curveStyle": "round-segments",
+          "weights": "0.38568762146769403",
+          "distances": "-50.22333908291316",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-89.41463414634143 39"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "39 --> 59",
+          "graph": {
+            "dbId": 9625196,
+            "stId": "R-HSA-9625196",
+            "displayName": "Unfolded substrate in LAMP2a multimeric complex binds HSPA8",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9625197
+            ],
+            "following": [
+              9625188
+            ],
+            "inputs": [
+              9625181,
+              9625182
+            ],
+            "outputs": [
+              9625165
+            ],
+            "efs": [],
+            "diagramIds": [
+              39
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "39",
+          "target": "59",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-106 70",
+          "reactomeId": 9625196,
+          "reactionId": 39
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "59 --- 53",
+          "graph": {
+            "dbId": 9625188,
+            "stId": "R-HSA-9625188",
+            "displayName": "HSPA8 transports unfolded substrate to lysosomal lumen for degradation",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9625196
+            ],
+            "following": [
+              9626060
+            ],
+            "inputs": [
+              9625165
+            ],
+            "outputs": [
+              9625189
+            ],
+            "efs": [],
+            "diagramIds": [
+              53
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "59",
+          "target": "53",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "96 70",
+          "targetEndpoint": "0 0",
+          "reactomeId": 9625188,
+          "reactionId": 53
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "38 --> 60",
+          "graph": {
+            "dbId": 9626067,
+            "stId": "R-HSA-9626067",
+            "displayName": "EEF1A1:GTP translocates from lysosomal membrane to cytosol",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626038
+            ],
+            "inputs": [
+              9626061
+            ],
+            "outputs": [
+              9626045
+            ],
+            "efs": [],
+            "diagramIds": [
+              38
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "38",
+          "target": "60",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "68 -42",
+          "reactomeId": 9626067,
+          "reactionId": 38
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "61 --- 39",
+          "graph": {
+            "dbId": 9625196,
+            "stId": "R-HSA-9625196",
+            "displayName": "Unfolded substrate in LAMP2a multimeric complex binds HSPA8",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9625197
+            ],
+            "following": [
+              9625188
+            ],
+            "inputs": [
+              9625181,
+              9625182
+            ],
+            "outputs": [
+              9625165
+            ],
+            "efs": [],
+            "diagramIds": [
+              39
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "61",
+          "target": "39",
+          "reactomeId": 9625196,
+          "reactionId": 39,
+          "curveStyle": "round-segments",
+          "weights": "0.48097791174922555",
+          "distances": "24.79120023751541",
+          "sourceEndpoint": "55.03571428571422 67",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "30 --> 61",
+          "graph": {
+            "dbId": 9625197,
+            "stId": "R-HSA-9625197",
+            "displayName": "GFAP binds LAMP2a multimer",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9624158
+            ],
+            "following": [
+              9625196
+            ],
+            "inputs": [
+              9624156,
+              9625195
+            ],
+            "outputs": [
+              9625181
+            ],
+            "efs": [],
+            "diagramIds": [
+              30
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "30",
+          "target": "61",
+          "stoichiometry": 1,
+          "weights": "",
+          "distances": "",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-120 58",
+          "reactomeId": 9625197,
+          "reactionId": 30
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "62 --- 64",
+          "graph": {
+            "dbId": 9626038,
+            "stId": "R-HSA-9626038",
+            "displayName": "EEF1A1 binds GTP",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626034
+            ],
+            "following": [
+              9626067
+            ],
+            "inputs": [
+              29438,
+              9626022
+            ],
+            "outputs": [
+              9626061
+            ],
+            "efs": [],
+            "diagramIds": [
+              64
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "62",
+          "target": "64",
+          "reactomeId": 9626038,
+          "reactionId": 64,
+          "curveStyle": "round-segments",
+          "weights": "0.26614909650159085",
+          "distances": "35.82539722398447",
+          "sourceEndpoint": "-57.14634146341473 -33",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "36 --> 63",
+          "graph": {
+            "dbId": 9622840,
+            "stId": "R-HSA-9622840",
+            "displayName": "HSPA8 dissociates from LAMP2A-bound substrate",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9620197
+            ],
+            "following": [
+              9626253,
+              9622831,
+              9615721
+            ],
+            "inputs": [
+              9620204
+            ],
+            "outputs": [
+              9622841,
+              264476
+            ],
+            "efs": [],
+            "diagramIds": [
+              36
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "36",
+          "target": "63",
+          "reactomeId": 9622840,
+          "reactionId": 36,
+          "curveStyle": "round-segments",
+          "weights": "-0.000027846382313394258",
+          "distances": "36.87817488471453",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "33.67194649399585 25"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "37 --- 44",
+          "graph": {
+            "dbId": 9626253,
+            "stId": "R-HSA-9626253",
+            "displayName": "HSPA8 binds LAMP2a multimers",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9622840,
+              9626235,
+              9626242
+            ],
+            "following": [
+              9626256
+            ],
+            "inputs": [
+              9626026,
+              264476
+            ],
+            "outputs": [
+              9626247
+            ],
+            "efs": [],
+            "diagramIds": [
+              44
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "37",
+          "target": "44",
+          "reactomeId": 9626253,
+          "reactionId": 44,
+          "curveStyle": "round-segments",
+          "weights": "1.0772687498000795",
+          "distances": "-46.40488567867054",
+          "sourceEndpoint": "-36.969135802469054 -53",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      },
+      {
+        "data": {
+          "id": "25 --> 63",
+          "graph": {
+            "dbId": 9626235,
+            "stId": "R-HSA-9626235",
+            "displayName": "HSPA8 dissociates from LAMP2a",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9626256
+            ],
+            "following": [
+              9626253,
+              9615721,
+              9626276
+            ],
+            "inputs": [
+              9626246
+            ],
+            "outputs": [
+              264476,
+              9626023
+            ],
+            "efs": [],
+            "diagramIds": [
+              25
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "25",
+          "target": "63",
+          "reactomeId": 9626235,
+          "reactionId": 25,
+          "curveStyle": "round-segments",
+          "weights": "0.06985827526208042 0.5403246843816581",
+          "distances": "-35.087918772935495 -254.28637890084826",
+          "sourceEndpoint": "0 0",
+          "targetEndpoint": "-34.74569569116193 25"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "production outgoing reaction"
+      },
+      {
+        "data": {
+          "id": "63 --- 31",
+          "graph": {
+            "dbId": 9615721,
+            "stId": "R-HSA-9615721",
+            "displayName": "HSPA8 binds substrate",
+            "schemaClass": "Reaction",
+            "speciesId": 0,
+            "preceding": [
+              9622840,
+              9626235
+            ],
+            "following": [
+              9620197
+            ],
+            "inputs": [
+              264476,
+              9615715
+            ],
+            "outputs": [
+              9615717
+            ],
+            "efs": [],
+            "diagramIds": [
+              31
+            ],
+            "entityFunctionalStatus": []
+          },
+          "source": "63",
+          "target": "31",
+          "reactomeId": 9615721,
+          "reactionId": 31,
+          "curveStyle": "round-segments",
+          "weights": "0.627674513623496",
+          "distances": "23.772494777819478",
+          "sourceEndpoint": "-17.10485166067815 25",
+          "targetEndpoint": "0 0"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": "consumption incoming reaction"
+      }
+    ]
+  },
+  "style": [
+    {
+      "selector": "",
+      "style": {
+        "font-family": "Roboto",
+        "font-weight": "600",
+        "z-index": "1"
+      }
+    },
+    {
+      "selector": "node.Compartment",
+      "style": {
+        "shape": "round-rectangle",
+        "width": "data(width)",
+        "height": "data(height)",
+        "border-style": "double",
+        "z-index": "0",
+        "z-compound-depth": "bottom",
+        "overlay-opacity": "0",
+        "color": "fn",
+        "border-color": "fn",
+        "background-color": "fn",
+        "background-opacity": "fn",
+        "border-width": "12px"
+      }
+    },
+    {
+      "selector": "node.Compartment.inner, node.Compartment.outer",
+      "style": {
+        "border-style": "solid",
+        "border-width": "4px"
+      }
+    },
+    {
+      "selector": "node.Compartment.outer",
+      "style": {
+        "label": "data(displayName)",
+        "text-opacity": "1",
+        "text-valign": "bottom",
+        "text-halign": "right",
+        "text-margin-x": "data(textX)",
+        "text-margin-y": "data(textY)"
+      }
+    },
+    {
+      "selector": "node[?radius]",
+      "style": {
+        "corner-radius": "data(radius)"
+      }
+    },
+    {
+      "selector": "node.Shadow",
+      "style": {
+        "label": "data(displayName)",
+        "font-size": "80px",
+        "background-opacity": "0",
+        "shape": "rectangle",
+        "text-valign": "center",
+        "text-halign": "center",
+        "text-outline-color": "fn",
+        "text-outline-width": "15px",
+        "text-wrap": "wrap",
+        "text-max-width": "data(width)"
+      }
+    },
+    {
+      "selector": "node.Shadow[?color]",
+      "style": {
+        "color": "data(color)"
+      }
+    },
+    {
+      "selector": "node.drug",
+      "style": {
+        "text-max-width": "fn",
+        "text-margin-x": "4px",
+        "font-style": "italic"
+      }
+    },
+    {
+      "selector": "node.PhysicalEntity, node.Pathway, node.Modification, node.Protein",
+      "style": {
+        "font-size": "12px",
+        "text-margin-x": "0px",
+        "label": "data(displayName)",
+        "width": "data(width)",
+        "height": "data(height)",
+        "background-fit": "none",
+        "text-halign": "center",
+        "text-valign": "center",
+        "text-wrap": "wrap",
+        "text-max-width": "fn",
+        "background-image-smoothing": "no no no no no no no no",
+        "background-image": "fn",
+        "background-position-y": "fn",
+        "background-position-x": "fn",
+        "background-height": "fn",
+        "background-width": "fn",
+        "background-clip": "fn",
+        "background-image-containment": "fn",
+        "background-image-opacity": "fn",
+        "bounds-expansion": "fn",
+        "color": "fn"
+      }
+    },
+    {
+      "selector": "node.InteractorOccurrences",
+      "style": {
+        "label": "data(displayName)",
+        "color": "fn",
+        "shape": "ellipse",
+        "text-valign": "center",
+        "text-halign": "center",
+        "text-wrap": "wrap",
+        "background-color": "fn"
+      }
+    },
+    {
+      "selector": "node.InteractorOccurrences.Disease",
+      "style": {
+        "background-color": "fn"
+      }
+    },
+    {
+      "selector": "node.InteractorOccurrences.hover",
+      "style": {
+        "border-width": "4px",
+        "border-color": "fn"
+      }
+    },
+    {
+      "selector": "node.InteractorOccurrences.select",
+      "style": {
+        "border-width": "4px",
+        "border-color": "fn"
+      }
+    },
+    {
+      "selector": "node.Interactor",
+      "style": {
+        "label": "data(displayName)",
+        "font-family": "Roboto Mono, monospace",
+        "border-width": "4px",
+        "text-wrap": "ellipsis",
+        "border-color": "fn"
+      }
+    },
+    {
+      "selector": "node.DiseaseInteractor",
+      "style": {
+        "shape": "round-hexagon",
+        "background-color": "fn",
+        "background-opacity": "0",
+        "font-family": "Roboto Mono, monospace",
+        "color": "fn",
+        "text-wrap": "ellipsis",
+        "text-max-width": "fn"
+      }
+    },
+    {
+      "selector": "node.PhysicalEntity.disease",
+      "style": {
+        "border-color": "fn",
+        "color": "fn",
+        "border-width": "4px"
+      }
+    },
+    {
+      "selector": "node.Protein",
+      "style": {
+        "shape": "round-rectangle",
+        "background-color": "fn"
+      }
+    },
+    {
+      "selector": "node.Protein.drug",
+      "style": {
+        "background-color": "fn"
+      }
+    },
+    {
+      "selector": "node.GenomeEncodedEntity",
+      "style": {
+        "shape": "round-rectangle",
+        "background-opacity": "0",
+        "background-color": "fn",
+        "text-margin-y": "4px",
+        "border-width": "0px"
+      }
+    },
+    {
+      "selector": "node.RNA",
+      "style": {
+        "shape": "bottom-round-rectangle",
+        "background-color": "fn"
+      }
+    },
+    {
+      "selector": "node.RNA.drug",
+      "style": {
+        "background-color": "fn"
+      }
+    },
+    {
+      "selector": "node.Gene",
+      "style": {
+        "shape": "bottom-round-rectangle",
+        "background-opacity": "0",
+        "background-color": "fn",
+        "bounds-expansion": "17px",
+        "text-margin-y": "10px",
+        "border-width": "0px"
+      }
+    },
+    {
+      "selector": "node.Molecule",
+      "style": {
+        "shape": "round-rectangle",
+        "color": "fn",
+        "background-color": "fn",
+        "border-color": "fn",
+        "border-width": "4px",
+        "corner-radius": "fn"
+      }
+    },
+    {
+      "selector": "node.Molecule.drug",
+      "style": {
+        "color": "fn",
+        "border-color": "fn"
+      }
+    },
+    {
+      "selector": "node.Molecule.Interactor",
+      "style": {
+        "border-color": "fn"
+      }
+    },
+    {
+      "selector": "node.EntitySet",
+      "style": {
+        "background-opacity": "0",
+        "shape": "round-rectangle",
+        "border-width": "0px",
+        "text-max-width": "fn"
+      }
+    },
+    {
+      "selector": "node.EntitySet.drug",
+      "style": {
+        "text-max-width": "fn"
+      }
+    },
+    {
+      "selector": "node.Complex",
+      "style": {
+        "shape": "cut-rectangle",
+        "text-max-width": "fn",
+        "background-opacity": "0",
+        "border-width": "0px"
+      }
+    },
+    {
+      "selector": "node.Complex.drug",
+      "style": {
+        "text-margin-x": "4px",
+        "text-max-width": "fn"
+      }
+    },
+    {
+      "selector": "node.Cell",
+      "style": {
+        "background-opacity": "0",
+        "shape": "round-rectangle",
+        "corner-radius": "999999px",
+        "border-width": "0px",
+        "text-max-width": "fn"
+      }
+    },
+    {
+      "selector": "node.Pathway",
+      "style": {
+        "background-color": "fn",
+        "text-margin-x": "18px"
+      }
+    },
+    {
+      "selector": "node.Interacting.Pathway",
+      "style": {
+        "shape": "rectangle",
+        "border-color": "fn",
+        "border-width": "12px",
+        "border-position": "inside",
+        "text-max-width": "fn"
+      }
+    },
+    {
+      "selector": "node.SUB.Pathway",
+      "style": {
+        "background-opacity": "0",
+        "shape": "round-rectangle",
+        "text-max-width": "fn"
+      }
+    },
+    {
+      "selector": "node.Pathway.disease",
+      "style": {
+        "border-color": "fn",
+        "color": "fn"
+      }
+    },
+    {
+      "selector": "node.Modification",
+      "style": {
+        "background-color": "fn",
+        "shape": "round-rectangle"
+      }
+    },
+    {
+      "selector": "node.loss-of-function",
+      "style": {
+        "border-style": "dashed",
+        "border-dash-pattern": "4 8",
+        "border-cap": "round"
+      }
+    },
+    {
+      "selector": "node.reaction",
+      "style": {
+        "width": "24px",
+        "height": "24px",
+        "shape": "round-rectangle",
+        "text-halign": "center",
+        "text-valign": "center",
+        "border-width": "4px",
+        "border-color": "fn",
+        "color": "fn",
+        "background-color": "fn"
+      }
+    },
+    {
+      "selector": "node.reaction[?displayName]",
+      "style": {
+        "label": "data(displayName)",
+        "font-weight": "400",
+        "text-valign": "top",
+        "text-margin-y": "-5px"
+      }
+    },
+    {
+      "selector": "node.reaction.hover",
+      "style": {
+        "border-width": "4px",
+        "border-color": "fn"
+      }
+    },
+    {
+      "selector": "node.reaction:selected",
+      "style": {
+        "border-width": "6px",
+        "border-color": "fn"
+      }
+    },
+    {
+      "selector": "node.reaction.flag",
+      "style": {
+        "outline-width": "6px",
+        "outline-color": "fn"
+      }
+    },
+    {
+      "selector": "node.association",
+      "style": {
+        "shape": "ellipse",
+        "background-color": "fn"
+      }
+    },
+    {
+      "selector": "node.dissociation",
+      "style": {
+        "shape": "ellipse",
+        "border-style": "double",
+        "border-width": "12px"
+      }
+    },
+    {
+      "selector": "node.uncertain",
+      "style": {
+        "label": "?",
+        "text-valign": "center",
+        "text-margin-y": "0px",
+        "font-weight": "600"
+      }
+    },
+    {
+      "selector": "node.omitted",
+      "style": {
+        "background-image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20width%3D%2210%22%20height%3D%2210%22%3E%3Cline%20x1%3D%222.5%22%20y1%3D%223%22%20x2%3D%224.5%22%20y2%3D%227%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke%3D%22%23001F24%22%2F%3E%3Cline%20x1%3D%225.5%22%20y1%3D%223%22%20x2%3D%227.5%22%20y2%3D%227%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke%3D%22%23001F24%22%2F%3E%3C%2Fsvg%3E",
+        "background-fit": "cover",
+        "background-height": "100%",
+        "background-width": "100%"
+      }
+    },
+    {
+      "selector": "node.InteractorOccurrences",
+      "style": {
+        "label": "data(displayName)",
+        "color": "fn",
+        "shape": "ellipse",
+        "text-valign": "center",
+        "text-halign": "center",
+        "text-wrap": "wrap",
+        "background-color": "fn"
+      }
+    },
+    {
+      "selector": "node.InteractorOccurrences.Disease",
+      "style": {
+        "background-color": "fn"
+      }
+    },
+    {
+      "selector": "node.InteractorOccurrences.hover",
+      "style": {
+        "border-width": "4px",
+        "border-color": "fn"
+      }
+    },
+    {
+      "selector": "node.InteractorOccurrences.select",
+      "style": {
+        "border-width": "4px",
+        "border-color": "fn"
+      }
+    },
+    {
+      "selector": "node.Interactor",
+      "style": {
+        "label": "data(displayName)",
+        "font-family": "Roboto Mono, monospace",
+        "border-color": "fn",
+        "text-wrap": "ellipsis"
+      }
+    },
+    {
+      "selector": "node.RNA.Interactor, node.Protein.Interactor",
+      "style": {
+        "border-color": "fn",
+        "border-width": "4px"
+      }
+    },
+    {
+      "selector": "node.Molecule.Interactor",
+      "style": {
+        "color": "fn",
+        "background-color": "fn",
+        "border-color": "fn",
+        "border-width": "4px",
+        "corner-radius": "fn"
+      }
+    },
+    {
+      "selector": "node.DiseaseInteractor",
+      "style": {
+        "shape": "round-hexagon",
+        "background-color": "fn",
+        "color": "fn",
+        "border-width": "0px",
+        "width": "data(width)",
+        "height": "data(height)",
+        "text-halign": "center",
+        "text-valign": "center",
+        "text-max-width": "fn"
+      }
+    },
+    {
+      "selector": "node.input_output",
+      "style": {
+        "shape": "ellipse",
+        "width": "16px",
+        "height": "16px"
+      }
+    },
+    {
+      "selector": "edge",
+      "style": {
+        "curve-style": "straight",
+        "line-cap": "round",
+        "source-endpoint": "outside-to-node",
+        "arrow-scale": "1.5",
+        "width": "4px",
+        "color": "fn",
+        "line-color": "fn",
+        "target-arrow-color": "fn",
+        "mid-source-arrow-color": "fn",
+        "mid-target-arrow-color": "fn",
+        "source-arrow-color": "fn",
+        "source-arrow-width": "100%",
+        "target-arrow-width": "100%"
+      }
+    },
+    {
+      "selector": "edge.disease",
+      "style": {
+        "color": "fn",
+        "line-color": "fn",
+        "border-color": "fn",
+        "target-arrow-color": "fn",
+        "source-arrow-color": "fn"
+      }
+    },
+    {
+      "selector": "edge.hover",
+      "style": {
+        "line-color": "fn",
+        "width": "6px",
+        "arrow-scale": "1",
+        "source-arrow-color": "fn",
+        "target-arrow-color": "fn",
+        "source-arrow-width": "50%",
+        "target-arrow-width": "50%",
+        "z-index": "2"
+      }
+    },
+    {
+      "selector": "edge:selected",
+      "style": {
+        "line-color": "fn",
+        "width": "8px",
+        "arrow-scale": "1",
+        "source-arrow-color": "fn",
+        "target-arrow-color": "fn",
+        "source-arrow-width": "50%",
+        "target-arrow-width": "50%",
+        "z-index": "3"
+      }
+    },
+    {
+      "selector": "edge.consumption",
+      "style": {
+        "target-endpoint": "inside-to-node",
+        "source-endpoint": "outside-to-node"
+      }
+    },
+    {
+      "selector": "edge.production",
+      "style": {
+        "target-arrow-shape": "triangle"
+      }
+    },
+    {
+      "selector": "edge.catalysis",
+      "style": {
+        "target-arrow-shape": "circle",
+        "target-arrow-fill": "hollow",
+        "target-arrow-color": "fn"
+      }
+    },
+    {
+      "selector": "edge.positive-regulation",
+      "style": {
+        "target-arrow-shape": "triangle",
+        "target-arrow-fill": "hollow",
+        "target-arrow-color": "fn"
+      }
+    },
+    {
+      "selector": "edge.negative-regulation",
+      "style": {
+        "target-arrow-shape": "tee",
+        "line-cap": "butt",
+        "source-endpoint": "inside-to-node",
+        "target-arrow-color": "fn"
+      }
+    },
+    {
+      "selector": "edge.set-to-member",
+      "style": {
+        "target-arrow-shape": "circle",
+        "line-style": "dashed",
+        "line-dash-pattern": "6 10",
+        "opacity": "0.5"
+      }
+    },
+    {
+      "selector": "edge[stoichiometry > 1]",
+      "style": {
+        "text-background-color": "fn",
+        "text-background-opacity": "1",
+        "text-border-width": "2px",
+        "text-border-opacity": "1",
+        "text-border-color": "fn",
+        "text-background-shape": "roundrectangle",
+        "text-background-padding": "4px"
+      }
+    },
+    {
+      "selector": "edge[stoichiometry > 1].incoming",
+      "style": {
+        "source-label": "data(stoichiometry)",
+        "source-text-offset": "30px"
+      }
+    },
+    {
+      "selector": "edge[stoichiometry > 1].outgoing",
+      "style": {
+        "target-label": "data(stoichiometry)",
+        "target-text-offset": "35px"
+      }
+    },
+    {
+      "selector": "edge.shadow[?color]",
+      "style": {
+        "underlay-color": "data(color)",
+        "underlay-padding": "20px",
+        "underlay-opacity": "0.2"
+      }
+    },
+    {
+      "selector": "edge.flag",
+      "style": {
+        "underlay-color": "fn",
+        "underlay-padding": "10px",
+        "underlay-opacity": "1"
+      }
+    },
+    {
+      "selector": "edge[?weights]",
+      "style": {
+        "curve-style": "fn",
+        "segment-distances": "data(distances)",
+        "segment-weights": "data(weights)",
+        "segment-radii": "30",
+        "radius-type": "influence-radius",
+        "edge-distances": "endpoints"
+      }
+    },
+    {
+      "selector": "edge[?sourceEndpoint]",
+      "style": {
+        "source-endpoint": "data(sourceEndpoint)"
+      }
+    },
+    {
+      "selector": "edge[?targetEndpoint]",
+      "style": {
+        "target-endpoint": "data(targetEndpoint)"
+      }
+    },
+    {
+      "selector": "edge[?sourceLabel]",
+      "style": {
+        "source-label": "data(sourceLabel)",
+        "source-text-margin-y": "-12px",
+        "font-weight": "400"
+      }
+    },
+    {
+      "selector": "edge[?label]",
+      "style": {
+        "label": "data(label)",
+        "text-margin-y": "12px",
+        "font-weight": "400"
+      }
+    },
+    {
+      "selector": "edge.Interactor",
+      "style": {
+        "line-color": "fn",
+        "line-style": "dashed",
+        "line-dash-pattern": "1 8"
+      }
+    },
+    {
+      "selector": "edge.DiseaseInteractor",
+      "style": {
+        "line-color": "fn"
+      }
+    },
+    {
+      "selector": "edge.Interactor.hover, edge.DiseaseInteractor.hover",
+      "style": {
+        "line-color": "fn"
+      }
+    },
+    {
+      "selector": "edge[?sourceOffset]",
+      "style": {
+        "source-text-offset": "data(sourceOffset)"
+      }
+    },
+    {
+      "selector": "[?labelColor]",
+      "style": {
+        "color": "fn"
+      }
+    },
+    {
+      "selector": "node.debug",
+      "style": {
+        "label": "data(id)",
+        "text-outline-width": "4px",
+        "text-outline-color": "rgb(0,0,0)",
+        "text-outline-opacity": "1",
+        "color": "rgb(255,255,255)"
+      }
+    },
+    {
+      "selector": "node.Legend.Label",
+      "style": {
+        "label": "data(displayName)",
+        "text-halign": "center",
+        "text-valign": "center",
+        "font-size": "24px",
+        "font-weight": "400",
+        "background-opacity": "0",
+        "color": "fn"
+      }
+    },
+    {
+      "selector": "node.Legend.Placeholder",
+      "style": {
+        "background-opacity": "0",
+        "border-opacity": "0",
+        "width": "20px",
+        "height": "20px",
+        "shape": "rectangle"
+      }
+    },
+    {
+      "selector": "node.Legend.Placeholder[?displayName]",
+      "style": {
+        "label": "data(displayName)",
+        "font-weight": "400"
+      }
+    },
+    {
+      "selector": ".trivial",
+      "style": {
+        "opacity": "0"
+      }
+    }
+  ],
+  "data": {},
+  "zoomingEnabled": true,
+  "userZoomingEnabled": true,
+  "zoom": 0.2,
+  "minZoom": 0.2,
+  "maxZoom": 15,
+  "panningEnabled": true,
+  "userPanningEnabled": true,
+  "pan": {
+    "x": 106.69282874115305,
+    "y": 16.384510407476
+  },
+  "boxSelectionEnabled": true,
+  "renderer": {
+    "name": "canvas"
+  }
+}

@@ -25,32 +25,39 @@ let loadSample = function (fname) {
 	fetch(fname).then(function (res) {
 		return res.text();
 	}).then(function (data) {
-		cyGraph = convert(data);
-		cy.add(cyGraph);
-		cy.layout({ name: 'preset' }).run();
+		if (fname == "examples/9613829.json") {
+			cy.style(defaultStylesheet);
+			cy.add(JSON.parse(data).elements);
+			cy.fit(cy.elements(), 30);
+		} else { // sbgn
+			cyGraph = convert(data);
+			cy.style(sbgnStylesheet(cytoscape));
+			cy.add(cyGraph);
+			cy.layout({ name: 'preset' }).run();
 
-		cy.nodes().forEach(node => {			
-			let bbox = node.data('bbox');
-			node.css('width', bbox.w);
-			node.css('height', bbox.h);
-			node.css('font-size', 11);
-			node.position({x: bbox.x, y: bbox.y});
-			if(node.data("class") == "process" || node.data("class") == "omitted process" || node.data("class") == "uncertain process" || node.data("class") == "association" || node.data("class") == "dissociation") {
-				if(node.css("content")) {
-					node.css("content", ".");
+			cy.nodes().forEach(node => {			
+				let bbox = node.data('bbox');
+				node.css('width', bbox.w);
+				node.css('height', bbox.h);
+				node.css('font-size', 11);
+				node.position({x: bbox.x, y: bbox.y});
+				if(node.data("class") == "process" || node.data("class") == "omitted process" || node.data("class") == "uncertain process" || node.data("class") == "association" || node.data("class") == "dissociation") {
+					if(node.css("content")) {
+						node.css("content", ".");
+					}
 				}
-			}
-			if(node.data("class") != "compartment" && node.data("class") != "complex") {
-				node.css('padding', 0);
-			} else if (node.data("class") == "complex") {
-				if (node.children().length > 0) {
-					node.css('padding', 10);
-				} else {
+				if(node.data("class") != "compartment" && node.data("class") != "complex") {
 					node.css('padding', 0);
+				} else if (node.data("class") == "complex") {
+					if (node.children().length > 0) {
+						node.css('padding', 10);
+					} else {
+						node.css('padding', 0);
+					}
 				}
-			}
-		});
-		cy.fit(cy.elements(), 30);
+			});
+			cy.fit(cy.elements(), 30);
+		}
 	});
 };
 
@@ -104,12 +111,18 @@ document.getElementById("samples").addEventListener("change", function (event) {
 	}
 	else if(sample == "sample16") {
 		filename = "Beta_oxidation_of_hexanoyl-CoA_to_butanoyl-CoA.xml";
+  } 
+	else if(sample == "reactome") {
+		filename = "9613829.json";
 	}
 	loadSample('examples/' + filename);
 	document.getElementById("fileName").innerHTML = filename;
 });
 
+document.getElementById('clearButton').addEventListener('click', clearCanvas);
+
 document.getElementById("layoutButton").addEventListener("click", function () {
+	let imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
 	let selectedEles = cy.elements(":selected");
 	if(selectedEles.length > 0) {
 		let layoutElements = selectedEles.not(".pinned");
@@ -117,14 +130,17 @@ document.getElementById("layoutButton").addEventListener("click", function () {
 			name: "sbgn-layout",
 			randomize: !document.getElementById("randomize").checked,
 			idealEdgeLength: parseFloat(document.getElementById("idealEdgeLength").value),
-			fit: false
+			fit: false,
+			imageData: imageData,
+			subset: layoutElements
 		}).run();
 	} else {
 		let layoutElements = cy.elements().not(".pinned");
 		layoutElements.layout({
 			name: "sbgn-layout",
 			randomize: !document.getElementById("randomize").checked,
-			idealEdgeLength: parseFloat(document.getElementById("idealEdgeLength").value)
+			idealEdgeLength: parseFloat(document.getElementById("idealEdgeLength").value),
+			imageData: imageData
 		}).run();
 	}
 });
@@ -149,3 +165,13 @@ document.getElementById("unpinAll").addEventListener("click", function () {
 document.getElementById("selectAll").addEventListener("click", function () {
   cy.elements().select();
 });
+
+let defaultStylesheet = [
+  {
+    selector: 'node',
+    style: {
+			'label': 'data(displayName)',
+      'text-wrap': 'wrap',
+    }
+  }
+];
